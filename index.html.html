@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0f172a">
+<title>TripCrew</title>
+<style>
+:root{--bg:#f7f8fc;--surface:#fff;--ink:#0f172a;--muted:#64748b;--line:#e2e8f0;--brand:#2563eb;--brand2:#60a5fa;--success:#16a34a;--warn:#f59e0b;--radius:22px;--shadow:0 18px 50px rgba(15,23,42,.08);--topbar:rgba(247,248,252,.9);--appgrad1:#eef4ff;--appgrad2:#f7f8fc;--card:#fff;--soft:#eff6ff;--input:#fff}
+#dark-toggle{position:absolute;opacity:0;pointer-events:none}
+body:has(#dark-toggle:checked){--bg:#07111f;--surface:#0f1b2d;--ink:#f8fafc;--muted:#9fb0c7;--line:#23324a;--brand:#60a5fa;--brand2:#93c5fd;--shadow:0 18px 50px rgba(0,0,0,.28);--topbar:rgba(7,17,31,.9);--appgrad1:#0b1728;--appgrad2:#07111f;--card:#0f1b2d;--soft:#132238;--input:#0b1728}
+body:has(#dark-toggle:checked) .hero{background:linear-gradient(135deg,#020617,#173b72)}
+body:has(#dark-toggle:checked) .detail-hero,body:has(#dark-toggle:checked) .train-timer{background:linear-gradient(135deg,#0f1b2d,#132238);border-color:#243b5c}
+body:has(#dark-toggle:checked) .success{background:#12351f;color:#86efac}
+body:has(#dark-toggle:checked) .pending{background:#3a2a0b;color:#fcd34d}
+body:has(#dark-toggle:checked) .info{background:#102d52;color:#93c5fd}
+body:has(#dark-toggle:checked) .notice{background:#2c170c;border-color:#713f12;color:#fdba74}
+body:has(#dark-toggle:checked) .nav:active{background:#132238}
+body:has(#dark-toggle:checked) .progress,body:has(#dark-toggle:checked) .vote{background:#223149}
+body:has(#dark-toggle:checked) .timeline:before{background:#24456d}
+body:has(#dark-toggle:checked) .timeline-item:before{box-shadow:0 0 0 4px #17365a}
+body:has(#dark-toggle:checked) .avatar{background:#15345a;color:#bfdbfe}
+body:has(#dark-toggle:checked) .timer-box{background:#0b1728}
+body:has(#dark-toggle:checked) .bottom{background:rgba(7,17,31,.95)}
+body:has(#dark-toggle:checked) .gear{background:#0f1b2d}
+body:has(#dark-toggle:checked) .field input,body:has(#dark-toggle:checked) .field textarea,body:has(#dark-toggle:checked) .field select,body:has(#dark-toggle:checked) .name-editor input{background:var(--input);color:var(--ink)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;display:flex;justify-content:center}a{color:inherit;text-decoration:none}.app{width:100%;max-width:520px;min-height:100vh;background:linear-gradient(180deg,var(--appgrad1) 0,var(--appgrad2) 220px);padding-bottom:94px;position:relative}.topbar{position:sticky;top:0;z-index:20;padding:26px 20px 11px;display:flex;justify-content:space-between;align-items:center;background:var(--topbar);backdrop-filter:blur(18px);border-bottom:1px solid rgba(226,232,240,.7)}.eyebrow{margin:0;font-size:11px;font-weight:900;letter-spacing:.16em;color:var(--brand)}h1{margin:3px 0 0;font-size:24px}.gear{width:40px;height:40px;display:grid;place-items:center;border:1px solid var(--line);background:var(--card);border-radius:14px}.screen{display:none;padding:16px 16px 32px}.screen:target{display:block}#home{display:block}body:has(.screen:target) #home{display:none}body:has(#home:target) #home{display:block}.hero{background:linear-gradient(135deg,#0f172a,#1d4ed8);color:#fff;border-radius:28px;padding:22px;box-shadow:var(--shadow);position:relative;overflow:hidden}.hero:after{content:"";position:absolute;width:170px;height:170px;border-radius:50%;background:rgba(255,255,255,.09);right:-50px;top:-60px}.hero-row{display:flex;justify-content:space-between;gap:14px;align-items:flex-end;position:relative;z-index:1}.hero h2{margin:0;font-size:30px}.hero p{margin:6px 0 0;color:#dbeafe}.countdown{text-align:right}.countdown strong{display:block;font-size:28px}.countdown span{font-size:12px;color:#bfdbfe}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px;position:relative;z-index:1}.stat{background:rgba(255,255,255,.11);padding:12px;border-radius:16px}.stat strong{display:block;font-size:18px}.stat span{font-size:11px;color:#dbeafe}.section{margin-top:22px}.section-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.section h3{margin:0;font-size:18px}.seeall{color:var(--brand);font-weight:800;font-size:13px}.card,.tap{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px;box-shadow:0 8px 24px rgba(15,23,42,.04)}.tap{display:block;position:relative;padding-right:42px;transition:transform .08s}.tap:active{transform:scale(.985)}.tap:after{content:"›";position:absolute;right:16px;top:50%;transform:translateY(-50%);font-size:25px;color:#94a3b8}.card+.card,.tap+.tap{margin-top:10px}.muted{color:var(--muted);font-size:13px}.badge{display:inline-block;padding:6px 9px;border-radius:999px;font-size:11px;font-weight:900}.success{background:#dcfce7;color:#166534}.pending{background:#fef3c7;color:#92400e}.info{background:#dbeafe;color:#1d4ed8}.row{display:flex;justify-content:space-between;align-items:center;gap:12px}.row-start{display:flex;align-items:center;gap:12px;min-width:0}.avatar{width:42px;height:42px;border-radius:14px;background:#dbeafe;color:#1e40af;display:grid;place-items:center;font-weight:900;flex:0 0 auto}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.quick{min-height:122px;display:flex;flex-direction:column;justify-content:space-between}.quick .emoji{font-size:28px}.quick strong{font-size:15px}.quick span{font-size:12px;color:var(--muted)}.progress{height:10px;border-radius:999px;background:#e2e8f0;overflow:hidden;margin:10px 0 8px}.progress>div{height:100%;width:33.33%;background:linear-gradient(90deg,var(--brand),var(--brand2))}.back{display:inline-flex;align-items:center;gap:6px;color:var(--brand);font-weight:900;margin:0 0 12px}.screen-title{font-size:26px;margin:0 0 4px}.screen-sub{margin:0 0 16px;color:var(--muted)}.cat-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.cat{min-height:130px;display:flex;flex-direction:column;justify-content:space-between}.cat .emoji{font-size:30px}.cat strong{font-size:17px}.cat small{color:var(--muted)}.detail-hero{background:linear-gradient(135deg,var(--card),var(--soft));border:1px solid #dbeafe;border-radius:26px;padding:20px;box-shadow:0 8px 24px rgba(15,23,42,.04)}.detail-hero .emoji{font-size:36px}.detail-hero h2{margin:8px 0 4px;font-size:28px}.kv{display:flex;justify-content:space-between;gap:20px;padding:13px 0;border-bottom:1px solid var(--line)}.kv:last-child{border-bottom:0}.kv span:first-child{color:var(--muted)}.money{font-weight:900}.bottom{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(100%,520px);display:grid;grid-template-columns:repeat(5,1fr);padding:10px 10px calc(10px + env(safe-area-inset-bottom));background:color-mix(in srgb,var(--card) 94%,transparent);backdrop-filter:blur(20px);border-top:1px solid var(--line);z-index:30}.nav{display:flex;flex-direction:column;align-items:center;gap:3px;padding:7px 2px;border-radius:12px;color:#94a3b8}.nav span{font-size:18px}.nav small{font-size:10px;font-weight:800}.nav:active{background:#eff6ff;color:var(--brand)}.timeline{position:relative;padding-left:18px}.timeline:before{content:"";position:absolute;left:5px;top:4px;bottom:4px;width:2px;background:#dbeafe}.timeline-item{position:relative;padding:0 0 18px 16px}.timeline-item:before{content:"";position:absolute;left:-18px;top:5px;width:10px;height:10px;border-radius:50%;background:var(--brand);box-shadow:0 0 0 4px #dbeafe}.timeline-item:last-child{padding-bottom:0}.pillrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.option{padding:12px;border:1px solid var(--line);border-radius:14px;margin-top:8px}.vote{height:7px;border-radius:999px;background:#e2e8f0;overflow:hidden;margin-top:7px}.vote>div{height:100%;background:var(--brand)}.w43{width:43%}.w29{width:29%}.check{width:24px;height:24px;border-radius:8px;display:grid;place-items:center;background:#dcfce7;color:#166534;font-weight:900}.emptybtn{display:inline-block;margin-top:14px;background:var(--brand);color:#fff;padding:12px 16px;border-radius:14px;font-weight:900}.notice{background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;border-radius:16px;padding:13px;font-size:13px;margin-top:14px}.train-timer{margin-top:14px;background:linear-gradient(135deg,var(--card),var(--soft));border:1px solid #dbeafe;border-radius:22px;padding:16px;box-shadow:0 8px 24px rgba(15,23,42,.05)}.train-timer-head{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:12px}.train-timer-head strong{font-size:16px}.train-timer-head span{font-size:12px;color:var(--muted);text-align:right}.timer-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.timer-box{background:var(--card);border:1px solid var(--line);border-radius:15px;padding:10px 6px;text-align:center}.timer-box strong{display:block;font-size:22px;line-height:1.05;color:var(--ink);font-variant-numeric:tabular-nums}.timer-box span{display:block;margin-top:4px;font-size:10px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}.timer-note{margin-top:10px;font-size:11px;color:var(--muted)}
+
+.theme-row{display:flex;align-items:center;justify-content:space-between;gap:14px}.theme-copy strong{display:block;font-size:15px}.theme-copy span{display:block;margin-top:3px;font-size:12px;color:var(--muted)}.theme-switch{width:54px;height:32px;border-radius:999px;background:#cbd5e1;position:relative;display:block;cursor:pointer;flex:0 0 auto;transition:.2s}.theme-switch:after{content:"";position:absolute;width:26px;height:26px;left:3px;top:3px;border-radius:50%;background:#fff;box-shadow:0 2px 7px rgba(15,23,42,.2);transition:.2s}#dark-toggle:checked~.app .theme-switch{background:var(--brand)}#dark-toggle:checked~.app .theme-switch:after{transform:translateX(22px)}.timer-live{display:inline-flex;align-items:center;gap:6px;margin-top:9px;font-size:11px;font-weight:800;color:var(--success)}.timer-live:before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor;animation:pulse 1.3s infinite}@keyframes pulse{0%,100%{opacity:.3}50%{opacity:1}}
+@media(min-width:700px){.app{margin:20px 0;min-height:calc(100vh - 40px);border-radius:32px;overflow:hidden;box-shadow:var(--shadow)}.bottom{bottom:20px;border-radius:0 0 32px 32px}}
+.addplus{width:42px;height:42px;border-radius:14px;background:var(--brand);color:#fff;display:grid;place-items:center;font-size:28px;font-weight:700;line-height:1;box-shadow:0 8px 20px rgba(37,99,235,.22)}.addplus:active{transform:scale(.96)}.titlebar{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}.field{margin-top:14px}.field label{display:block;font-size:12px;font-weight:900;color:var(--muted);margin-bottom:6px}.field input,.field textarea,.field select{width:100%;border:1px solid var(--line);border-radius:14px;padding:13px 14px;font:inherit;background:var(--input);color:var(--ink)}.field textarea{min-height:110px;resize:vertical}.primary{display:block;width:100%;border:0;border-radius:15px;padding:14px 16px;margin-top:18px;background:var(--brand);color:#fff;font:inherit;font-weight:900;text-align:center}.helper{font-size:12px;color:var(--muted);margin-top:8px}.name-editor{margin-top:14px}.name-editor .row-edit{display:flex;gap:8px;align-items:center}.name-editor input{flex:1;border:1px solid var(--line);border-radius:14px;padding:13px 14px;font:inherit;background:var(--input);color:var(--ink);min-width:0}.save-name{border:0;border-radius:14px;padding:13px 14px;background:var(--brand);color:#fff;font:inherit;font-weight:900;white-space:nowrap}.save-name:active{transform:scale(.97)}.saved-msg{font-size:12px;color:var(--success);font-weight:800;min-height:16px;margin-top:6px}</style>
+</head>
+<body>
+<input id="dark-toggle" type="checkbox" aria-label="Dark mode">
+<div class="app">
+<header class="topbar"><div><p class="eyebrow">TRIPCREW</p><h1>Seattle 2027</h1></div><a class="gear" href="#settings">⚙️</a></header>
+
+<section id="home" class="screen">
+  <div class="hero"><div class="hero-row"><div><h2>Seattle, WA</h2><p>Jul 31 – Aug 15, 2027</p></div><div class="countdown"><strong id="trip-days">323</strong><span>days to go</span></div></div><div class="stats"><div class="stat"><strong>7</strong><span>travelers</span></div><div class="stat"><strong>$5.9–7.9K</strong><span>trip estimate</span></div><div class="stat"><strong>1/3</strong><span>deadlines done</span></div></div></div>
+  <div class="train-timer" aria-label="Countdown to train departure"><div class="train-timer-head"><strong>🚆 Train departure countdown</strong><span>Jul 31, 2027<br>6:01 AM Pacific</span></div><div class="timer-grid"><div class="timer-box"><strong id="train-days">322</strong><span>Days</span></div><div class="timer-box"><strong id="train-hours">16</strong><span>Hours</span></div><div class="timer-box"><strong id="train-minutes">06</strong><span>Minutes</span></div><div class="timer-box"><strong id="train-seconds">11</strong><span>Seconds</span></div></div><div class="timer-note" id="train-timer-note">Confirmed departure: July 31, 2027 at 6:01 AM Pacific. If this preview blocks live updates, these numbers are a snapshot; the hosted app will tick every second.</div></div>
+  <div class="section"><div class="section-head"><h3>Quick access</h3></div><div class="grid2"><a class="tap quick" href="#expenses"><div class="emoji">💳</div><div><strong>Expenses</strong><br><span>Budget & funding</span></div></a><a class="tap quick" href="#bookings"><div class="emoji">🎟️</div><div><strong>Bookings</strong><br><span>Car, train & stay</span></div></a><a class="tap quick" href="#planning"><div class="emoji">💡</div><div><strong>Planning</strong><br><span>Seattle ideas</span></div></a><a class="tap quick" href="#itinerary"><div class="emoji">🗓️</div><div><strong>Itinerary</strong><br><span>Confirmed plans</span></div></a><a class="tap quick" href="#voting"><div class="emoji">🗳️</div><div><strong>Voting</strong><br><span>Group decisions</span></div></a></div></div>
+  <div class="section"><div class="section-head"><h3>Deadlines</h3><a class="seeall" href="#deadlines">See all</a></div><a class="tap" href="#deadlines"><div class="row"><div><strong>1 of 3 complete</strong><div class="muted">Amtrak is next • Sep 14, 2026</div></div><span class="badge info">33%</span></div><div class="progress"><div></div></div></a></div>
+  <div class="section"><div class="section-head"><h3>Travelers</h3><a class="seeall" href="#travelers">See all</a></div><a class="tap" href="#travelers"><div class="row"><div class="row-start"><div class="avatar">7</div><div><strong>Traveler 1–7</strong><div class="muted">7 confirmed travelers</div></div></div><span class="badge success">Confirmed</span></div></a></div>
+</section>
+<section id="travelers" class="screen"><a class="back" href="#home">‹ Home</a><h2 class="screen-title">Travelers</h2><p class="screen-sub">All 7 travelers are confirmed.</p><a class="tap" href="#traveler-1"><div class="row"><div class="row-start"><div class="avatar">T1</div><div><strong data-traveler-name="1">Traveler 1</strong><div class="muted">Confirmed traveler • Turo paid</div></div></div><span class="badge success">Confirmed</span></div></a><a class="tap" href="#traveler-2"><div class="row"><div class="row-start"><div class="avatar">T2</div><div><strong data-traveler-name="2">Traveler 2</strong><div class="muted">Confirmed traveler • Turo paid</div></div></div><span class="badge success">Confirmed</span></div></a><a class="tap" href="#traveler-3"><div class="row"><div class="row-start"><div class="avatar">T3</div><div><strong data-traveler-name="3">Traveler 3</strong><div class="muted">Confirmed traveler • Turo paid</div></div></div><span class="badge success">Confirmed</span></div></a><a class="tap" href="#traveler-4"><div class="row"><div class="row-start"><div class="avatar">T4</div><div><strong data-traveler-name="4">Traveler 4</strong><div class="muted">Confirmed traveler • Turo paid</div></div></div><span class="badge success">Confirmed</span></div></a><a class="tap" href="#traveler-5"><div class="row"><div class="row-start"><div class="avatar">T5</div><div><strong data-traveler-name="5">Traveler 5</strong><div class="muted">Confirmed traveler • Turo paid</div></div></div><span class="badge success">Confirmed</span></div></a><a class="tap" href="#traveler-6"><div class="row"><div class="row-start"><div class="avatar">T6</div><div><strong data-traveler-name="6">Traveler 6</strong><div class="muted">Confirmed traveler • Turo paid</div></div></div><span class="badge success">Confirmed</span></div></a><a class="tap" href="#traveler-7"><div class="row"><div class="row-start"><div class="avatar">T7</div><div><strong data-traveler-name="7">Traveler 7</strong><div class="muted">Confirmed traveler • Turo paid</div></div></div><span class="badge success">Confirmed</span></div></a></section>
+<section id="expenses" class="screen"><a class="back" href="#home">‹ Home</a><h2 class="screen-title">Expenses</h2><p class="screen-sub">Confirmed costs and planning estimates.</p><div class="cat-grid"><a class="tap cat" href="#transport"><div class="emoji">🚆</div><div><strong>Transport</strong><br><small>~$2,945 • Turo + Amtrak</small></div></a><a class="tap cat" href="#lodging"><div class="emoji">🏠</div><div><strong>Lodging</strong><br><small>$3,000–$5,000 estimate</small></div></a><a class="tap cat" href="#food"><div class="emoji">🍽️</div><div><strong>Food</strong><br><small>No expenses yet</small></div></a><a class="tap cat" href="#activities"><div class="emoji">🎡</div><div><strong>Activities</strong><br><small>No expenses yet</small></div></a></div></section>
+<section id="transport" class="screen"><a class="back" href="#expenses">‹ Expenses</a><h2 class="screen-title">Transport</h2><p class="screen-sub">One paid booking + one upcoming group purchase.</p><a class="tap" href="#turo"><div class="row"><div><strong>Turo • 2018 Dodge Grand Caravan</strong><div class="muted">Fully paid • 7/7 funded</div></div><div class="money">$1,440</div></div></a><a class="tap" href="#amtrak"><div class="row"><div><strong>Amtrak round trip</strong><div class="muted">~$215/person • group purchase</div></div><div class="money">~$1,505</div></div></a></section>
+<section id="lodging" class="screen"><a class="back" href="#expenses">‹ Expenses</a><h2 class="screen-title">Lodging</h2><p class="screen-sub">Airbnb is still in planning.</p><a class="tap" href="#airbnb"><div class="row"><div><strong>Airbnb</strong><div class="muted">Group-funded • booking date TBD</div></div><div class="money">$3–5K</div></div></a></section>
+<section id="food" class="screen"><a class="back" href="#expenses">‹ Expenses</a><h2 class="screen-title">Food</h2><p class="screen-sub">No food expenses yet.</p><div class="card"><strong>Nothing here yet</strong><p class="muted">Your group can add food costs later.</p></div></section>
+<section id="activities" class="screen"><a class="back" href="#expenses">‹ Expenses</a><h2 class="screen-title">Activities</h2><p class="screen-sub">No activity expenses yet.</p><div class="card"><strong>Nothing here yet</strong><p class="muted">Your group can add activities later.</p></div></section>
+<section id="turo" class="screen"><a class="back" href="#transport">‹ Transport</a><div class="detail-hero"><div class="emoji">🚙</div><h2>Turo Car Rental</h2><div class="muted">2018 Dodge Grand Caravan</div></div><div class="section card"><div class="kv"><span>Total</span><strong>$1,440</strong></div><div class="kv"><span>Funding</span><strong>7/7 travelers</strong></div><div class="kv"><span>Balance</span><strong>$0</strong></div><div class="kv"><span>Status</span><span class="badge success">Paid & booked</span></div></div></section>
+<section id="amtrak" class="screen"><a class="back" href="#transport">‹ Transport</a><div class="detail-hero"><div class="emoji">🚆</div><h2>Amtrak round trip</h2><div class="muted">Upcoming group purchase</div></div><div class="section card"><div class="kv"><span>Estimated total</span><strong>~$1,505</strong></div><div class="kv"><span>Estimated per person</span><strong>~$215</strong></div><div class="kv"><span>Purchase target</span><strong>Sep 14, 2026</strong></div><div class="kv"><span>Purchase</span><strong>One combined group transaction</strong></div><div class="kv"><span>Status</span><span class="badge pending">Not purchased</span></div></div></section>
+<section id="airbnb" class="screen"><a class="back" href="#lodging">‹ Lodging</a><div class="detail-hero"><div class="emoji">🏠</div><h2>Airbnb</h2><div class="muted">Seattle lodging estimate</div></div><div class="section card"><div class="kv"><span>Estimated total</span><strong>$3,000–$5,000</strong></div><div class="kv"><span>Estimated per person</span><strong>~$428.57–$714.29</strong></div><div class="kv"><span>Funding</span><strong>Group-funded</strong></div><div class="kv"><span>Booking deadline</span><strong>TBD</strong></div><div class="kv"><span>Status</span><span class="badge info">Planning</span></div></div></section>
+<section id="planning" class="screen"><a class="back" href="#home">‹ Home</a><div class="titlebar"><div><h2 class="screen-title">Planning</h2><p class="screen-sub">Ideas from the crew for Seattle.</p></div><a class="addplus" href="#add-idea" aria-label="Add a Seattle idea">+</a></div><div class="card"><strong>No suggestions yet</strong><p class="muted">Everyone can suggest attractions, food, bars, shopping, outdoor activities, events, day trips, or anything else worth checking out.</p><a class="emptybtn" href="#add-idea">+ Add a Seattle idea</a></div></section>
+<section id="add-idea" class="screen"><a class="back" href="#planning">‹ Planning</a><h2 class="screen-title">Add a Seattle idea</h2><p class="screen-sub">Share something the group might want to do, see, eat, or visit.</p><div class="card"><div class="field"><label>Idea</label><input type="text" placeholder="Example: Pike Place Market"></div><div class="field"><label>Category</label><select><option>Attractions</option><option>Food</option><option>Bars / Nightlife</option><option>Shopping</option><option>Outdoors</option><option>Events</option><option>Day Trips</option><option>Other</option></select></div><div class="field"><label>Why should we go? (optional)</label><textarea placeholder="Tell the crew why you recommend it."></textarea></div><div class="field"><label>Link (optional)</label><input type="url" placeholder="Website, TikTok, Instagram, Maps, etc."></div><div class="field"><label>Estimated cost (optional)</label><input type="text" placeholder="Free, ~$25/person, etc."></div><a class="primary" href="#planning">Add suggestion</a><div class="helper">Shared saving will be enabled when TripCrew moves to synced traveler accounts.</div></div></section>
+<section id="itinerary" class="screen"><a class="back" href="#home">‹ Home</a><div class="titlebar"><div><h2 class="screen-title">Itinerary</h2><p class="screen-sub">Jul 31 – Aug 15, 2027 · confirmed plans only</p></div><a class="addplus" href="#add-plan" aria-label="Add a confirmed plan">+</a></div><div class="card"><strong>No confirmed plans yet</strong><p class="muted">Once the crew agrees on an idea, add it here as part of the official trip itinerary.</p><a class="emptybtn" href="#add-plan">+ Add confirmed plan</a></div></section>
+<section id="add-plan" class="screen"><a class="back" href="#itinerary">‹ Itinerary</a><h2 class="screen-title">Add confirmed plan</h2><p class="screen-sub">Add something the group has officially decided to do.</p><div class="card"><div class="field"><label>Plan</label><input type="text" placeholder="What are you doing?"></div><div class="field"><label>Date</label><input type="date" min="2027-07-31" max="2027-08-15"></div><div class="field"><label>Time (optional)</label><input type="time"></div><div class="field"><label>Location (optional)</label><input type="text" placeholder="Where?"></div><div class="field"><label>Notes</label><textarea placeholder="Reservation details, cost, meeting point, or anything the crew should know."></textarea></div><a class="primary" href="#itinerary">Add to itinerary</a><div class="helper">Shared saving will be enabled when TripCrew moves to synced traveler accounts.</div></div></section>
+<section id="bookings" class="screen"><a class="back" href="#home">‹ Home</a><h2 class="screen-title">Bookings</h2><p class="screen-sub">Reservations and booking status.</p><a class="tap" href="#booking-turo"><div class="row"><div><strong>🚙 Turo</strong><div class="muted">2018 Dodge Grand Caravan</div></div><span class="badge success">Booked & paid</span></div></a><a class="tap" href="#booking-amtrak"><div class="row"><div><strong>🚆 Amtrak</strong><div class="muted">Round trip • group purchase</div></div><span class="badge pending">Sep 14</span></div></a><a class="tap" href="#booking-airbnb"><div class="row"><div><strong>🏠 Airbnb</strong><div class="muted">Stay</div></div><span class="badge info">TBD</span></div></a></section>
+<section id="booking-turo" class="screen"><a class="back" href="#bookings">‹ Bookings</a><div class="detail-hero"><div class="emoji">🚙</div><h2>Turo</h2><div class="muted">2018 Dodge Grand Caravan</div></div><div class="section card"><div class="kv"><span>Status</span><span class="badge success">Booked & fully paid</span></div><div class="kv"><span>Total</span><strong>$1,440</strong></div><div class="kv"><span>Funding</span><strong>7/7 paid</strong></div><div class="kv"><span>Confirmation</span><strong>Private / add later</strong></div></div></section>
+<section id="booking-amtrak" class="screen"><a class="back" href="#bookings">‹ Bookings</a><div class="detail-hero"><div class="emoji">🚆</div><h2>Amtrak</h2><div class="muted">Round-trip train booking</div></div><div class="section card"><div class="kv"><span>Status</span><strong>Not purchased</strong></div><div class="kv"><span>Target</span><strong>Sep 14, 2026</strong></div><div class="kv"><span>Estimate</span><strong>~$215/person</strong></div><div class="kv"><span>Purchase type</span><strong>Combined group purchase</strong></div></div></section>
+<section id="booking-airbnb" class="screen"><a class="back" href="#bookings">‹ Bookings</a><div class="detail-hero"><div class="emoji">🏠</div><h2>Airbnb</h2><div class="muted">Seattle lodging</div></div><div class="section card"><div class="kv"><span>Status</span><strong>Planning</strong></div><div class="kv"><span>Budget</span><strong>$3,000–$5,000</strong></div><div class="kv"><span>Deadline</span><strong>TBD</strong></div></div></section>
+<section id="voting" class="screen"><a class="back" href="#home">‹ Home</a><div class="titlebar"><div><h2 class="screen-title">Voting</h2><p class="screen-sub">Group decisions belong to your group.</p></div><a class="addplus" href="#add-poll" aria-label="Create a poll">+</a></div><div class="card"><strong>No polls yet</strong><p class="muted">Voting starts empty so the seven travelers can create decisions when needed.</p><a class="emptybtn" href="#add-poll">+ Create a poll</a></div></section>
+<section id="add-poll" class="screen"><a class="back" href="#voting">‹ Voting</a><h2 class="screen-title">Create a poll</h2><p class="screen-sub">Put a group decision up for a vote.</p><div class="card"><div class="field"><label>Question</label><input type="text" placeholder="What should the group decide?"></div><div class="field"><label>Option 1</label><input type="text" placeholder="First choice"></div><div class="field"><label>Option 2</label><input type="text" placeholder="Second choice"></div><div class="field"><label>Option 3 (optional)</label><input type="text" placeholder="Third choice"></div><div class="field"><label>Notes (optional)</label><textarea placeholder="Anything travelers should know before voting."></textarea></div><a class="primary" href="#voting">Create poll</a><div class="helper">Live voting and shared results will be enabled when TripCrew moves to synced accounts.</div></div></section>
+<section id="deadlines" class="screen"><a class="back" href="#home">‹ Home</a><h2 class="screen-title">Deadlines</h2><p class="screen-sub">1 complete • 2 upcoming</p><div class="card"><div class="row"><div class="row-start"><div class="check">✓</div><div><strong>Turo car rental</strong><div class="muted">Completed • fully paid</div></div></div><span class="badge success">Done</span></div></div><div class="card"><div class="row"><div><strong>Buy Amtrak tickets</strong><div class="muted">Sep 14, 2026</div></div><span class="badge pending">Upcoming</span></div></div><div class="card"><div class="row"><div><strong>Book Airbnb</strong><div class="muted">Date TBD</div></div><span class="badge pending">Upcoming</span></div></div></section>
+<section id="traveler-1" class="screen"><a class="back" href="#travelers">‹ Travelers</a><div class="detail-hero"><div class="avatar">T1</div><h2 data-traveler-name="1">Traveler 1</h2><div class="muted">Confirmed traveler</div></div><div class="section card name-editor"><strong>Your name</strong><p class="muted">Add or change the name shown for Traveler 1.</p><div class="row-edit"><input id="traveler-name-input-1" type="text" maxlength="32" placeholder="Enter your name" autocomplete="name"><button class="save-name" type="button" data-save-traveler="1">Save</button></div><div id="traveler-name-msg-1" class="saved-msg" aria-live="polite"></div></div><div class="section card"><div class="kv"><span>Status</span><strong>Confirmed</strong></div><div class="kv"><span>Turo share</span><span class="badge success">Paid</span></div><div class="kv"><span>Amtrak</span><strong>~$215 • not funded yet</strong></div><div class="kv"><span>Airbnb</span><strong>Estimate TBD</strong></div></div></section><section id="traveler-2" class="screen"><a class="back" href="#travelers">‹ Travelers</a><div class="detail-hero"><div class="avatar">T2</div><h2 data-traveler-name="2">Traveler 2</h2><div class="muted">Confirmed traveler</div></div><div class="section card name-editor"><strong>Your name</strong><p class="muted">Add or change the name shown for Traveler 2.</p><div class="row-edit"><input id="traveler-name-input-2" type="text" maxlength="32" placeholder="Enter your name" autocomplete="name"><button class="save-name" type="button" data-save-traveler="2">Save</button></div><div id="traveler-name-msg-2" class="saved-msg" aria-live="polite"></div></div><div class="section card"><div class="kv"><span>Status</span><strong>Confirmed</strong></div><div class="kv"><span>Turo share</span><span class="badge success">Paid</span></div><div class="kv"><span>Amtrak</span><strong>~$215 • not funded yet</strong></div><div class="kv"><span>Airbnb</span><strong>Estimate TBD</strong></div></div></section><section id="traveler-3" class="screen"><a class="back" href="#travelers">‹ Travelers</a><div class="detail-hero"><div class="avatar">T3</div><h2 data-traveler-name="3">Traveler 3</h2><div class="muted">Confirmed traveler</div></div><div class="section card name-editor"><strong>Your name</strong><p class="muted">Add or change the name shown for Traveler 3.</p><div class="row-edit"><input id="traveler-name-input-3" type="text" maxlength="32" placeholder="Enter your name" autocomplete="name"><button class="save-name" type="button" data-save-traveler="3">Save</button></div><div id="traveler-name-msg-3" class="saved-msg" aria-live="polite"></div></div><div class="section card"><div class="kv"><span>Status</span><strong>Confirmed</strong></div><div class="kv"><span>Turo share</span><span class="badge success">Paid</span></div><div class="kv"><span>Amtrak</span><strong>~$215 • not funded yet</strong></div><div class="kv"><span>Airbnb</span><strong>Estimate TBD</strong></div></div></section><section id="traveler-4" class="screen"><a class="back" href="#travelers">‹ Travelers</a><div class="detail-hero"><div class="avatar">T4</div><h2 data-traveler-name="4">Traveler 4</h2><div class="muted">Confirmed traveler</div></div><div class="section card name-editor"><strong>Your name</strong><p class="muted">Add or change the name shown for Traveler 4.</p><div class="row-edit"><input id="traveler-name-input-4" type="text" maxlength="32" placeholder="Enter your name" autocomplete="name"><button class="save-name" type="button" data-save-traveler="4">Save</button></div><div id="traveler-name-msg-4" class="saved-msg" aria-live="polite"></div></div><div class="section card"><div class="kv"><span>Status</span><strong>Confirmed</strong></div><div class="kv"><span>Turo share</span><span class="badge success">Paid</span></div><div class="kv"><span>Amtrak</span><strong>~$215 • not funded yet</strong></div><div class="kv"><span>Airbnb</span><strong>Estimate TBD</strong></div></div></section><section id="traveler-5" class="screen"><a class="back" href="#travelers">‹ Travelers</a><div class="detail-hero"><div class="avatar">T5</div><h2 data-traveler-name="5">Traveler 5</h2><div class="muted">Confirmed traveler</div></div><div class="section card name-editor"><strong>Your name</strong><p class="muted">Add or change the name shown for Traveler 5.</p><div class="row-edit"><input id="traveler-name-input-5" type="text" maxlength="32" placeholder="Enter your name" autocomplete="name"><button class="save-name" type="button" data-save-traveler="5">Save</button></div><div id="traveler-name-msg-5" class="saved-msg" aria-live="polite"></div></div><div class="section card"><div class="kv"><span>Status</span><strong>Confirmed</strong></div><div class="kv"><span>Turo share</span><span class="badge success">Paid</span></div><div class="kv"><span>Amtrak</span><strong>~$215 • not funded yet</strong></div><div class="kv"><span>Airbnb</span><strong>Estimate TBD</strong></div></div></section><section id="traveler-6" class="screen"><a class="back" href="#travelers">‹ Travelers</a><div class="detail-hero"><div class="avatar">T6</div><h2 data-traveler-name="6">Traveler 6</h2><div class="muted">Confirmed traveler</div></div><div class="section card name-editor"><strong>Your name</strong><p class="muted">Add or change the name shown for Traveler 6.</p><div class="row-edit"><input id="traveler-name-input-6" type="text" maxlength="32" placeholder="Enter your name" autocomplete="name"><button class="save-name" type="button" data-save-traveler="6">Save</button></div><div id="traveler-name-msg-6" class="saved-msg" aria-live="polite"></div></div><div class="section card"><div class="kv"><span>Status</span><strong>Confirmed</strong></div><div class="kv"><span>Turo share</span><span class="badge success">Paid</span></div><div class="kv"><span>Amtrak</span><strong>~$215 • not funded yet</strong></div><div class="kv"><span>Airbnb</span><strong>Estimate TBD</strong></div></div></section><section id="traveler-7" class="screen"><a class="back" href="#travelers">‹ Travelers</a><div class="detail-hero"><div class="avatar">T7</div><h2 data-traveler-name="7">Traveler 7</h2><div class="muted">Confirmed traveler</div></div><div class="section card name-editor"><strong>Your name</strong><p class="muted">Add or change the name shown for Traveler 7.</p><div class="row-edit"><input id="traveler-name-input-7" type="text" maxlength="32" placeholder="Enter your name" autocomplete="name"><button class="save-name" type="button" data-save-traveler="7">Save</button></div><div id="traveler-name-msg-7" class="saved-msg" aria-live="polite"></div></div><div class="section card"><div class="kv"><span>Status</span><strong>Confirmed</strong></div><div class="kv"><span>Turo share</span><span class="badge success">Paid</span></div><div class="kv"><span>Amtrak</span><strong>~$215 • not funded yet</strong></div><div class="kv"><span>Airbnb</span><strong>Estimate TBD</strong></div></div></section>
+<section id="more" class="screen"><a class="back" href="#home">‹ Home</a><h2 class="screen-title">More</h2><p class="screen-sub">Everything else for the trip.</p><div class="grid2"><a class="tap quick" href="#planning"><div class="emoji">💡</div><div><strong>Planning</strong><br><span>Seattle ideas</span></div></a><a class="tap quick" href="#bookings"><div class="emoji">🎟️</div><div><strong>Bookings</strong><br><span>Reservations</span></div></a><a class="tap quick" href="#voting"><div class="emoji">🗳️</div><div><strong>Voting</strong><br><span>Group polls</span></div></a><a class="tap quick" href="#deadlines"><div class="emoji">⏰</div><div><strong>Deadlines</strong><br><span>Important dates</span></div></a><a class="tap quick" href="#settings"><div class="emoji">⚙️</div><div><strong>Settings</strong><br><span>Trip details</span></div></a></div></section>
+<section id="settings" class="screen"><a class="back" href="#home">‹ Home</a><h2 class="screen-title">Trip settings</h2><p class="screen-sub">Seattle 2027</p><div class="card"><div class="theme-row"><div class="theme-copy"><strong>🌙 Dark mode</strong><span>Switch TripCrew to a darker theme.</span></div><label class="theme-switch" for="dark-toggle" aria-label="Toggle dark mode"></label></div></div><div style="height:10px"></div><div class="card"><div class="kv"><span>Destination</span><strong>Seattle, WA</strong></div><div class="kv"><span>Dates</span><strong>Jul 31–Aug 15, 2027</strong></div><div class="kv"><span>Train departure</span><strong>Jul 31, 2027 · 6:01 AM Pacific</strong></div><div class="kv"><span>Length</span><strong>16 calendar days • 15 nights</strong></div><div class="kv"><span>Travelers</span><strong>7</strong></div><div class="kv"><span>Invite code</span><strong>SEATTLE27</strong></div></div></section>
+<nav class="bottom"><a class="nav" href="#home"><span>🏠</span><small>Home</small></a><a class="nav" href="#travelers"><span>👥</span><small>Travelers</small></a><a class="nav" href="#expenses"><span>💳</span><small>Expenses</small></a><a class="nav" href="#itinerary"><span>🗓️</span><small>Plan</small></a><a class="nav" href="#more"><span>•••</span><small>More</small></a></nav>
+</div>
+
+<script>
+(function () {
+  function byId(id) { return document.getElementById(id); }
+  function trimSpaces(value) {
+    return String(value || '').replace(/^\s+|\s+$/g, '').replace(/\s+/g, ' ').substring(0, 32);
+  }
+  function storageGet(key) {
+    try { return window.localStorage ? window.localStorage.getItem(key) : null; } catch (e) { return null; }
+  }
+  function storageSet(key, value) {
+    try {
+      if (!window.localStorage) return false;
+      if (value === null) window.localStorage.removeItem(key);
+      else window.localStorage.setItem(key, value);
+      return true;
+    } catch (e) { return false; }
+  }
+  function addEvent(el, type, fn) {
+    if (!el) return;
+    if (el.addEventListener) el.addEventListener(type, fn, false);
+    else if (el.attachEvent) el.attachEvent('on' + type, fn);
+  }
+
+  // Persistent dark mode.
+  var darkToggle = byId('dark-toggle');
+  if (darkToggle) {
+    darkToggle.checked = storageGet('tripcrew.darkMode') === '1';
+    addEvent(darkToggle, 'change', function () {
+      storageSet('tripcrew.darkMode', darkToggle.checked ? '1' : '0');
+    });
+  }
+
+  // Traveler names.
+  function travelerKey(i) { return 'tripcrew.traveler.' + i + '.name'; }
+  function nodesWithTraveler(i) {
+    if (document.querySelectorAll) return document.querySelectorAll('[data-traveler-name="' + i + '"]');
+    return [];
+  }
+  function applyTravelerName(i, name) {
+    var display = name || ('Traveler ' + i);
+    var nodes = nodesWithTraveler(i);
+    var j;
+    for (j = 0; j < nodes.length; j++) nodes[j].innerText = display;
+    var input = byId('traveler-name-input-' + i);
+    if (input) input.value = name || '';
+  }
+  function saveTravelerName(i) {
+    var input = byId('traveler-name-input-' + i);
+    var msg = byId('traveler-name-msg-' + i);
+    var name = trimSpaces(input ? input.value : '');
+    var saved = storageSet(travelerKey(i), name ? name : null);
+    applyTravelerName(i, name);
+    if (msg) {
+      if (saved) msg.innerText = name ? ('Saved as ' + name + '.') : ('Name reset to Traveler ' + i + '.');
+      else msg.innerText = 'Name changed for this session. Permanent saving needs browser storage.';
+      window.setTimeout(function () { msg.innerText = ''; }, 2600);
+    }
+  }
+  var i;
+  for (i = 1; i <= 7; i++) {
+    applyTravelerName(i, trimSpaces(storageGet(travelerKey(i)) || ''));
+    (function (n) {
+      var button = document.querySelector ? document.querySelector('[data-save-traveler="' + n + '"]') : null;
+      var input = byId('traveler-name-input-' + n);
+      addEvent(button, 'click', function () { saveTravelerName(n); });
+      addEvent(input, 'keypress', function (e) {
+        e = e || window.event;
+        if ((e.keyCode || e.which) === 13) {
+          if (e.preventDefault) e.preventDefault();
+          saveTravelerName(n);
+          return false;
+        }
+      });
+    })(i);
+  }
+
+  // Live countdown: Jul 31, 2027 at 6:01 AM Pacific Daylight Time (UTC-7).
+  var TRAIN_DEPARTURE = new Date('2027-07-31T06:01:00-07:00').getTime();
+  function two(n) { return n < 10 ? '0' + n : String(n); }
+  function updateTrainCountdown() {
+    var diff = TRAIN_DEPARTURE - new Date().getTime();
+    var tripDaysEl = byId('trip-days');
+    if (tripDaysEl) tripDaysEl.innerText = String(Math.max(0, Math.ceil(diff / 86400000)));
+    var dEl = byId('train-days'), hEl = byId('train-hours'), mEl = byId('train-minutes'), sEl = byId('train-seconds');
+    var note = byId('train-timer-note'), live = byId('timer-live-status');
+    if (!dEl || !hEl || !mEl || !sEl) return;
+    if (live) live.innerText = 'Live - updating every second';
+    if (diff <= 0) {
+      dEl.innerText = '0'; hEl.innerText = '00'; mEl.innerText = '00'; sEl.innerText = '00';
+      if (note) note.innerText = 'Train departure time has arrived. Have a great trip!';
+      return;
+    }
+    var days = Math.floor(diff / 86400000); diff = diff % 86400000;
+    var hours = Math.floor(diff / 3600000); diff = diff % 3600000;
+    var mins = Math.floor(diff / 60000); diff = diff % 60000;
+    var secs = Math.floor(diff / 1000);
+    dEl.innerText = String(days); hEl.innerText = two(hours); mEl.innerText = two(mins); sEl.innerText = two(secs);
+  }
+  updateTrainCountdown();
+  window.setInterval(updateTrainCountdown, 1000);
+
+  // Swipe from left edge to go back.
+  var EDGE_ZONE = 34, TRIGGER_DISTANCE = 82, MAX_VERTICAL_DRIFT = 72;
+  var startX = 0, startY = 0, tracking = false;
+  function activeScreen() {
+    var hash = window.location.hash || '#home';
+    try { return document.querySelector(hash) || document.querySelector('#home'); } catch (e) { return document.querySelector('#home'); }
+  }
+  function fallbackBack() {
+    var screen = activeScreen();
+    var back = screen && screen.querySelector ? screen.querySelector('a.back') : null;
+    if (back && back.getAttribute('href')) window.location.hash = back.getAttribute('href');
+    else if (window.location.hash && window.location.hash !== '#home') window.location.hash = '#home';
+  }
+  addEvent(document, 'touchstart', function (e) {
+    if (!e.touches || e.touches.length !== 1) return;
+    var t = e.touches[0];
+    startX = t.clientX; startY = t.clientY;
+    tracking = startX <= EDGE_ZONE && (window.location.hash || '#home') !== '#home';
+  });
+  addEvent(document, 'touchend', function (e) {
+    if (!tracking || !e.changedTouches || e.changedTouches.length !== 1) { tracking = false; return; }
+    var t = e.changedTouches[0];
+    var dx = t.clientX - startX, dy = Math.abs(t.clientY - startY);
+    tracking = false;
+    if (dx >= TRIGGER_DISTANCE && dy <= MAX_VERTICAL_DRIFT) fallbackBack();
+  });
+})();
+</script>
+
+<script>
+(function () {
+  var SUPABASE_URL = 'https://dbumoidcqkijpwnerxee.supabase.co';
+  var SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_x7cHFhvsixNHlIGv3e37xQ_GIALjKB6';
+  var TRIP_NAME = 'Seattle 2027';
+
+  function makeGate() {
+    var style = document.createElement('style');
+    style.textContent = [
+      '#tripcrew-gate{position:fixed;inset:0;z-index:9999;background:linear-gradient(180deg,#eef4ff 0,#f7f8fc 40%,#f7f8fc 100%);display:flex;align-items:center;justify-content:center;padding:24px;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}',
+      '#tripcrew-gate-card{width:min(100%,430px);background:#fff;border:1px solid #e2e8f0;border-radius:28px;padding:24px;box-shadow:0 24px 70px rgba(15,23,42,.14)}',
+      '#tripcrew-gate .logo{width:56px;height:56px;border-radius:18px;background:linear-gradient(135deg,#0f172a,#2563eb);display:grid;place-items:center;color:#fff;font-size:26px;margin-bottom:18px}',
+      '#tripcrew-gate h1{margin:0;font-size:28px;color:#0f172a}',
+      '#tripcrew-gate p{margin:8px 0 18px;color:#64748b;line-height:1.45}',
+      '#tripcrew-gate label{display:block;font-size:12px;font-weight:800;color:#475569;margin-bottom:7px}',
+      '#tripcrew-code{width:100%;border:1px solid #cbd5e1;border-radius:15px;padding:14px 15px;font-size:16px;outline:none;background:#fff;color:#0f172a}',
+      '#tripcrew-code:focus{border-color:#2563eb;box-shadow:0 0 0 3px rgba(37,99,235,.12)}',
+      '#tripcrew-unlock{width:100%;border:0;border-radius:15px;padding:14px 16px;margin-top:12px;background:#2563eb;color:#fff;font-weight:900;font-size:15px}',
+      '#tripcrew-unlock:disabled{opacity:.65}',
+      '#tripcrew-gate-status{min-height:20px;margin-top:12px;font-size:13px;color:#64748b}',
+      '#tripcrew-gate-status.error{color:#b91c1c}',
+      '#tripcrew-gate-status.ok{color:#15803d}',
+      '@media (prefers-color-scheme:dark){#tripcrew-gate{background:#07111f}#tripcrew-gate-card{background:#0f1b2d;border-color:#23324a}#tripcrew-gate h1{color:#f8fafc}#tripcrew-gate p,#tripcrew-gate-status{color:#9fb0c7}#tripcrew-code{background:#0b1728;color:#f8fafc;border-color:#334155}#tripcrew-gate label{color:#cbd5e1}}'
+    ].join('');
+    document.head.appendChild(style);
+
+    var gate = document.createElement('div');
+    gate.id = 'tripcrew-gate';
+    gate.innerHTML = '<div id="tripcrew-gate-card">' +
+      '<div class="logo">✈️</div>' +
+      '<h1>Welcome to TripCrew</h1>' +
+      '<p>This Seattle 2027 trip is private. Enter the shared trip code to continue.</p>' +
+      '<label for="tripcrew-code">TRIP ACCESS CODE</label>' +
+      '<input id="tripcrew-code" type="password" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="Enter access code">' +
+      '<button id="tripcrew-unlock" type="button">Unlock TripCrew</button>' +
+      '<div id="tripcrew-gate-status">Checking secure session…</div>' +
+      '</div>';
+    document.body.appendChild(gate);
+    return gate;
+  }
+
+  function loadSupabase(callback) {
+    if (window.supabase && window.supabase.createClient) return callback();
+    var script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
+    script.onload = callback;
+    script.onerror = function () {
+      var s = document.getElementById('tripcrew-gate-status');
+      if (s) { s.className = 'error'; s.textContent = 'Could not load the secure connection. Check your internet connection.'; }
+    };
+    document.head.appendChild(script);
+  }
+
+  function hideGate() {
+    var gate = document.getElementById('tripcrew-gate');
+    if (gate) gate.style.display = 'none';
+  }
+
+  function status(text, kind) {
+    var el = document.getElementById('tripcrew-gate-status');
+    if (!el) return;
+    el.className = kind || '';
+    el.textContent = text;
+  }
+
+  makeGate();
+
+  if (SUPABASE_PUBLISHABLE_KEY === 'PASTE_YOUR_PUBLISHABLE_KEY_HERE') {
+    status('TripCrew still needs the Supabase publishable key added in GitHub.', 'error');
+    return;
+  }
+
+  loadSupabase(function () {
+    var client = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
+      auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true }
+    });
+
+    async function ensureSession() {
+      var result = await client.auth.getSession();
+      if (result.error) throw result.error;
+      if (result.data && result.data.session) return result.data.session;
+      var signed = await client.auth.signInAnonymously();
+      if (signed.error) throw signed.error;
+      return signed.data.session;
+    }
+
+    async function alreadyMember() {
+      var q = await client.from('trip_members').select('trip_id').limit(1);
+      if (q.error) throw q.error;
+      return q.data && q.data.length > 0;
+    }
+
+    async function start() {
+      try {
+        await ensureSession();
+        if (await alreadyMember()) {
+          hideGate();
+          return;
+        }
+        status('Enter your trip code to unlock Seattle 2027.');
+      } catch (e) {
+        console.error(e);
+        status('Secure sign-in could not start. Please refresh and try again.', 'error');
+      }
+    }
+
+    async function unlock() {
+      var input = document.getElementById('tripcrew-code');
+      var button = document.getElementById('tripcrew-unlock');
+      var code = input ? input.value.trim() : '';
+      if (!code) { status('Enter the trip access code.', 'error'); return; }
+      button.disabled = true;
+      status('Checking code…');
+      try {
+        await ensureSession();
+        var rpc = await client.rpc('join_trip_with_code', { trip_name: TRIP_NAME, submitted_code: code });
+        if (rpc.error) throw rpc.error;
+        if (!rpc.data) {
+          status('That code is not correct.', 'error');
+          button.disabled = false;
+          return;
+        }
+        status('Access granted.', 'ok');
+        window.setTimeout(hideGate, 350);
+      } catch (e) {
+        console.error(e);
+        var parts = [];
+        if (e && e.message) parts.push(e.message);
+        if (e && e.code) parts.push('Code: ' + e.code);
+        if (e && e.details) parts.push('Details: ' + e.details);
+        if (e && e.hint) parts.push('Hint: ' + e.hint);
+        status('Supabase error: ' + (parts.length ? parts.join(' | ') : String(e)), 'error');
+        button.disabled = false;
+      }
+    }
+
+    document.getElementById('tripcrew-unlock').addEventListener('click', unlock);
+    document.getElementById('tripcrew-code').addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') unlock();
+    });
+
+    start();
+  });
+})();
+</script>
+
+</body>
+</html>
