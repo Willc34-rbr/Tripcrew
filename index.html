@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0f172a">
-<title>TripCrew v1.13</title>
+<title>TripCrew</title>
 <style>
 :root{--bg:#f7f8fc;--surface:#fff;--ink:#0f172a;--muted:#64748b;--line:#e2e8f0;--brand:#2563eb;--brand2:#60a5fa;--success:#16a34a;--warn:#f59e0b;--radius:22px;--shadow:0 18px 50px rgba(15,23,42,.08);--topbar:rgba(247,248,252,.9);--appgrad1:#eef4ff;--appgrad2:#f7f8fc;--card:#fff;--soft:#eff6ff;--input:#fff}
 #dark-toggle{position:absolute;opacity:0;pointer-events:none}
@@ -197,5 +197,147 @@ body:has(#dark-toggle:checked) .field input,body:has(#dark-toggle:checked) .fiel
   });
 })();
 </script>
+
+<script>
+(function () {
+  var SUPABASE_URL = 'https://dbumoidcqkijpwnerxee.supabase.co';
+  var SUPABASE_PUBLISHABLE_KEY = 'PASTE_YOUR_PUBLISHABLE_KEY_HERE';
+  var TRIP_NAME = 'Seattle 2027';
+
+  function makeGate() {
+    var style = document.createElement('style');
+    style.textContent = [
+      '#tripcrew-gate{position:fixed;inset:0;z-index:9999;background:linear-gradient(180deg,#eef4ff 0,#f7f8fc 40%,#f7f8fc 100%);display:flex;align-items:center;justify-content:center;padding:24px;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}',
+      '#tripcrew-gate-card{width:min(100%,430px);background:#fff;border:1px solid #e2e8f0;border-radius:28px;padding:24px;box-shadow:0 24px 70px rgba(15,23,42,.14)}',
+      '#tripcrew-gate .logo{width:56px;height:56px;border-radius:18px;background:linear-gradient(135deg,#0f172a,#2563eb);display:grid;place-items:center;color:#fff;font-size:26px;margin-bottom:18px}',
+      '#tripcrew-gate h1{margin:0;font-size:28px;color:#0f172a}',
+      '#tripcrew-gate p{margin:8px 0 18px;color:#64748b;line-height:1.45}',
+      '#tripcrew-gate label{display:block;font-size:12px;font-weight:800;color:#475569;margin-bottom:7px}',
+      '#tripcrew-code{width:100%;border:1px solid #cbd5e1;border-radius:15px;padding:14px 15px;font-size:16px;outline:none;background:#fff;color:#0f172a}',
+      '#tripcrew-code:focus{border-color:#2563eb;box-shadow:0 0 0 3px rgba(37,99,235,.12)}',
+      '#tripcrew-unlock{width:100%;border:0;border-radius:15px;padding:14px 16px;margin-top:12px;background:#2563eb;color:#fff;font-weight:900;font-size:15px}',
+      '#tripcrew-unlock:disabled{opacity:.65}',
+      '#tripcrew-gate-status{min-height:20px;margin-top:12px;font-size:13px;color:#64748b}',
+      '#tripcrew-gate-status.error{color:#b91c1c}',
+      '#tripcrew-gate-status.ok{color:#15803d}',
+      '@media (prefers-color-scheme:dark){#tripcrew-gate{background:#07111f}#tripcrew-gate-card{background:#0f1b2d;border-color:#23324a}#tripcrew-gate h1{color:#f8fafc}#tripcrew-gate p,#tripcrew-gate-status{color:#9fb0c7}#tripcrew-code{background:#0b1728;color:#f8fafc;border-color:#334155}#tripcrew-gate label{color:#cbd5e1}}'
+    ].join('');
+    document.head.appendChild(style);
+
+    var gate = document.createElement('div');
+    gate.id = 'tripcrew-gate';
+    gate.innerHTML = '<div id="tripcrew-gate-card">' +
+      '<div class="logo">✈️</div>' +
+      '<h1>Welcome to TripCrew</h1>' +
+      '<p>This Seattle 2027 trip is private. Enter the shared trip code to continue.</p>' +
+      '<label for="tripcrew-code">TRIP ACCESS CODE</label>' +
+      '<input id="tripcrew-code" type="password" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="Enter access code">' +
+      '<button id="tripcrew-unlock" type="button">Unlock TripCrew</button>' +
+      '<div id="tripcrew-gate-status">Checking secure session…</div>' +
+      '</div>';
+    document.body.appendChild(gate);
+    return gate;
+  }
+
+  function loadSupabase(callback) {
+    if (window.supabase && window.supabase.createClient) return callback();
+    var script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
+    script.onload = callback;
+    script.onerror = function () {
+      var s = document.getElementById('tripcrew-gate-status');
+      if (s) { s.className = 'error'; s.textContent = 'Could not load the secure connection. Check your internet connection.'; }
+    };
+    document.head.appendChild(script);
+  }
+
+  function hideGate() {
+    var gate = document.getElementById('tripcrew-gate');
+    if (gate) gate.style.display = 'none';
+  }
+
+  function status(text, kind) {
+    var el = document.getElementById('tripcrew-gate-status');
+    if (!el) return;
+    el.className = kind || '';
+    el.textContent = text;
+  }
+
+  makeGate();
+
+  if (SUPABASE_PUBLISHABLE_KEY === 'PASTE_YOUR_PUBLISHABLE_KEY_HERE') {
+    status('TripCrew still needs the Supabase publishable key added in GitHub.', 'error');
+    return;
+  }
+
+  loadSupabase(function () {
+    var client = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
+      auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true }
+    });
+
+    async function ensureSession() {
+      var result = await client.auth.getSession();
+      if (result.error) throw result.error;
+      if (result.data && result.data.session) return result.data.session;
+      var signed = await client.auth.signInAnonymously();
+      if (signed.error) throw signed.error;
+      return signed.data.session;
+    }
+
+    async function alreadyMember() {
+      var q = await client.from('trip_members').select('trip_id').limit(1);
+      if (q.error) throw q.error;
+      return q.data && q.data.length > 0;
+    }
+
+    async function start() {
+      try {
+        await ensureSession();
+        if (await alreadyMember()) {
+          hideGate();
+          return;
+        }
+        status('Enter your trip code to unlock Seattle 2027.');
+      } catch (e) {
+        console.error(e);
+        status('Secure sign-in could not start. Please refresh and try again.', 'error');
+      }
+    }
+
+    async function unlock() {
+      var input = document.getElementById('tripcrew-code');
+      var button = document.getElementById('tripcrew-unlock');
+      var code = input ? input.value.trim() : '';
+      if (!code) { status('Enter the trip access code.', 'error'); return; }
+      button.disabled = true;
+      status('Checking code…');
+      try {
+        await ensureSession();
+        var rpc = await client.rpc('join_trip_with_code', { trip_name: TRIP_NAME, submitted_code: code });
+        if (rpc.error) throw rpc.error;
+        if (!rpc.data) {
+          status('That code is not correct.', 'error');
+          button.disabled = false;
+          return;
+        }
+        status('Access granted.', 'ok');
+        window.setTimeout(hideGate, 350);
+      } catch (e) {
+        console.error(e);
+        status('TripCrew could not verify the code. Please try again.', 'error');
+        button.disabled = false;
+      }
+    }
+
+    document.getElementById('tripcrew-unlock').addEventListener('click', unlock);
+    document.getElementById('tripcrew-code').addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') unlock();
+    });
+
+    start();
+  });
+})();
+</script>
+
 </body>
 </html>
