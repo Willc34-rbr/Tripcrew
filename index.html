@@ -177,16 +177,16 @@ body:has(#dark-toggle:checked) .field input,body:has(#dark-toggle:checked) .fiel
     if (document.querySelectorAll) return document.querySelectorAll('[data-traveler-name="' + i + '"]');
     return [];
   }
-  function applyTravelerName(i, name) {
+  window.applyTravelerName = function (i, name) {
     var display = name || ('Traveler ' + i);
     var nodes = nodesWithTraveler(i);
     var j;
     for (j = 0; j < nodes.length; j++) nodes[j].innerText = display;
     var input = byId('traveler-name-input-' + i);
     if (input) input.value = name || '';
-  }
+  };
   var i;
-  for (i = 1; i <= 7; i++) applyTravelerName(i, '');
+  for (i = 1; i <= 7; i++) window.applyTravelerName(i, '');
 
   // Live countdown: Jul 31, 2027 at 6:01 AM Pacific Daylight Time (UTC-7).
   var TRAIN_DEPARTURE = new Date('2027-07-31T06:01:00-07:00').getTime();
@@ -244,14 +244,6 @@ body:has(#dark-toggle:checked) .field input,body:has(#dark-toggle:checked) .fiel
 
 <script>
 (function () {
-  function applyTravelerName(i, name) {
-    var display = name || ('Traveler ' + i);
-    var nodes = document.querySelectorAll ? document.querySelectorAll('[data-traveler-name=\"' + i + '\"]') : [];
-    for (var j = 0; j < nodes.length; j++) nodes[j].innerText = display;
-    var input = document.getElementById('traveler-name-input-' + i);
-    if (input) input.value = name || '';
-  }
-
   var SUPABASE_URL = 'https://dbumoidcqkijpwnerxee.supabase.co';
   var SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_x7cHFhvsixNHlIGv3e37xQ_GIALjKB6';
   var TRIP_NAME = 'Seattle 2027';
@@ -383,7 +375,7 @@ body:has(#dark-toggle:checked) .field input,body:has(#dark-toggle:checked) .fiel
       });
       for (var slot = 1; slot <= 7; slot++) {
         var profile = travelerProfiles[slot] || null;
-        applyTravelerName(slot, profile ? profile.display_name : '');
+        window.applyTravelerName(slot, profile ? profile.display_name : '');
         setTravelerControls(slot, profile);
       }
     }
