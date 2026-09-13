@@ -463,7 +463,7 @@ body:has(#dark-toggle:checked) .field input,body:has(#dark-toggle:checked) .fiel
 
     async function loadIdeas() {
       if (!currentTripId) return;
-      var q = await client.from('planning_suggestions')
+      var q = await client.from('planning_ideas')
         .select('id,title,category,notes,link,estimated_cost,created_by,created_at')
         .eq('trip_id', currentTripId)
         .order('created_at', { ascending: false });
@@ -495,7 +495,7 @@ body:has(#dark-toggle:checked) .field input,body:has(#dark-toggle:checked) .fiel
       if (!currentTripId || !currentUserId) { if (msg) msg.textContent='Trip session is not ready. Refresh and try again.'; return; }
       if (btn) btn.disabled = true;
       try {
-        var result = await client.from('planning_suggestions').insert({
+        var result = await client.from('planning_ideas').insert({
           trip_id: currentTripId, title: title, category: category,
           notes: notes || null, link: link || null, estimated_cost: cost || null,
           created_by: currentUserId
