@@ -130,10 +130,10 @@ body{min-height:100dvh}
 <section id="add-idea" class="screen"><a class="back" href="#planning">‹ Planning</a><h2 class="screen-title">Add a Seattle idea</h2><p class="screen-sub">Share something the group might want to do, see, eat, or visit.</p><div class="card"><div class="field"><label>Idea</label><input id="idea-title" type="text" maxlength="100" placeholder="Example: Pike Place Market"></div><div class="field"><label>Category</label><select id="idea-category"><option>Attractions</option><option>Food</option><option>Bars / Nightlife</option><option>Shopping</option><option>Outdoors</option><option>Events</option><option>Day Trips</option><option>Other</option></select></div><div class="field"><label>Why should we go? (optional)</label><textarea id="idea-notes" maxlength="600" placeholder="Tell the crew why you recommend it."></textarea></div><div class="field"><label>Link (optional)</label><input id="idea-link" type="url" maxlength="500" placeholder="Website, TikTok, Instagram, Maps, etc."></div><div class="field"><label>Estimated cost (optional)</label><input id="idea-cost" type="text" maxlength="80" placeholder="Free, ~$25/person, etc."></div><button id="save-idea" class="primary" type="button">Add suggestion</button><div id="idea-save-msg" class="helper" aria-live="polite">Suggestions are shared with everyone in this trip.</div></div></section>
 <section id="itinerary" class="screen"><a class="back" href="#home">‹ Home</a><div class="titlebar"><div><h2 class="screen-title">Itinerary</h2><p class="screen-sub">Jul 31 – Aug 15, 2027 · confirmed plans only</p></div><a class="addplus" href="#add-plan" aria-label="Add a confirmed plan">+</a></div><div id="itinerary-list"><div class="card" id="itinerary-empty"><strong>No confirmed plans yet</strong><p class="muted">Once the crew agrees on an idea, add it here as part of the official trip itinerary.</p><a class="emptybtn" href="#add-plan">+ Add confirmed plan</a></div></div></section>
 <section id="add-plan" class="screen"><a class="back" href="#itinerary">‹ Itinerary</a><h2 class="screen-title">Add confirmed plan</h2><p class="screen-sub">Add something the group has officially decided to do.</p><div class="card"><div class="field"><label>Plan</label><input id="plan-title" type="text" maxlength="100" placeholder="What are you doing?"></div><div class="field-row"><div class="field"><label>Date</label><input id="plan-date" type="date" min="2027-07-31" max="2027-08-15"></div><div class="field"><label>Time (optional)</label><input id="plan-time" type="time"></div></div><div class="field"><label>Location (optional)</label><input id="plan-location" type="text" maxlength="120" placeholder="Where?"></div><div class="field"><label>Notes</label><textarea id="plan-notes" maxlength="800" placeholder="Cost, meeting point, or anything the crew should know."></textarea></div><button id="save-plan" class="primary" type="button">Add to itinerary</button><div id="plan-save-msg" class="helper" aria-live="polite">Confirmed plans are shared with everyone in this trip.</div></div></section>
-<section id="bookings" class="screen"><a class="back" href="#home">‹ Home</a><h2 class="screen-title">Bookings</h2><p class="screen-sub">Reservations and booking status.</p><a class="tap" href="#booking-turo"><div class="row"><div><strong>🚙 Turo</strong><div class="muted">2018 Dodge Grand Caravan</div></div><span class="badge success">Booked & paid</span></div></a><a class="tap" href="#booking-amtrak"><div class="row"><div><strong>🚆 Amtrak</strong><div class="muted">Round trip • group purchase</div></div><span class="badge pending">Sep 14</span></div></a><a class="tap" href="#booking-airbnb"><div class="row"><div><strong>🏠 Airbnb</strong><div class="muted">Stay</div></div><span class="badge info">TBD</span></div></a></section>
+<section id="bookings" class="screen"><a class="back" href="#home">‹ Home</a><h2 class="screen-title">Bookings</h2><p class="screen-sub">Reservations and booking status.</p><a class="tap" href="#booking-turo"><div class="row"><div><strong>🚙 Turo</strong><div class="muted">2018 Dodge Grand Caravan</div></div><span class="badge success">Booked & paid</span></div></a><a class="tap" href="#booking-amtrak"><div class="row"><div><strong>🚆 Amtrak</strong><div class="muted">Round trip • group purchase</div></div><span id="bookings-amtrak-badge" class="badge pending">Sep 14</span></div></a><a class="tap" href="#booking-airbnb"><div class="row"><div><strong>🏠 Airbnb</strong><div class="muted">Stay</div></div><span class="badge info">TBD</span></div></a></section>
 <section id="booking-turo" class="screen"><a class="back" href="#bookings">‹ Bookings</a><div class="detail-hero"><div class="emoji">🚙</div><h2>Turo</h2><div class="muted">2018 Dodge Grand Caravan</div></div><div class="section card"><div class="kv"><span>Status</span><span class="badge success">Booked & fully paid</span></div><div class="kv"><span>Total</span><strong>$1,440</strong></div><div class="kv"><span>Funding</span><strong>7/7 paid</strong></div><div class="kv"><span>Confirmation</span><strong>Private / add later</strong></div></div></section>
-<section id="booking-amtrak" class="screen"><a class="back" href="#bookings">‹ Bookings</a><div class="detail-hero"><div class="emoji">🚆</div><h2>Amtrak</h2><div class="muted">Round-trip train booking</div></div><div class="section card"><div class="kv"><span>Status</span><strong>Not purchased</strong></div><div class="kv"><span>Target</span><strong>Sep 14, 2026</strong></div><div class="kv"><span>Estimate</span><strong>~$215/person</strong></div><div class="kv"><span>Purchase type</span><strong>Combined group purchase</strong></div></div></section>
-<section id="booking-airbnb" class="screen"><a class="back" href="#bookings">‹ Bookings</a><div class="detail-hero"><div class="emoji">🏠</div><h2>Airbnb</h2><div class="muted">Seattle lodging</div></div><div class="section card"><div class="kv"><span>Status</span><strong>Planning</strong></div><div class="kv"><span>Budget</span><strong>$3,000–$5,000</strong></div><div class="kv"><span>Deadline</span><strong>TBD</strong></div></div></section>
+<section id="booking-amtrak" class="screen"><a class="back" href="#bookings">‹ Bookings</a><div class="detail-hero"><div class="emoji">🚆</div><h2>Amtrak</h2><div class="muted">Round-trip train booking</div></div><div class="section card"><div class="kv"><span>Status</span><strong id="amtrak-booking-display-status">Not purchased</strong></div><div class="kv"><span>Target</span><strong>Sep 14, 2026</strong></div><div class="kv"><span>Estimate</span><strong id="amtrak-booking-display-price">$215–$240/person</strong></div><div class="kv"><span>Purchase type</span><strong>Combined group purchase</strong></div></div><div class="section card"><div class="field"><label>BOOKING STATUS</label><select id="amtrak-booking-status"><option value="Not purchased">Not purchased</option><option value="Ready to purchase">Ready to purchase</option><option value="Purchased">Purchased</option></select></div><div class="field-row"><div class="field"><label>FINAL TOTAL</label><input id="amtrak-booking-total" type="number" min="0" step="0.01" placeholder="Group total"></div><div class="field"><label>PER PERSON</label><input id="amtrak-booking-person" type="number" min="0" step="0.01" placeholder="Per traveler"></div></div><div class="field"><label>NOTE</label><textarea id="amtrak-booking-note" placeholder="Example: Tickets purchased together"></textarea></div><button id="save-amtrak-booking" class="primary-button" type="button">Save Amtrak update</button><div id="amtrak-booking-msg" class="helper" aria-live="polite">Shared with everyone in this trip.</div></div></section>
+<section id="booking-airbnb" class="screen"><a class="back" href="#bookings">‹ Bookings</a><div class="detail-hero"><div class="emoji">🏠</div><h2>Airbnb</h2><div class="muted">Seattle lodging</div></div><div class="section card"><div class="kv"><span>Status</span><strong id="airbnb-booking-display-status">Planning</strong></div><div class="kv"><span>Budget</span><strong id="airbnb-booking-display-price">$3,000–$5,000</strong></div><div class="kv"><span>Deadline</span><strong>TBD</strong></div></div><div class="section card"><div class="field"><label>BOOKING STATUS</label><select id="airbnb-booking-status"><option value="Planning">Planning</option><option value="Ready to book">Ready to book</option><option value="Booked">Booked</option></select></div><div class="field-row"><div class="field"><label>FINAL TOTAL</label><input id="airbnb-booking-total" type="number" min="0" step="0.01" placeholder="Group total"></div><div class="field"><label>PER PERSON</label><input id="airbnb-booking-person" type="number" min="0" step="0.01" placeholder="Per traveler"></div></div><div class="field"><label>NOTE</label><textarea id="airbnb-booking-note" placeholder="Example: Lodging booked and fully funded"></textarea></div><button id="save-airbnb-booking" class="primary-button" type="button">Save Airbnb update</button><div id="airbnb-booking-msg" class="helper" aria-live="polite">Shared with everyone in this trip.</div></div></section>
 <section id="voting" class="screen"><a class="back" href="#home">‹ Home</a><div class="titlebar"><div><h2 class="screen-title">Voting</h2><p class="screen-sub">Create polls and vote as a crew.</p></div><a class="addplus" href="#add-poll" aria-label="Create a poll">+</a></div><div id="polls-list"><div class="card"><strong>No polls yet</strong><p class="muted">Create the first group decision when you are ready.</p><a class="emptybtn" href="#add-poll">+ Create a poll</a></div></div></section>
 <section id="add-poll" class="screen"><a class="back" href="#voting">‹ Voting</a><h2 class="screen-title">Create a poll</h2><p class="screen-sub">Put a group decision up for a vote.</p><div class="card"><div class="field"><label>Question</label><input id="poll-question" type="text" maxlength="140" placeholder="What should the group decide?"></div><div class="field"><label>Option 1</label><input id="poll-option-1" type="text" maxlength="100" placeholder="First choice"></div><div class="field"><label>Option 2</label><input id="poll-option-2" type="text" maxlength="100" placeholder="Second choice"></div><div class="field"><label>Option 3 (optional)</label><input id="poll-option-3" type="text" maxlength="100" placeholder="Third choice"></div><div class="field"><label>Notes (optional)</label><textarea id="poll-notes" maxlength="600" placeholder="Anything travelers should know before voting."></textarea></div><button id="save-poll" class="primary" type="button">Create poll</button><div id="poll-save-msg" class="helper" aria-live="polite">Each traveler gets one vote per poll and can change it later.</div></div></section>
 <section id="deadlines" class="screen"><a class="back" href="#home">‹ Home</a><h2 class="screen-title">Deadlines</h2><p class="screen-sub">1 complete • 2 upcoming</p><div class="card"><div class="row"><div class="row-start"><div class="check">✓</div><div><strong>Turo car rental</strong><div class="muted">Completed • fully paid</div></div></div><span class="badge success">Done</span></div></div><div class="card" id="amtrak-deadline-card"><div class="row"><div><strong>Buy Amtrak tickets</strong><div class="muted" id="amtrak-deadline-text">Sep 14, 2026</div></div><span id="amtrak-deadline-status" class="badge pending">Upcoming</span></div></div><div class="card"><div class="row"><div><strong>Book Airbnb</strong><div class="muted">Date TBD</div></div><span class="badge pending">Upcoming</span></div></div></section>
@@ -347,6 +347,113 @@ body{min-height:100dvh}
     var currentTripId = null;
     var travelerProfiles = {};
     var ownTravelerSlot = null;
+
+    function bookingMoney(v) {
+      if (v === null || v === undefined || v === '') return '';
+      var n = Number(v);
+      if (!isFinite(n)) return '';
+      return '$' + n.toLocaleString(undefined, {minimumFractionDigits: n % 1 ? 2 : 0, maximumFractionDigits: 2});
+    }
+
+    function bookingMsg(key, text, kind) {
+      var el = document.getElementById(key + '-booking-msg');
+      if (!el) return;
+      el.textContent = text || '';
+      el.style.color = kind === 'error' ? '#b91c1c' : (kind === 'ok' ? '#15803d' : '');
+    }
+
+    function renderBooking(key, row) {
+      if (!row) return;
+      var status = row.status || (key === 'amtrak' ? 'Not purchased' : 'Planning');
+      var total = row.total_cost;
+      var per = row.per_person_cost;
+
+      var statusSelect = document.getElementById(key + '-booking-status');
+      var totalInput = document.getElementById(key + '-booking-total');
+      var personInput = document.getElementById(key + '-booking-person');
+      var noteInput = document.getElementById(key + '-booking-note');
+      if (statusSelect) statusSelect.value = status;
+      if (totalInput) totalInput.value = total == null ? '' : total;
+      if (personInput) personInput.value = per == null ? '' : per;
+      if (noteInput) noteInput.value = row.note || '';
+
+      var statusDisplay = document.getElementById(key + '-booking-display-status');
+      if (statusDisplay) statusDisplay.textContent = status;
+
+      var priceDisplay = document.getElementById(key + '-booking-display-price');
+      if (priceDisplay) {
+        if (per != null) priceDisplay.textContent = bookingMoney(per) + '/person';
+        else if (total != null) priceDisplay.textContent = bookingMoney(total) + ' total';
+      }
+
+      var badge = document.getElementById('bookings-' + key + '-badge');
+      if (badge) {
+        badge.textContent = status;
+        badge.className = 'badge ' + ((status === 'Purchased' || status === 'Booked') ? 'success' : (status.indexOf('Ready') === 0 ? 'info' : 'pending'));
+      }
+
+      if (key === 'amtrak' && status === 'Purchased') {
+        var deadlineText = document.getElementById('amtrak-deadline-text');
+        var deadlineStatus = document.getElementById('amtrak-deadline-status');
+        var detailBadge = document.getElementById('amtrak-deadline-badge');
+        var homeDeadline = document.getElementById('home-amtrak-deadline');
+        if (deadlineText) deadlineText.textContent = 'Completed';
+        if (deadlineStatus) { deadlineStatus.textContent = 'Done'; deadlineStatus.className = 'badge success'; }
+        if (detailBadge) { detailBadge.textContent = 'Done'; detailBadge.className = 'badge success'; }
+        if (homeDeadline) homeDeadline.textContent = 'Amtrak tickets purchased';
+      }
+    }
+
+    async function loadBookingUpdates() {
+      if (!currentTripId) return;
+      var result = await client.from('booking_updates')
+        .select('booking_key,status,total_cost,per_person_cost,note')
+        .eq('trip_id', currentTripId);
+      if (result.error) {
+        console.error(result.error);
+        return;
+      }
+      var rows = result.data || [];
+      for (var i = 0; i < rows.length; i++) renderBooking(rows[i].booking_key, rows[i]);
+    }
+
+    async function saveBookingUpdate(key) {
+      if (!currentTripId || !currentUserId) return;
+      var statusSelect = document.getElementById(key + '-booking-status');
+      var totalInput = document.getElementById(key + '-booking-total');
+      var personInput = document.getElementById(key + '-booking-person');
+      var noteInput = document.getElementById(key + '-booking-note');
+
+      var row = {
+        trip_id: currentTripId,
+        booking_key: key,
+        status: statusSelect ? statusSelect.value : '',
+        total_cost: totalInput && totalInput.value !== '' ? Number(totalInput.value) : null,
+        per_person_cost: personInput && personInput.value !== '' ? Number(personInput.value) : null,
+        note: noteInput ? noteInput.value.trim() : '',
+        updated_by: currentUserId,
+        updated_at: new Date().toISOString()
+      };
+
+      bookingMsg(key, 'Saving…');
+      var result = await client.from('booking_updates')
+        .upsert(row, {onConflict: 'trip_id,booking_key'})
+        .select()
+        .single();
+
+      if (result.error) {
+        bookingMsg(key, result.error.message || 'Could not save update.', 'error');
+        return;
+      }
+
+      renderBooking(key, result.data);
+      bookingMsg(key, 'Saved for everyone.', 'ok');
+    }
+
+    var amtrakSaveButton = document.getElementById('save-amtrak-booking');
+    if (amtrakSaveButton) amtrakSaveButton.addEventListener('click', function () { saveBookingUpdate('amtrak'); });
+    var airbnbSaveButton = document.getElementById('save-airbnb-booking');
+    if (airbnbSaveButton) airbnbSaveButton.addEventListener('click', function () { saveBookingUpdate('airbnb'); });
 
     function travelerMessage(slot, text, kind) {
       var el = document.getElementById('traveler-name-msg-' + slot);
@@ -685,6 +792,7 @@ body{min-height:100dvh}
           await loadIdeas();
           await loadItinerary();
           await loadPolls();
+          await loadBookingUpdates();
           hideGate();
           return;
         }
