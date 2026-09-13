@@ -103,6 +103,14 @@ body{min-height:100dvh}
   .field-row{grid-template-columns:1fr}
 }
 
+
+.deadline-manage-card{margin-bottom:10px}
+.deadline-manage-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.deadline-manage-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.deadline-mini-btn{border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:10px;padding:8px 10px;font-weight:800}
+.deadline-mini-btn.danger{color:#b91c1c}
+.deadline-complete{text-decoration:line-through;opacity:.65}
+
 </style>
 </head>
 <body>
@@ -116,7 +124,7 @@ body{min-height:100dvh}
   <div class="section"><div class="section-head"><h3>Quick access</h3></div><div class="grid2"><a class="tap quick" href="#expenses"><div class="emoji">💳</div><div><strong>Expenses</strong><br><span>Budget & funding</span></div></a><a class="tap quick" href="#bookings"><div class="emoji">🎟️</div><div><strong>Bookings</strong><br><span>Car, train & stay</span></div></a><a class="tap quick" href="#planning"><div class="emoji">💡</div><div><strong>Planning</strong><br><span>Seattle ideas</span></div></a><a class="tap quick" href="#itinerary"><div class="emoji">🗓️</div><div><strong>Itinerary</strong><br><span>Confirmed plans</span></div></a><a class="tap quick" href="#voting"><div class="emoji">🗳️</div><div><strong>Voting</strong><br><span>Group decisions</span></div></a></div></div>
   <div class="section"><div class="section-head"><h3>Deadlines</h3><a class="seeall" href="#deadlines">See all</a></div><a class="tap" href="#deadlines"><div class="row"><div><strong>1 of 3 complete</strong><div class="muted" id="home-amtrak-deadline">Amtrak is next • Sep 14, 2026</div></div><span class="badge info">33%</span></div><div class="progress"><div></div></div></a></div>
   <div class="section"><div class="section-head"><h3>Travelers</h3><a class="seeall" href="#travelers">See all</a></div><a class="tap" href="#travelers"><div class="row"><div class="row-start"><div class="avatar">7</div><div><strong>Traveler 1–7</strong><div class="muted">7 confirmed travelers</div></div></div><span class="badge success">Confirmed</span></div></a></div>
-</section>
+<a class="primary-button" href="#manage-deadlines" style="display:block;text-align:center;margin-top:12px;text-decoration:none">Manage deadlines</a></section>
 <section id="travelers" class="screen"><a class="back" href="#home">‹ Home</a><h2 class="screen-title">Travelers</h2><p class="screen-sub">All 7 travelers are confirmed.</p><a class="tap" href="#traveler-1"><div class="row"><div class="row-start"><div class="avatar">T1</div><div><strong data-traveler-name="1">Traveler 1</strong><div class="muted">Confirmed traveler • Turo paid</div></div></div><span class="badge success">Confirmed</span></div></a><a class="tap" href="#traveler-2"><div class="row"><div class="row-start"><div class="avatar">T2</div><div><strong data-traveler-name="2">Traveler 2</strong><div class="muted">Confirmed traveler • Turo paid</div></div></div><span class="badge success">Confirmed</span></div></a><a class="tap" href="#traveler-3"><div class="row"><div class="row-start"><div class="avatar">T3</div><div><strong data-traveler-name="3">Traveler 3</strong><div class="muted">Confirmed traveler • Turo paid</div></div></div><span class="badge success">Confirmed</span></div></a><a class="tap" href="#traveler-4"><div class="row"><div class="row-start"><div class="avatar">T4</div><div><strong data-traveler-name="4">Traveler 4</strong><div class="muted">Confirmed traveler • Turo paid</div></div></div><span class="badge success">Confirmed</span></div></a><a class="tap" href="#traveler-5"><div class="row"><div class="row-start"><div class="avatar">T5</div><div><strong data-traveler-name="5">Traveler 5</strong><div class="muted">Confirmed traveler • Turo paid</div></div></div><span class="badge success">Confirmed</span></div></a><a class="tap" href="#traveler-6"><div class="row"><div class="row-start"><div class="avatar">T6</div><div><strong data-traveler-name="6">Traveler 6</strong><div class="muted">Confirmed traveler • Turo paid</div></div></div><span class="badge success">Confirmed</span></div></a><a class="tap" href="#traveler-7"><div class="row"><div class="row-start"><div class="avatar">T7</div><div><strong data-traveler-name="7">Traveler 7</strong><div class="muted">Confirmed traveler • Turo paid</div></div></div><span class="badge success">Confirmed</span></div></a></section>
 <section id="expenses" class="screen"><a class="back" href="#home">‹ Home</a><h2 class="screen-title">Expenses</h2><p class="screen-sub">Confirmed costs and planning estimates.</p><div class="cat-grid"><a class="tap cat" href="#transport"><div class="emoji">🚆</div><div><strong>Transport</strong><br><small>$2,945–$3,120 • Turo + Amtrak</small></div></a><a class="tap cat" href="#lodging"><div class="emoji">🏠</div><div><strong>Lodging</strong><br><small>$3,000–$5,000 estimate</small></div></a><a class="tap cat" href="#food"><div class="emoji">🍽️</div><div><strong>Food</strong><br><small>No expenses yet</small></div></a><a class="tap cat" href="#activities"><div class="emoji">🎡</div><div><strong>Activities</strong><br><small>No expenses yet</small></div></a></div></section>
 <section id="transport" class="screen"><a class="back" href="#expenses">‹ Expenses</a><h2 class="screen-title">Transport</h2><p class="screen-sub">One paid booking + one upcoming group purchase.</p><a class="tap" href="#turo"><div class="row"><div><strong>Turo • 2018 Dodge Grand Caravan</strong><div class="muted">Fully paid • 7/7 funded</div></div><div class="money">$1,440</div></div></a><a class="tap" href="#amtrak"><div class="row"><div><strong>Amtrak round trip</strong><div class="muted">$215–$240/person • round trip</div></div><div class="money">$1,505–$1,680</div></div></a></section>
@@ -143,6 +151,28 @@ body{min-height:100dvh}
 <nav class="bottom"><a class="nav" href="#home"><span>🏠</span><small>Home</small></a><a class="nav" href="#travelers"><span>👥</span><small>Travelers</small></a><a class="nav" href="#expenses"><span>💳</span><small>Expenses</small></a><a class="nav" href="#itinerary"><span>🗓️</span><small>Plan</small></a><a class="nav" href="#more"><span>•••</span><small>More</small></a></nav>
 </div>
 
+
+<section id="manage-deadlines" class="screen">
+  <a class="back" href="#home">‹ Home</a>
+  <div class="section">
+    <h2>Manage deadlines</h2>
+    <div class="muted">Add, complete, reopen, edit, or delete trip deadlines. Changes sync for the whole crew.</div>
+  </div>
+  <div id="deadline-manager-list" class="section"></div>
+  <div class="section card">
+    <h3 id="deadline-form-title">Add deadline</h3>
+    <input id="deadline-edit-id" type="hidden">
+    <div class="field"><label>TITLE</label><input id="deadline-title-input" type="text" maxlength="120" placeholder="Example: Buy Amtrak tickets"></div>
+    <div class="field-row">
+      <div class="field"><label>DUE DATE</label><input id="deadline-date-input" type="date"></div>
+      <div class="field"><label>STATUS</label><select id="deadline-status-input"><option value="upcoming">Upcoming</option><option value="completed">Completed</option><option value="skipped">Skipped</option></select></div>
+    </div>
+    <div class="field"><label>NOTE</label><textarea id="deadline-note-input" maxlength="500" placeholder="Optional note"></textarea></div>
+    <button id="save-deadline-button" class="primary-button" type="button">Save deadline</button>
+    <button id="cancel-deadline-edit" class="secondary-button" type="button" style="display:none;margin-top:8px">Cancel edit</button>
+    <div id="deadline-form-msg" class="helper" aria-live="polite"></div>
+  </div>
+</section>
 <script>
 (function () {
   function byId(id) { return document.getElementById(id); }
@@ -347,6 +377,121 @@ body{min-height:100dvh}
     var currentTripId = null;
     var travelerProfiles = {};
     var ownTravelerSlot = null;
+    var sharedDeadlines = [];
+
+    function deadlineMsg(text, kind) {
+      var el = document.getElementById('deadline-form-msg');
+      if (!el) return;
+      el.textContent = text || '';
+      el.style.color = kind === 'error' ? '#b91c1c' : (kind === 'ok' ? '#15803d' : '');
+    }
+
+    function formatDeadlineDate(value) {
+      if (!value) return 'No date';
+      var d = new Date(value + 'T12:00:00');
+      return d.toLocaleDateString(undefined, {month:'short', day:'numeric', year:'numeric'});
+    }
+
+    function renderDeadlineManager() {
+      var list = document.getElementById('deadline-manager-list');
+      if (!list) return;
+      if (!sharedDeadlines.length) {
+        list.innerHTML = '<div class="card muted">No shared deadlines yet. Add one below.</div>';
+        return;
+      }
+      list.innerHTML = sharedDeadlines.map(function(d) {
+        var done = d.status === 'completed';
+        var skipped = d.status === 'skipped';
+        var badge = done ? 'Completed' : (skipped ? 'Skipped' : 'Upcoming');
+        var cls = done ? 'success' : (skipped ? 'info' : 'pending');
+        return '<div class="card deadline-manage-card" data-deadline-id="' + d.id + '">' +
+          '<div class="deadline-manage-top"><div><strong class="' + (done ? 'deadline-complete' : '') + '">' + escapeHtml(d.title) + '</strong>' +
+          '<div class="muted">' + formatDeadlineDate(d.due_date) + (d.note ? ' • ' + escapeHtml(d.note) : '') + '</div></div>' +
+          '<span class="badge ' + cls + '">' + badge + '</span></div>' +
+          '<div class="deadline-manage-actions">' +
+          '<button class="deadline-mini-btn" type="button" data-deadline-toggle="' + d.id + '">' + (done ? 'Reopen' : 'Mark complete') + '</button>' +
+          '<button class="deadline-mini-btn" type="button" data-deadline-edit="' + d.id + '">Edit</button>' +
+          '<button class="deadline-mini-btn danger" type="button" data-deadline-delete="' + d.id + '">Delete</button>' +
+          '</div></div>';
+      }).join('');
+    }
+
+    async function loadSharedDeadlines() {
+      if (!currentTripId) return;
+      var result = await client.from('trip_deadlines')
+        .select('id,title,due_date,status,note,created_by')
+        .eq('trip_id', currentTripId)
+        .order('due_date', {ascending:true});
+      if (result.error) { console.error(result.error); return; }
+      sharedDeadlines = result.data || [];
+      renderDeadlineManager();
+    }
+
+    function resetDeadlineForm() {
+      var ids = ['deadline-edit-id','deadline-title-input','deadline-date-input','deadline-note-input'];
+      ids.forEach(function(id){ var el=document.getElementById(id); if(el) el.value=''; });
+      var status = document.getElementById('deadline-status-input');
+      if (status) status.value = 'upcoming';
+      var title = document.getElementById('deadline-form-title');
+      if (title) title.textContent = 'Add deadline';
+      var cancel = document.getElementById('cancel-deadline-edit');
+      if (cancel) cancel.style.display = 'none';
+      deadlineMsg('');
+    }
+
+    async function saveDeadline() {
+      if (!currentTripId || !currentUserId) return;
+      var id = document.getElementById('deadline-edit-id').value;
+      var title = document.getElementById('deadline-title-input').value.trim();
+      var due = document.getElementById('deadline-date-input').value || null;
+      var status = document.getElementById('deadline-status-input').value;
+      var note = document.getElementById('deadline-note-input').value.trim();
+      if (!title) { deadlineMsg('Add a deadline title.', 'error'); return; }
+      deadlineMsg('Saving…');
+      var result;
+      if (id) {
+        result = await client.from('trip_deadlines').update({
+          title:title,due_date:due,status:status,note:note,updated_at:new Date().toISOString()
+        }).eq('id', id);
+      } else {
+        result = await client.from('trip_deadlines').insert({
+          trip_id:currentTripId,title:title,due_date:due,status:status,note:note,created_by:currentUserId
+        });
+      }
+      if (result.error) { deadlineMsg(result.error.message, 'error'); return; }
+      resetDeadlineForm();
+      await loadSharedDeadlines();
+      deadlineMsg('Saved for everyone.', 'ok');
+    }
+
+    async function toggleDeadline(id) {
+      var d = sharedDeadlines.find(function(x){return x.id===id;});
+      if (!d) return;
+      var next = d.status === 'completed' ? 'upcoming' : 'completed';
+      var result = await client.from('trip_deadlines').update({status:next,updated_at:new Date().toISOString()}).eq('id',id);
+      if (result.error) { deadlineMsg(result.error.message,'error'); return; }
+      await loadSharedDeadlines();
+    }
+
+    function editDeadline(id) {
+      var d = sharedDeadlines.find(function(x){return x.id===id;});
+      if (!d) return;
+      document.getElementById('deadline-edit-id').value = d.id;
+      document.getElementById('deadline-title-input').value = d.title || '';
+      document.getElementById('deadline-date-input').value = d.due_date || '';
+      document.getElementById('deadline-status-input').value = d.status || 'upcoming';
+      document.getElementById('deadline-note-input').value = d.note || '';
+      document.getElementById('deadline-form-title').textContent = 'Edit deadline';
+      document.getElementById('cancel-deadline-edit').style.display = '';
+      location.hash = '#manage-deadlines';
+    }
+
+    async function deleteDeadline(id) {
+      if (!confirm('Delete this deadline?')) return;
+      var result = await client.from('trip_deadlines').delete().eq('id',id);
+      if (result.error) { deadlineMsg(result.error.message,'error'); return; }
+      await loadSharedDeadlines();
+    }
 
     function bookingMoney(v) {
       if (v === null || v === undefined || v === '') return '';
@@ -454,6 +599,19 @@ body{min-height:100dvh}
     if (amtrakSaveButton) amtrakSaveButton.addEventListener('click', function () { saveBookingUpdate('amtrak'); });
     var airbnbSaveButton = document.getElementById('save-airbnb-booking');
     if (airbnbSaveButton) airbnbSaveButton.addEventListener('click', function () { saveBookingUpdate('airbnb'); });
+
+    var deadlineSaveButton = document.getElementById('save-deadline-button');
+    if (deadlineSaveButton) deadlineSaveButton.addEventListener('click', saveDeadline);
+    var deadlineCancelButton = document.getElementById('cancel-deadline-edit');
+    if (deadlineCancelButton) deadlineCancelButton.addEventListener('click', resetDeadlineForm);
+    var deadlineList = document.getElementById('deadline-manager-list');
+    if (deadlineList) deadlineList.addEventListener('click', function(e) {
+      var t = e.target.closest('[data-deadline-toggle],[data-deadline-edit],[data-deadline-delete]');
+      if (!t) return;
+      if (t.dataset.deadlineToggle) toggleDeadline(t.dataset.deadlineToggle);
+      else if (t.dataset.deadlineEdit) editDeadline(t.dataset.deadlineEdit);
+      else if (t.dataset.deadlineDelete) deleteDeadline(t.dataset.deadlineDelete);
+    });
 
     function travelerMessage(slot, text, kind) {
       var el = document.getElementById('traveler-name-msg-' + slot);
@@ -793,6 +951,7 @@ body{min-height:100dvh}
           await loadItinerary();
           await loadPolls();
           await loadBookingUpdates();
+          await loadSharedDeadlines();
           hideGate();
           return;
         }
