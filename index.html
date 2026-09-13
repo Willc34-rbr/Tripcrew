@@ -28,6 +28,59 @@ body:has(#dark-toggle:checked) .field input,body:has(#dark-toggle:checked) .fiel
 
 .theme-row{display:flex;align-items:center;justify-content:space-between;gap:14px}.theme-copy strong{display:block;font-size:15px}.theme-copy span{display:block;margin-top:3px;font-size:12px;color:var(--muted)}.theme-switch{width:54px;height:32px;border-radius:999px;background:#cbd5e1;position:relative;display:block;cursor:pointer;flex:0 0 auto;transition:.2s}.theme-switch:after{content:"";position:absolute;width:26px;height:26px;left:3px;top:3px;border-radius:50%;background:#fff;box-shadow:0 2px 7px rgba(15,23,42,.2);transition:.2s}#dark-toggle:checked~.app .theme-switch{background:var(--brand)}#dark-toggle:checked~.app .theme-switch:after{transform:translateX(22px)}.timer-live{display:inline-flex;align-items:center;gap:6px;margin-top:9px;font-size:11px;font-weight:800;color:var(--success)}.timer-live:before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor;animation:pulse 1.3s infinite}@keyframes pulse{0%,100%{opacity:.3}50%{opacity:1}}
 @media(min-width:700px){.app{margin:20px 0;min-height:calc(100vh - 40px);border-radius:32px;overflow:hidden;box-shadow:var(--shadow)}.bottom{bottom:20px;border-radius:0 0 32px 32px}}
+/* Desktop & tablet responsive layout */
+@media (min-width: 760px){
+  body{padding:20px;background:var(--bg)}
+  .app{max-width:980px;min-height:calc(100vh - 40px);margin:0 auto;border-radius:30px;overflow:hidden;box-shadow:var(--shadow);padding-bottom:110px}
+  .topbar{padding:24px 30px 14px}
+  .screen{padding:26px 30px 42px}
+  .hero{padding:28px 30px}
+  .hero h2{font-size:36px}
+  .countdown strong{font-size:34px}
+  .grid2{grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+  .cat-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+  .card,.tap{padding:18px}
+  .quick{min-height:138px}
+  .section{margin-top:28px}
+  .section h3{font-size:20px}
+  .screen-title{font-size:32px}
+  .detail-hero{padding:26px}
+  .detail-hero h2{font-size:34px}
+  .bottom{width:min(calc(100% - 40px),980px);bottom:20px;border-radius:18px;padding:10px 18px;box-shadow:0 14px 35px rgba(15,23,42,.12);border:1px solid var(--line)}
+  .nav{flex-direction:row;justify-content:center;gap:8px;padding:10px 12px}
+  .nav span{font-size:18px}
+  .nav small{font-size:12px}
+}
+
+@media (min-width: 1100px){
+  body{padding:24px}
+  .app{max-width:1180px;min-height:calc(100vh - 48px);padding-bottom:34px}
+  .topbar{padding:24px 36px 14px}
+  .screen{padding:30px 36px 48px;padding-top:104px}
+  .bottom{position:absolute;top:82px;bottom:auto;left:36px;right:36px;transform:none;width:auto;border-radius:16px;padding:8px 14px;grid-template-columns:repeat(5,1fr);box-shadow:0 10px 28px rgba(15,23,42,.08);background:color-mix(in srgb,var(--card) 97%,transparent)}
+  .nav{min-height:48px}
+  .hero{padding:32px 34px}
+  .hero-row{align-items:center}
+  .hero h2{font-size:40px}
+  .stats{gap:14px;margin-top:20px}
+  .stat{padding:16px}
+  .stat strong{font-size:22px}
+  .grid2{grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+  .cat-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+  .cat{min-height:150px}
+  .card,.tap{border-radius:20px}
+  .train-timer{padding:20px}
+  .timer-box{padding:14px 8px}
+  .timer-box strong{font-size:28px}
+  .kv{font-size:15px}
+}
+
+@media (min-width: 1400px){
+  .app{max-width:1280px}
+  .bottom{left:40px;right:40px}
+  .screen{padding-left:40px;padding-right:40px}
+}
+
 .addplus{width:42px;height:42px;border-radius:14px;background:var(--brand);color:#fff;display:grid;place-items:center;font-size:28px;font-weight:700;line-height:1;box-shadow:0 8px 20px rgba(37,99,235,.22)}.addplus:active{transform:scale(.96)}.titlebar{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}.field{margin-top:14px}.field label{display:block;font-size:12px;font-weight:900;color:var(--muted);margin-bottom:6px}.field input,.field textarea,.field select{width:100%;border:1px solid var(--line);border-radius:14px;padding:13px 14px;font:inherit;background:var(--input);color:var(--ink)}.field textarea{min-height:110px;resize:vertical}.primary{display:block;width:100%;border:0;border-radius:15px;padding:14px 16px;margin-top:18px;background:var(--brand);color:#fff;font:inherit;font-weight:900;text-align:center}.helper{font-size:12px;color:var(--muted);margin-top:8px}.name-editor{margin-top:14px}.name-editor .row-edit{display:flex;gap:8px;align-items:center}.name-editor input{flex:1;border:1px solid var(--line);border-radius:14px;padding:13px 14px;font:inherit;background:var(--input);color:var(--ink);min-width:0}.save-name{border:0;border-radius:14px;padding:13px 14px;background:var(--brand);color:#fff;font:inherit;font-weight:900;white-space:nowrap}.save-name:active{transform:scale(.97)}.saved-msg{font-size:12px;color:var(--success);font-weight:800;min-height:16px;margin-top:6px}</style>
 </head>
 <body>
@@ -39,7 +92,7 @@ body:has(#dark-toggle:checked) .field input,body:has(#dark-toggle:checked) .fiel
   <div class="hero"><div class="hero-row"><div><h2>Seattle, WA</h2><p>Jul 31 – Aug 15, 2027</p></div><div class="countdown"><strong id="trip-days">323</strong><span>days to go</span></div></div><div class="stats"><div class="stat"><strong>7</strong><span>travelers</span></div><div class="stat"><strong>$5.9–7.9K</strong><span>trip estimate</span></div><div class="stat"><strong>1/3</strong><span>deadlines done</span></div></div></div>
   <div class="train-timer" aria-label="Countdown to train departure"><div class="train-timer-head"><strong>🚆 Train departure countdown</strong><span>Jul 31, 2027<br>6:01 AM Pacific</span></div><div class="timer-grid"><div class="timer-box"><strong id="train-days">322</strong><span>Days</span></div><div class="timer-box"><strong id="train-hours">16</strong><span>Hours</span></div><div class="timer-box"><strong id="train-minutes">06</strong><span>Minutes</span></div><div class="timer-box"><strong id="train-seconds">11</strong><span>Seconds</span></div></div><div class="timer-note" id="train-timer-note">Confirmed departure: July 31, 2027 at 6:01 AM Pacific. If this preview blocks live updates, these numbers are a snapshot; the hosted app will tick every second.</div></div>
   <div class="section"><div class="section-head"><h3>Quick access</h3></div><div class="grid2"><a class="tap quick" href="#expenses"><div class="emoji">💳</div><div><strong>Expenses</strong><br><span>Budget & funding</span></div></a><a class="tap quick" href="#bookings"><div class="emoji">🎟️</div><div><strong>Bookings</strong><br><span>Car, train & stay</span></div></a><a class="tap quick" href="#planning"><div class="emoji">💡</div><div><strong>Planning</strong><br><span>Seattle ideas</span></div></a><a class="tap quick" href="#itinerary"><div class="emoji">🗓️</div><div><strong>Itinerary</strong><br><span>Confirmed plans</span></div></a><a class="tap quick" href="#voting"><div class="emoji">🗳️</div><div><strong>Voting</strong><br><span>Group decisions</span></div></a></div></div>
-  <div class="section"><div class="section-head"><h3>Deadlines</h3><a class="seeall" href="#deadlines">See all</a></div><a class="tap" href="#deadlines"><div class="row"><div><strong>1 of 3 complete</strong><div class="muted">Amtrak is next • Sep 14, 2026</div></div><span class="badge info">33%</span></div><div class="progress"><div></div></div></a></div>
+  <div class="section"><div class="section-head"><h3>Deadlines</h3><a class="seeall" href="#deadlines">See all</a></div><a class="tap" href="#deadlines"><div class="row"><div><strong>1 of 3 complete</strong><div class="muted" id="home-amtrak-deadline">Amtrak is next • Sep 14, 2026</div></div><span class="badge info">33%</span></div><div class="progress"><div></div></div></a></div>
   <div class="section"><div class="section-head"><h3>Travelers</h3><a class="seeall" href="#travelers">See all</a></div><a class="tap" href="#travelers"><div class="row"><div class="row-start"><div class="avatar">7</div><div><strong>Traveler 1–7</strong><div class="muted">7 confirmed travelers</div></div></div><span class="badge success">Confirmed</span></div></a></div>
 </section>
 <section id="travelers" class="screen"><a class="back" href="#home">‹ Home</a><h2 class="screen-title">Travelers</h2><p class="screen-sub">All 7 travelers are confirmed.</p><a class="tap" href="#traveler-1"><div class="row"><div class="row-start"><div class="avatar">T1</div><div><strong data-traveler-name="1">Traveler 1</strong><div class="muted">Confirmed traveler • Turo paid</div></div></div><span class="badge success">Confirmed</span></div></a><a class="tap" href="#traveler-2"><div class="row"><div class="row-start"><div class="avatar">T2</div><div><strong data-traveler-name="2">Traveler 2</strong><div class="muted">Confirmed traveler • Turo paid</div></div></div><span class="badge success">Confirmed</span></div></a><a class="tap" href="#traveler-3"><div class="row"><div class="row-start"><div class="avatar">T3</div><div><strong data-traveler-name="3">Traveler 3</strong><div class="muted">Confirmed traveler • Turo paid</div></div></div><span class="badge success">Confirmed</span></div></a><a class="tap" href="#traveler-4"><div class="row"><div class="row-start"><div class="avatar">T4</div><div><strong data-traveler-name="4">Traveler 4</strong><div class="muted">Confirmed traveler • Turo paid</div></div></div><span class="badge success">Confirmed</span></div></a><a class="tap" href="#traveler-5"><div class="row"><div class="row-start"><div class="avatar">T5</div><div><strong data-traveler-name="5">Traveler 5</strong><div class="muted">Confirmed traveler • Turo paid</div></div></div><span class="badge success">Confirmed</span></div></a><a class="tap" href="#traveler-6"><div class="row"><div class="row-start"><div class="avatar">T6</div><div><strong data-traveler-name="6">Traveler 6</strong><div class="muted">Confirmed traveler • Turo paid</div></div></div><span class="badge success">Confirmed</span></div></a><a class="tap" href="#traveler-7"><div class="row"><div class="row-start"><div class="avatar">T7</div><div><strong data-traveler-name="7">Traveler 7</strong><div class="muted">Confirmed traveler • Turo paid</div></div></div><span class="badge success">Confirmed</span></div></a></section>
@@ -49,22 +102,22 @@ body:has(#dark-toggle:checked) .field input,body:has(#dark-toggle:checked) .fiel
 <section id="food" class="screen"><a class="back" href="#expenses">‹ Expenses</a><h2 class="screen-title">Food</h2><p class="screen-sub">No food expenses yet.</p><div class="card"><strong>Nothing here yet</strong><p class="muted">Your group can add food costs later.</p></div></section>
 <section id="activities" class="screen"><a class="back" href="#expenses">‹ Expenses</a><h2 class="screen-title">Activities</h2><p class="screen-sub">No activity expenses yet.</p><div class="card"><strong>Nothing here yet</strong><p class="muted">Your group can add activities later.</p></div></section>
 <section id="turo" class="screen"><a class="back" href="#transport">‹ Transport</a><div class="detail-hero"><div class="emoji">🚙</div><h2>Turo Car Rental</h2><div class="muted">2018 Dodge Grand Caravan</div></div><div class="section card"><div class="kv"><span>Total</span><strong>$1,440</strong></div><div class="kv"><span>Funding</span><strong>7/7 travelers</strong></div><div class="kv"><span>Balance</span><strong>$0</strong></div><div class="kv"><span>Status</span><span class="badge success">Paid & booked</span></div></div></section>
-<section id="amtrak" class="screen"><a class="back" href="#transport">‹ Transport</a><div class="detail-hero"><div class="emoji">🚆</div><h2>Amtrak round trip</h2><div class="muted">Upcoming group purchase</div></div><div class="section card"><div class="kv"><span>Estimated total</span><strong>~$1,505</strong></div><div class="kv"><span>Estimated per person</span><strong>~$215</strong></div><div class="kv"><span>Purchase target</span><strong>Sep 14, 2026</strong></div><div class="kv"><span>Purchase</span><strong>One combined group transaction</strong></div><div class="kv"><span>Status</span><span class="badge pending">Not purchased</span></div></div></section>
+<section id="amtrak" class="screen"><a class="back" href="#transport">‹ Transport</a><div class="detail-hero"><div class="emoji">🚆</div><h2>Amtrak round trip</h2><div class="muted">Upcoming group purchase</div></div><div class="section card"><div class="kv"><span>Estimated total</span><strong>~$1,505</strong></div><div class="kv"><span>Estimated per person</span><strong>~$215</strong></div><div class="kv"><span>Purchase target</span><strong>Sep 14, 2026</strong></div><div class="kv"><span>Deadline status</span><span id="amtrak-deadline-badge" class="badge pending">Upcoming</span></div><div class="kv"><span>Purchase</span><strong>One combined group transaction</strong></div><div class="kv"><span>Status</span><span class="badge pending">Not purchased</span></div></div></section>
 <section id="airbnb" class="screen"><a class="back" href="#lodging">‹ Lodging</a><div class="detail-hero"><div class="emoji">🏠</div><h2>Airbnb</h2><div class="muted">Seattle lodging estimate</div></div><div class="section card"><div class="kv"><span>Estimated total</span><strong>$3,000–$5,000</strong></div><div class="kv"><span>Estimated per person</span><strong>~$428.57–$714.29</strong></div><div class="kv"><span>Funding</span><strong>Group-funded</strong></div><div class="kv"><span>Booking deadline</span><strong>TBD</strong></div><div class="kv"><span>Status</span><span class="badge info">Planning</span></div></div></section>
-<section id="planning" class="screen"><a class="back" href="#home">‹ Home</a><div class="titlebar"><div><h2 class="screen-title">Planning</h2><p class="screen-sub">Ideas from the crew for Seattle.</p></div><a class="addplus" href="#add-idea" aria-label="Add a Seattle idea">+</a></div><div class="card"><strong>No suggestions yet</strong><p class="muted">Everyone can suggest attractions, food, bars, shopping, outdoor activities, events, day trips, or anything else worth checking out.</p><a class="emptybtn" href="#add-idea">+ Add a Seattle idea</a></div></section>
-<section id="add-idea" class="screen"><a class="back" href="#planning">‹ Planning</a><h2 class="screen-title">Add a Seattle idea</h2><p class="screen-sub">Share something the group might want to do, see, eat, or visit.</p><div class="card"><div class="field"><label>Idea</label><input type="text" placeholder="Example: Pike Place Market"></div><div class="field"><label>Category</label><select><option>Attractions</option><option>Food</option><option>Bars / Nightlife</option><option>Shopping</option><option>Outdoors</option><option>Events</option><option>Day Trips</option><option>Other</option></select></div><div class="field"><label>Why should we go? (optional)</label><textarea placeholder="Tell the crew why you recommend it."></textarea></div><div class="field"><label>Link (optional)</label><input type="url" placeholder="Website, TikTok, Instagram, Maps, etc."></div><div class="field"><label>Estimated cost (optional)</label><input type="text" placeholder="Free, ~$25/person, etc."></div><a class="primary" href="#planning">Add suggestion</a><div class="helper">Shared saving will be enabled when TripCrew moves to synced traveler accounts.</div></div></section>
-<section id="itinerary" class="screen"><a class="back" href="#home">‹ Home</a><div class="titlebar"><div><h2 class="screen-title">Itinerary</h2><p class="screen-sub">Jul 31 – Aug 15, 2027 · confirmed plans only</p></div><a class="addplus" href="#add-plan" aria-label="Add a confirmed plan">+</a></div><div class="card"><strong>No confirmed plans yet</strong><p class="muted">Once the crew agrees on an idea, add it here as part of the official trip itinerary.</p><a class="emptybtn" href="#add-plan">+ Add confirmed plan</a></div></section>
-<section id="add-plan" class="screen"><a class="back" href="#itinerary">‹ Itinerary</a><h2 class="screen-title">Add confirmed plan</h2><p class="screen-sub">Add something the group has officially decided to do.</p><div class="card"><div class="field"><label>Plan</label><input type="text" placeholder="What are you doing?"></div><div class="field"><label>Date</label><input type="date" min="2027-07-31" max="2027-08-15"></div><div class="field"><label>Time (optional)</label><input type="time"></div><div class="field"><label>Location (optional)</label><input type="text" placeholder="Where?"></div><div class="field"><label>Notes</label><textarea placeholder="Reservation details, cost, meeting point, or anything the crew should know."></textarea></div><a class="primary" href="#itinerary">Add to itinerary</a><div class="helper">Shared saving will be enabled when TripCrew moves to synced traveler accounts.</div></div></section>
+<section id="planning" class="screen"><a class="back" href="#home">‹ Home</a><div class="titlebar"><div><h2 class="screen-title">Planning</h2><p class="screen-sub">Ideas from the crew for Seattle.</p></div><a class="addplus" href="#add-idea" aria-label="Add a Seattle idea">+</a></div><div id="ideas-list"><div class="card" id="ideas-empty"><strong>No suggestions yet</strong><p class="muted">Everyone can suggest attractions, food, bars, shopping, outdoor activities, events, day trips, or anything else worth checking out.</p><a class="emptybtn" href="#add-idea">+ Add a Seattle idea</a></div></div></section>
+<section id="add-idea" class="screen"><a class="back" href="#planning">‹ Planning</a><h2 class="screen-title">Add a Seattle idea</h2><p class="screen-sub">Share something the group might want to do, see, eat, or visit.</p><div class="card"><div class="field"><label>Idea</label><input id="idea-title" type="text" maxlength="100" placeholder="Example: Pike Place Market"></div><div class="field"><label>Category</label><select id="idea-category"><option>Attractions</option><option>Food</option><option>Bars / Nightlife</option><option>Shopping</option><option>Outdoors</option><option>Events</option><option>Day Trips</option><option>Other</option></select></div><div class="field"><label>Why should we go? (optional)</label><textarea id="idea-notes" maxlength="600" placeholder="Tell the crew why you recommend it."></textarea></div><div class="field"><label>Link (optional)</label><input id="idea-link" type="url" maxlength="500" placeholder="Website, TikTok, Instagram, Maps, etc."></div><div class="field"><label>Estimated cost (optional)</label><input id="idea-cost" type="text" maxlength="80" placeholder="Free, ~$25/person, etc."></div><button id="save-idea" class="primary" type="button">Add suggestion</button><div id="idea-save-msg" class="helper" aria-live="polite">Suggestions are shared with everyone in this trip.</div></div></section>
+<section id="itinerary" class="screen"><a class="back" href="#home">‹ Home</a><div class="titlebar"><div><h2 class="screen-title">Itinerary</h2><p class="screen-sub">Jul 31 – Aug 15, 2027 · confirmed plans only</p></div><a class="addplus" href="#add-plan" aria-label="Add a confirmed plan">+</a></div><div id="itinerary-list"><div class="card" id="itinerary-empty"><strong>No confirmed plans yet</strong><p class="muted">Once the crew agrees on an idea, add it here as part of the official trip itinerary.</p><a class="emptybtn" href="#add-plan">+ Add confirmed plan</a></div></div></section>
+<section id="add-plan" class="screen"><a class="back" href="#itinerary">‹ Itinerary</a><h2 class="screen-title">Add confirmed plan</h2><p class="screen-sub">Add something the group has officially decided to do.</p><div class="card"><div class="field"><label>Plan</label><input id="plan-title" type="text" maxlength="100" placeholder="What are you doing?"></div><div class="field"><label>Date</label><input id="plan-date" type="date" min="2027-07-31" max="2027-08-15"></div><div class="field"><label>Time (optional)</label><input id="plan-time" type="time"></div><div class="field"><label>Location (optional)</label><input id="plan-location" type="text" maxlength="120" placeholder="Where?"></div><div class="field"><label>Notes</label><textarea id="plan-notes" maxlength="800" placeholder="Cost, meeting point, or anything the crew should know."></textarea></div><button id="save-plan" class="primary" type="button">Add to itinerary</button><div id="plan-save-msg" class="helper" aria-live="polite">Confirmed plans are shared with everyone in this trip.</div></div></section>
 <section id="bookings" class="screen"><a class="back" href="#home">‹ Home</a><h2 class="screen-title">Bookings</h2><p class="screen-sub">Reservations and booking status.</p><a class="tap" href="#booking-turo"><div class="row"><div><strong>🚙 Turo</strong><div class="muted">2018 Dodge Grand Caravan</div></div><span class="badge success">Booked & paid</span></div></a><a class="tap" href="#booking-amtrak"><div class="row"><div><strong>🚆 Amtrak</strong><div class="muted">Round trip • group purchase</div></div><span class="badge pending">Sep 14</span></div></a><a class="tap" href="#booking-airbnb"><div class="row"><div><strong>🏠 Airbnb</strong><div class="muted">Stay</div></div><span class="badge info">TBD</span></div></a></section>
 <section id="booking-turo" class="screen"><a class="back" href="#bookings">‹ Bookings</a><div class="detail-hero"><div class="emoji">🚙</div><h2>Turo</h2><div class="muted">2018 Dodge Grand Caravan</div></div><div class="section card"><div class="kv"><span>Status</span><span class="badge success">Booked & fully paid</span></div><div class="kv"><span>Total</span><strong>$1,440</strong></div><div class="kv"><span>Funding</span><strong>7/7 paid</strong></div><div class="kv"><span>Confirmation</span><strong>Private / add later</strong></div></div></section>
 <section id="booking-amtrak" class="screen"><a class="back" href="#bookings">‹ Bookings</a><div class="detail-hero"><div class="emoji">🚆</div><h2>Amtrak</h2><div class="muted">Round-trip train booking</div></div><div class="section card"><div class="kv"><span>Status</span><strong>Not purchased</strong></div><div class="kv"><span>Target</span><strong>Sep 14, 2026</strong></div><div class="kv"><span>Estimate</span><strong>~$215/person</strong></div><div class="kv"><span>Purchase type</span><strong>Combined group purchase</strong></div></div></section>
 <section id="booking-airbnb" class="screen"><a class="back" href="#bookings">‹ Bookings</a><div class="detail-hero"><div class="emoji">🏠</div><h2>Airbnb</h2><div class="muted">Seattle lodging</div></div><div class="section card"><div class="kv"><span>Status</span><strong>Planning</strong></div><div class="kv"><span>Budget</span><strong>$3,000–$5,000</strong></div><div class="kv"><span>Deadline</span><strong>TBD</strong></div></div></section>
 <section id="voting" class="screen"><a class="back" href="#home">‹ Home</a><div class="titlebar"><div><h2 class="screen-title">Voting</h2><p class="screen-sub">Group decisions belong to your group.</p></div><a class="addplus" href="#add-poll" aria-label="Create a poll">+</a></div><div class="card"><strong>No polls yet</strong><p class="muted">Voting starts empty so the seven travelers can create decisions when needed.</p><a class="emptybtn" href="#add-poll">+ Create a poll</a></div></section>
 <section id="add-poll" class="screen"><a class="back" href="#voting">‹ Voting</a><h2 class="screen-title">Create a poll</h2><p class="screen-sub">Put a group decision up for a vote.</p><div class="card"><div class="field"><label>Question</label><input type="text" placeholder="What should the group decide?"></div><div class="field"><label>Option 1</label><input type="text" placeholder="First choice"></div><div class="field"><label>Option 2</label><input type="text" placeholder="Second choice"></div><div class="field"><label>Option 3 (optional)</label><input type="text" placeholder="Third choice"></div><div class="field"><label>Notes (optional)</label><textarea placeholder="Anything travelers should know before voting."></textarea></div><a class="primary" href="#voting">Create poll</a><div class="helper">Live voting and shared results will be enabled when TripCrew moves to synced accounts.</div></div></section>
-<section id="deadlines" class="screen"><a class="back" href="#home">‹ Home</a><h2 class="screen-title">Deadlines</h2><p class="screen-sub">1 complete • 2 upcoming</p><div class="card"><div class="row"><div class="row-start"><div class="check">✓</div><div><strong>Turo car rental</strong><div class="muted">Completed • fully paid</div></div></div><span class="badge success">Done</span></div></div><div class="card"><div class="row"><div><strong>Buy Amtrak tickets</strong><div class="muted">Sep 14, 2026</div></div><span class="badge pending">Upcoming</span></div></div><div class="card"><div class="row"><div><strong>Book Airbnb</strong><div class="muted">Date TBD</div></div><span class="badge pending">Upcoming</span></div></div></section>
+<section id="deadlines" class="screen"><a class="back" href="#home">‹ Home</a><h2 class="screen-title">Deadlines</h2><p class="screen-sub">1 complete • 2 upcoming</p><div class="card"><div class="row"><div class="row-start"><div class="check">✓</div><div><strong>Turo car rental</strong><div class="muted">Completed • fully paid</div></div></div><span class="badge success">Done</span></div></div><div class="card" id="amtrak-deadline-card"><div class="row"><div><strong>Buy Amtrak tickets</strong><div class="muted" id="amtrak-deadline-text">Sep 14, 2026</div></div><span id="amtrak-deadline-status" class="badge pending">Upcoming</span></div></div><div class="card"><div class="row"><div><strong>Book Airbnb</strong><div class="muted">Date TBD</div></div><span class="badge pending">Upcoming</span></div></div></section>
 <section id="traveler-1" class="screen"><a class="back" href="#travelers">‹ Travelers</a><div class="detail-hero"><div class="avatar">T1</div><h2 data-traveler-name="1">Traveler 1</h2><div class="muted">Confirmed traveler</div></div><div class="section card name-editor"><strong>Your name</strong><p class="muted">Add or change the name shown for Traveler 1.</p><div class="row-edit"><input id="traveler-name-input-1" type="text" maxlength="32" placeholder="Enter your name" autocomplete="name"><button class="save-name" type="button" data-save-traveler="1">Save</button></div><div id="traveler-name-msg-1" class="saved-msg" aria-live="polite"></div></div><div class="section card"><div class="kv"><span>Status</span><strong>Confirmed</strong></div><div class="kv"><span>Turo share</span><span class="badge success">Paid</span></div><div class="kv"><span>Amtrak</span><strong>~$215 • not funded yet</strong></div><div class="kv"><span>Airbnb</span><strong>Estimate TBD</strong></div></div></section><section id="traveler-2" class="screen"><a class="back" href="#travelers">‹ Travelers</a><div class="detail-hero"><div class="avatar">T2</div><h2 data-traveler-name="2">Traveler 2</h2><div class="muted">Confirmed traveler</div></div><div class="section card name-editor"><strong>Your name</strong><p class="muted">Add or change the name shown for Traveler 2.</p><div class="row-edit"><input id="traveler-name-input-2" type="text" maxlength="32" placeholder="Enter your name" autocomplete="name"><button class="save-name" type="button" data-save-traveler="2">Save</button></div><div id="traveler-name-msg-2" class="saved-msg" aria-live="polite"></div></div><div class="section card"><div class="kv"><span>Status</span><strong>Confirmed</strong></div><div class="kv"><span>Turo share</span><span class="badge success">Paid</span></div><div class="kv"><span>Amtrak</span><strong>~$215 • not funded yet</strong></div><div class="kv"><span>Airbnb</span><strong>Estimate TBD</strong></div></div></section><section id="traveler-3" class="screen"><a class="back" href="#travelers">‹ Travelers</a><div class="detail-hero"><div class="avatar">T3</div><h2 data-traveler-name="3">Traveler 3</h2><div class="muted">Confirmed traveler</div></div><div class="section card name-editor"><strong>Your name</strong><p class="muted">Add or change the name shown for Traveler 3.</p><div class="row-edit"><input id="traveler-name-input-3" type="text" maxlength="32" placeholder="Enter your name" autocomplete="name"><button class="save-name" type="button" data-save-traveler="3">Save</button></div><div id="traveler-name-msg-3" class="saved-msg" aria-live="polite"></div></div><div class="section card"><div class="kv"><span>Status</span><strong>Confirmed</strong></div><div class="kv"><span>Turo share</span><span class="badge success">Paid</span></div><div class="kv"><span>Amtrak</span><strong>~$215 • not funded yet</strong></div><div class="kv"><span>Airbnb</span><strong>Estimate TBD</strong></div></div></section><section id="traveler-4" class="screen"><a class="back" href="#travelers">‹ Travelers</a><div class="detail-hero"><div class="avatar">T4</div><h2 data-traveler-name="4">Traveler 4</h2><div class="muted">Confirmed traveler</div></div><div class="section card name-editor"><strong>Your name</strong><p class="muted">Add or change the name shown for Traveler 4.</p><div class="row-edit"><input id="traveler-name-input-4" type="text" maxlength="32" placeholder="Enter your name" autocomplete="name"><button class="save-name" type="button" data-save-traveler="4">Save</button></div><div id="traveler-name-msg-4" class="saved-msg" aria-live="polite"></div></div><div class="section card"><div class="kv"><span>Status</span><strong>Confirmed</strong></div><div class="kv"><span>Turo share</span><span class="badge success">Paid</span></div><div class="kv"><span>Amtrak</span><strong>~$215 • not funded yet</strong></div><div class="kv"><span>Airbnb</span><strong>Estimate TBD</strong></div></div></section><section id="traveler-5" class="screen"><a class="back" href="#travelers">‹ Travelers</a><div class="detail-hero"><div class="avatar">T5</div><h2 data-traveler-name="5">Traveler 5</h2><div class="muted">Confirmed traveler</div></div><div class="section card name-editor"><strong>Your name</strong><p class="muted">Add or change the name shown for Traveler 5.</p><div class="row-edit"><input id="traveler-name-input-5" type="text" maxlength="32" placeholder="Enter your name" autocomplete="name"><button class="save-name" type="button" data-save-traveler="5">Save</button></div><div id="traveler-name-msg-5" class="saved-msg" aria-live="polite"></div></div><div class="section card"><div class="kv"><span>Status</span><strong>Confirmed</strong></div><div class="kv"><span>Turo share</span><span class="badge success">Paid</span></div><div class="kv"><span>Amtrak</span><strong>~$215 • not funded yet</strong></div><div class="kv"><span>Airbnb</span><strong>Estimate TBD</strong></div></div></section><section id="traveler-6" class="screen"><a class="back" href="#travelers">‹ Travelers</a><div class="detail-hero"><div class="avatar">T6</div><h2 data-traveler-name="6">Traveler 6</h2><div class="muted">Confirmed traveler</div></div><div class="section card name-editor"><strong>Your name</strong><p class="muted">Add or change the name shown for Traveler 6.</p><div class="row-edit"><input id="traveler-name-input-6" type="text" maxlength="32" placeholder="Enter your name" autocomplete="name"><button class="save-name" type="button" data-save-traveler="6">Save</button></div><div id="traveler-name-msg-6" class="saved-msg" aria-live="polite"></div></div><div class="section card"><div class="kv"><span>Status</span><strong>Confirmed</strong></div><div class="kv"><span>Turo share</span><span class="badge success">Paid</span></div><div class="kv"><span>Amtrak</span><strong>~$215 • not funded yet</strong></div><div class="kv"><span>Airbnb</span><strong>Estimate TBD</strong></div></div></section><section id="traveler-7" class="screen"><a class="back" href="#travelers">‹ Travelers</a><div class="detail-hero"><div class="avatar">T7</div><h2 data-traveler-name="7">Traveler 7</h2><div class="muted">Confirmed traveler</div></div><div class="section card name-editor"><strong>Your name</strong><p class="muted">Add or change the name shown for Traveler 7.</p><div class="row-edit"><input id="traveler-name-input-7" type="text" maxlength="32" placeholder="Enter your name" autocomplete="name"><button class="save-name" type="button" data-save-traveler="7">Save</button></div><div id="traveler-name-msg-7" class="saved-msg" aria-live="polite"></div></div><div class="section card"><div class="kv"><span>Status</span><strong>Confirmed</strong></div><div class="kv"><span>Turo share</span><span class="badge success">Paid</span></div><div class="kv"><span>Amtrak</span><strong>~$215 • not funded yet</strong></div><div class="kv"><span>Airbnb</span><strong>Estimate TBD</strong></div></div></section>
 <section id="more" class="screen"><a class="back" href="#home">‹ Home</a><h2 class="screen-title">More</h2><p class="screen-sub">Everything else for the trip.</p><div class="grid2"><a class="tap quick" href="#planning"><div class="emoji">💡</div><div><strong>Planning</strong><br><span>Seattle ideas</span></div></a><a class="tap quick" href="#bookings"><div class="emoji">🎟️</div><div><strong>Bookings</strong><br><span>Reservations</span></div></a><a class="tap quick" href="#voting"><div class="emoji">🗳️</div><div><strong>Voting</strong><br><span>Group polls</span></div></a><a class="tap quick" href="#deadlines"><div class="emoji">⏰</div><div><strong>Deadlines</strong><br><span>Important dates</span></div></a><a class="tap quick" href="#settings"><div class="emoji">⚙️</div><div><strong>Settings</strong><br><span>Trip details</span></div></a></div></section>
-<section id="settings" class="screen"><a class="back" href="#home">‹ Home</a><h2 class="screen-title">Trip settings</h2><p class="screen-sub">Seattle 2027</p><div class="card"><div class="theme-row"><div class="theme-copy"><strong>🌙 Dark mode</strong><span>Switch TripCrew to a darker theme.</span></div><label class="theme-switch" for="dark-toggle" aria-label="Toggle dark mode"></label></div></div><div style="height:10px"></div><div class="card"><div class="kv"><span>Destination</span><strong>Seattle, WA</strong></div><div class="kv"><span>Dates</span><strong>Jul 31–Aug 15, 2027</strong></div><div class="kv"><span>Train departure</span><strong>Jul 31, 2027 · 6:01 AM Pacific</strong></div><div class="kv"><span>Length</span><strong>16 calendar days • 15 nights</strong></div><div class="kv"><span>Travelers</span><strong>7</strong></div><div class="kv"><span>Invite code</span><strong>SEATTLE27</strong></div></div></section>
+<section id="settings" class="screen"><a class="back" href="#home">‹ Home</a><h2 class="screen-title">Trip settings</h2><p class="screen-sub">Seattle 2027</p><div class="card"><div class="theme-row"><div class="theme-copy"><strong>🌙 Dark mode</strong><span>Switch TripCrew to a darker theme.</span></div><label class="theme-switch" for="dark-toggle" aria-label="Toggle dark mode"></label></div></div><div style="height:10px"></div><div class="card"><div class="kv"><span>Destination</span><strong>Seattle, WA</strong></div><div class="kv"><span>Dates</span><strong>Jul 31–Aug 15, 2027</strong></div><div class="kv"><span>Train departure</span><strong>Jul 31, 2027 · 6:01 AM Pacific</strong></div><div class="kv"><span>Length</span><strong>16 calendar days • 15 nights</strong></div><div class="kv"><span>Travelers</span><strong>7</strong></div><div class="kv"><span>Access</span><strong>Private trip • code protected</strong></div></div></section>
 <nav class="bottom"><a class="nav" href="#home"><span>🏠</span><small>Home</small></a><a class="nav" href="#travelers"><span>👥</span><small>Travelers</small></a><a class="nav" href="#expenses"><span>💳</span><small>Expenses</small></a><a class="nav" href="#itinerary"><span>🗓️</span><small>Plan</small></a><a class="nav" href="#more"><span>•••</span><small>More</small></a></nav>
 </div>
 
@@ -100,8 +153,26 @@ body:has(#dark-toggle:checked) .field input,body:has(#dark-toggle:checked) .fiel
     });
   }
 
-  // Traveler names.
-  function travelerKey(i) { return 'tripcrew.traveler.' + i + '.name'; }
+  // Amtrak deadline urgency automatically updates as Sep 14, 2026 approaches.
+  function updateAmtrakDeadline() {
+    var deadline = new Date('2026-09-14T23:59:59-07:00').getTime();
+    var now = new Date().getTime();
+    var days = Math.ceil((deadline - now) / 86400000);
+    var label, badge;
+    if (days < 0) { label = 'Overdue • Sep 14, 2026'; badge = 'Overdue'; }
+    else if (days === 0) { label = 'Due today • Sep 14, 2026'; badge = 'Due today'; }
+    else if (days === 1) { label = 'Due tomorrow • Sep 14, 2026'; badge = 'Tomorrow'; }
+    else if (days <= 7) { label = 'Due in ' + days + ' days • Sep 14, 2026'; badge = 'Coming up'; }
+    else { label = 'Sep 14, 2026'; badge = 'Upcoming'; }
+    var home = byId('home-amtrak-deadline');
+    if (home) home.innerText = 'Amtrak is next • ' + label;
+    var text = byId('amtrak-deadline-text'); if (text) text.innerText = label;
+    var statusEl = byId('amtrak-deadline-status'); if (statusEl) statusEl.innerText = badge;
+    var detail = byId('amtrak-deadline-badge'); if (detail) detail.innerText = badge;
+  }
+  updateAmtrakDeadline();
+
+  // Traveler display helpers. Shared names are loaded from Supabase after private access is verified.
   function nodesWithTraveler(i) {
     if (document.querySelectorAll) return document.querySelectorAll('[data-traveler-name="' + i + '"]');
     return [];
@@ -114,35 +185,8 @@ body:has(#dark-toggle:checked) .field input,body:has(#dark-toggle:checked) .fiel
     var input = byId('traveler-name-input-' + i);
     if (input) input.value = name || '';
   }
-  function saveTravelerName(i) {
-    var input = byId('traveler-name-input-' + i);
-    var msg = byId('traveler-name-msg-' + i);
-    var name = trimSpaces(input ? input.value : '');
-    var saved = storageSet(travelerKey(i), name ? name : null);
-    applyTravelerName(i, name);
-    if (msg) {
-      if (saved) msg.innerText = name ? ('Saved as ' + name + '.') : ('Name reset to Traveler ' + i + '.');
-      else msg.innerText = 'Name changed for this session. Permanent saving needs browser storage.';
-      window.setTimeout(function () { msg.innerText = ''; }, 2600);
-    }
-  }
   var i;
-  for (i = 1; i <= 7; i++) {
-    applyTravelerName(i, trimSpaces(storageGet(travelerKey(i)) || ''));
-    (function (n) {
-      var button = document.querySelector ? document.querySelector('[data-save-traveler="' + n + '"]') : null;
-      var input = byId('traveler-name-input-' + n);
-      addEvent(button, 'click', function () { saveTravelerName(n); });
-      addEvent(input, 'keypress', function (e) {
-        e = e || window.event;
-        if ((e.keyCode || e.which) === 13) {
-          if (e.preventDefault) e.preventDefault();
-          saveTravelerName(n);
-          return false;
-        }
-      });
-    })(i);
-  }
+  for (i = 1; i <= 7; i++) applyTravelerName(i, '');
 
   // Live countdown: Jul 31, 2027 at 6:01 AM Pacific Daylight Time (UTC-7).
   var TRAIN_DEPARTURE = new Date('2027-07-31T06:01:00-07:00').getTime();
@@ -220,6 +264,8 @@ body:has(#dark-toggle:checked) .field input,body:has(#dark-toggle:checked) .fiel
       '#tripcrew-gate-status{min-height:20px;margin-top:12px;font-size:13px;color:#64748b}',
       '#tripcrew-gate-status.error{color:#b91c1c}',
       '#tripcrew-gate-status.ok{color:#15803d}',
+      '.save-name:disabled{opacity:.55;cursor:not-allowed}',
+      '.saved-msg{margin-top:9px;font-size:12px;color:#64748b;min-height:18px}',
       '@media (prefers-color-scheme:dark){#tripcrew-gate{background:#07111f}#tripcrew-gate-card{background:#0f1b2d;border-color:#23324a}#tripcrew-gate h1{color:#f8fafc}#tripcrew-gate p,#tripcrew-gate-status{color:#9fb0c7}#tripcrew-code{background:#0b1728;color:#f8fafc;border-color:#334155}#tripcrew-gate label{color:#cbd5e1}}'
     ].join('');
     document.head.appendChild(style);
@@ -275,6 +321,242 @@ body:has(#dark-toggle:checked) .field input,body:has(#dark-toggle:checked) .fiel
       auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true }
     });
 
+    var currentUserId = null;
+    var currentTripId = null;
+    var travelerProfiles = {};
+    var ownTravelerSlot = null;
+
+    function travelerMessage(slot, text, kind) {
+      var el = document.getElementById('traveler-name-msg-' + slot);
+      if (!el) return;
+      el.textContent = text || '';
+      el.style.color = kind === 'error' ? '#b91c1c' : (kind === 'ok' ? '#15803d' : '');
+    }
+
+    function setTravelerControls(slot, profile) {
+      var input = document.getElementById('traveler-name-input-' + slot);
+      var button = document.querySelector('[data-save-traveler="' + slot + '"]');
+      if (!input || !button) return;
+      if (profile && profile.user_id === currentUserId) {
+        input.disabled = false;
+        button.disabled = false;
+        button.textContent = 'Save';
+        travelerMessage(slot, 'This is your traveler slot. Your name is shared with the group.');
+      } else if (profile) {
+        input.disabled = true;
+        button.disabled = true;
+        button.textContent = 'Claimed';
+        travelerMessage(slot, 'Claimed by another traveler.');
+      } else if (ownTravelerSlot && ownTravelerSlot !== slot) {
+        input.disabled = true;
+        button.disabled = true;
+        button.textContent = 'Unavailable';
+        travelerMessage(slot, 'You already claimed Traveler ' + ownTravelerSlot + '.');
+      } else {
+        input.disabled = false;
+        button.disabled = false;
+        button.textContent = 'Claim slot';
+        travelerMessage(slot, 'Available — enter your name to claim Traveler ' + slot + '.');
+      }
+    }
+
+    async function loadTravelerProfiles() {
+      if (!currentTripId || !currentUserId) return;
+      var q = await client.from('traveler_profiles')
+        .select('slot,user_id,display_name')
+        .eq('trip_id', currentTripId)
+        .order('slot');
+      if (q.error) throw q.error;
+      travelerProfiles = {};
+      ownTravelerSlot = null;
+      (q.data || []).forEach(function (profile) {
+        travelerProfiles[profile.slot] = profile;
+        if (profile.user_id === currentUserId) ownTravelerSlot = profile.slot;
+      });
+      for (var slot = 1; slot <= 7; slot++) {
+        var profile = travelerProfiles[slot] || null;
+        applyTravelerName(slot, profile ? profile.display_name : '');
+        setTravelerControls(slot, profile);
+      }
+    }
+
+    async function saveTravelerProfile(slot) {
+      var input = document.getElementById('traveler-name-input-' + slot);
+      var button = document.querySelector('[data-save-traveler="' + slot + '"]');
+      var name = String(input ? input.value : '').trim().replace(/\s+/g, ' ').slice(0, 32);
+      if (!name) { travelerMessage(slot, 'Enter your name first.', 'error'); return; }
+      if (!currentTripId || !currentUserId) { travelerMessage(slot, 'Trip session is not ready. Refresh and try again.', 'error'); return; }
+      if (button) button.disabled = true;
+      try {
+        var existing = travelerProfiles[slot] || null;
+        var result;
+        if (existing && existing.user_id !== currentUserId) {
+          travelerMessage(slot, 'That traveler slot is already claimed.', 'error');
+          return;
+        }
+        if (existing) {
+          result = await client.from('traveler_profiles')
+            .update({ display_name: name })
+            .eq('trip_id', currentTripId)
+            .eq('slot', slot)
+            .eq('user_id', currentUserId);
+        } else {
+          if (ownTravelerSlot && ownTravelerSlot !== slot) {
+            travelerMessage(slot, 'You already claimed Traveler ' + ownTravelerSlot + '.', 'error');
+            return;
+          }
+          result = await client.from('traveler_profiles').insert({
+            trip_id: currentTripId,
+            slot: slot,
+            user_id: currentUserId,
+            display_name: name
+          });
+        }
+        if (result.error) throw result.error;
+        await loadTravelerProfiles();
+        travelerMessage(slot, 'Saved as ' + name + '.', 'ok');
+      } catch (e) {
+        console.error(e);
+        var message = e && e.message ? e.message : 'Could not save traveler name.';
+        if (e && e.code === '23505') message = 'That slot is already claimed, or you already claimed another traveler.';
+        travelerMessage(slot, message, 'error');
+      } finally {
+        var profileNow = travelerProfiles[slot] || null;
+        setTravelerControls(slot, profileNow);
+      }
+    }
+
+    for (var travelerSlot = 1; travelerSlot <= 7; travelerSlot++) {
+      (function (slot) {
+        var button = document.querySelector('[data-save-traveler="' + slot + '"]');
+        var input = document.getElementById('traveler-name-input-' + slot);
+        if (button) button.addEventListener('click', function () { saveTravelerProfile(slot); });
+        if (input) input.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter') { e.preventDefault(); saveTravelerProfile(slot); }
+        });
+      })(travelerSlot);
+    }
+
+
+    function memberDisplayName(userId) {
+      var slots = Object.keys(travelerProfiles || {});
+      for (var x = 0; x < slots.length; x++) {
+        var profile = travelerProfiles[slots[x]];
+        if (profile && profile.user_id === userId) return profile.display_name || ('Traveler ' + profile.slot);
+      }
+      return 'Crew member';
+    }
+
+    function esc(value) {
+      return String(value == null ? '' : value).replace(/[&<>\"]/g, function (c) {
+        return {'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;'}[c];
+      });
+    }
+
+    async function loadIdeas() {
+      if (!currentTripId) return;
+      var q = await client.from('planning_suggestions')
+        .select('id,title,category,notes,link,estimated_cost,created_by,created_at')
+        .eq('trip_id', currentTripId)
+        .order('created_at', { ascending: false });
+      if (q.error) throw q.error;
+      var list = document.getElementById('ideas-list');
+      if (!list) return;
+      if (!q.data || !q.data.length) {
+        list.innerHTML = '<div class="card" id="ideas-empty"><strong>No suggestions yet</strong><p class="muted">Everyone can suggest attractions, food, bars, shopping, outdoor activities, events, day trips, or anything else worth checking out.</p><a class="emptybtn" href="#add-idea">+ Add a Seattle idea</a></div>';
+        return;
+      }
+      list.innerHTML = q.data.map(function (idea) {
+        var meta = esc(idea.category || 'Other');
+        if (idea.estimated_cost) meta += ' • ' + esc(idea.estimated_cost);
+        var notes = idea.notes ? '<p class="muted" style="margin-top:8px">' + esc(idea.notes) + '</p>' : '';
+        var link = idea.link ? '<div style="margin-top:8px"><a class="seeall" href="' + esc(idea.link) + '" target="_blank" rel="noopener">Open link ↗</a></div>' : '';
+        return '<div class="card"><div class="row"><div><strong>' + esc(idea.title) + '</strong><div class="muted">' + meta + ' • suggested by ' + esc(memberDisplayName(idea.created_by)) + '</div></div><span class="badge info">Idea</span></div>' + notes + link + '</div>';
+      }).join('');
+    }
+
+    async function saveIdea() {
+      var title = String((document.getElementById('idea-title') || {}).value || '').trim();
+      var category = String((document.getElementById('idea-category') || {}).value || 'Other').trim();
+      var notes = String((document.getElementById('idea-notes') || {}).value || '').trim();
+      var link = String((document.getElementById('idea-link') || {}).value || '').trim();
+      var cost = String((document.getElementById('idea-cost') || {}).value || '').trim();
+      var msg = document.getElementById('idea-save-msg');
+      var btn = document.getElementById('save-idea');
+      if (!title) { if (msg) { msg.textContent='Add an idea name first.'; msg.style.color='#b91c1c'; } return; }
+      if (!currentTripId || !currentUserId) { if (msg) msg.textContent='Trip session is not ready. Refresh and try again.'; return; }
+      if (btn) btn.disabled = true;
+      try {
+        var result = await client.from('planning_suggestions').insert({
+          trip_id: currentTripId, title: title, category: category,
+          notes: notes || null, link: link || null, estimated_cost: cost || null,
+          created_by: currentUserId
+        });
+        if (result.error) throw result.error;
+        ['idea-title','idea-notes','idea-link','idea-cost'].forEach(function(id){ var el=document.getElementById(id); if(el) el.value=''; });
+        await loadIdeas();
+        if (msg) { msg.textContent='Suggestion saved for the whole crew.'; msg.style.color='#15803d'; }
+        window.location.hash = '#planning';
+      } catch (e) {
+        console.error(e); if (msg) { msg.textContent=(e && e.message) ? e.message : 'Could not save suggestion.'; msg.style.color='#b91c1c'; }
+      } finally { if (btn) btn.disabled = false; }
+    }
+
+    async function loadItinerary() {
+      if (!currentTripId) return;
+      var q = await client.from('itinerary_items')
+        .select('id,title,plan_date,plan_time,location,notes,created_by,created_at')
+        .eq('trip_id', currentTripId)
+        .order('plan_date', { ascending: true })
+        .order('plan_time', { ascending: true, nullsFirst: false });
+      if (q.error) throw q.error;
+      var list = document.getElementById('itinerary-list');
+      if (!list) return;
+      if (!q.data || !q.data.length) {
+        list.innerHTML = '<div class="card" id="itinerary-empty"><strong>No confirmed plans yet</strong><p class="muted">Once the crew agrees on an idea, add it here as part of the official trip itinerary.</p><a class="emptybtn" href="#add-plan">+ Add confirmed plan</a></div>';
+        return;
+      }
+      list.innerHTML = q.data.map(function (plan) {
+        var dateText = plan.plan_date ? new Date(plan.plan_date + 'T12:00:00').toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'}) : 'Date TBD';
+        var when = dateText + (plan.plan_time ? ' • ' + plan.plan_time.slice(0,5) : '');
+        var loc = plan.location ? ' • ' + esc(plan.location) : '';
+        var notes = plan.notes ? '<p class="muted" style="margin-top:8px">' + esc(plan.notes) + '</p>' : '';
+        return '<div class="card"><div class="row"><div><strong>' + esc(plan.title) + '</strong><div class="muted">' + esc(when) + loc + ' • added by ' + esc(memberDisplayName(plan.created_by)) + '</div></div><span class="badge success">Confirmed</span></div>' + notes + '</div>';
+      }).join('');
+    }
+
+    async function savePlan() {
+      var title = String((document.getElementById('plan-title') || {}).value || '').trim();
+      var date = String((document.getElementById('plan-date') || {}).value || '').trim();
+      var time = String((document.getElementById('plan-time') || {}).value || '').trim();
+      var location = String((document.getElementById('plan-location') || {}).value || '').trim();
+      var notes = String((document.getElementById('plan-notes') || {}).value || '').trim();
+      var msg = document.getElementById('plan-save-msg');
+      var btn = document.getElementById('save-plan');
+      if (!title || !date) { if (msg) { msg.textContent='Add a plan name and date first.'; msg.style.color='#b91c1c'; } return; }
+      if (!currentTripId || !currentUserId) { if (msg) msg.textContent='Trip session is not ready. Refresh and try again.'; return; }
+      if (btn) btn.disabled = true;
+      try {
+        var result = await client.from('itinerary_items').insert({
+          trip_id: currentTripId, title: title, plan_date: date,
+          plan_time: time || null, location: location || null, notes: notes || null,
+          created_by: currentUserId
+        });
+        if (result.error) throw result.error;
+        ['plan-title','plan-date','plan-time','plan-location','plan-notes'].forEach(function(id){ var el=document.getElementById(id); if(el) el.value=''; });
+        await loadItinerary();
+        if (msg) { msg.textContent='Plan saved for the whole crew.'; msg.style.color='#15803d'; }
+        window.location.hash = '#itinerary';
+      } catch (e) {
+        console.error(e); if (msg) { msg.textContent=(e && e.message) ? e.message : 'Could not save plan.'; msg.style.color='#b91c1c'; }
+      } finally { if (btn) btn.disabled = false; }
+    }
+
+    var saveIdeaBtn = document.getElementById('save-idea');
+    if (saveIdeaBtn) saveIdeaBtn.addEventListener('click', saveIdea);
+    var savePlanBtn = document.getElementById('save-plan');
+    if (savePlanBtn) savePlanBtn.addEventListener('click', savePlan);
+
     async function ensureSession() {
       var result = await client.auth.getSession();
       if (result.error) throw result.error;
@@ -284,16 +566,21 @@ body:has(#dark-toggle:checked) .field input,body:has(#dark-toggle:checked) .fiel
       return signed.data.session;
     }
 
-    async function alreadyMember() {
+    async function membershipTripId() {
       var q = await client.from('trip_members').select('trip_id').limit(1);
       if (q.error) throw q.error;
-      return q.data && q.data.length > 0;
+      return q.data && q.data.length ? q.data[0].trip_id : null;
     }
 
     async function start() {
       try {
-        await ensureSession();
-        if (await alreadyMember()) {
+        var session = await ensureSession();
+        currentUserId = session.user.id;
+        currentTripId = await membershipTripId();
+        if (currentTripId) {
+          await loadTravelerProfiles();
+          await loadIdeas();
+          await loadItinerary();
           hideGate();
           return;
         }
@@ -312,7 +599,8 @@ body:has(#dark-toggle:checked) .field input,body:has(#dark-toggle:checked) .fiel
       button.disabled = true;
       status('Checking code…');
       try {
-        await ensureSession();
+        var session = await ensureSession();
+        currentUserId = session.user.id;
         var rpc = await client.rpc('join_trip_with_code', { trip_name: TRIP_NAME, submitted_code: code });
         if (rpc.error) throw rpc.error;
         if (!rpc.data) {
@@ -320,6 +608,10 @@ body:has(#dark-toggle:checked) .field input,body:has(#dark-toggle:checked) .fiel
           button.disabled = false;
           return;
         }
+        currentTripId = rpc.data;
+        await loadTravelerProfiles();
+        await loadIdeas();
+        await loadItinerary();
         status('Access granted.', 'ok');
         window.setTimeout(hideGate, 350);
       } catch (e) {
