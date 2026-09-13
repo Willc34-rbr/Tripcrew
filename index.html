@@ -244,6 +244,14 @@ body:has(#dark-toggle:checked) .field input,body:has(#dark-toggle:checked) .fiel
 
 <script>
 (function () {
+  function applyTravelerName(i, name) {
+    var display = name || ('Traveler ' + i);
+    var nodes = document.querySelectorAll ? document.querySelectorAll('[data-traveler-name=\"' + i + '\"]') : [];
+    for (var j = 0; j < nodes.length; j++) nodes[j].innerText = display;
+    var input = document.getElementById('traveler-name-input-' + i);
+    if (input) input.value = name || '';
+  }
+
   var SUPABASE_URL = 'https://dbumoidcqkijpwnerxee.supabase.co';
   var SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_x7cHFhvsixNHlIGv3e37xQ_GIALjKB6';
   var TRIP_NAME = 'Seattle 2027';
