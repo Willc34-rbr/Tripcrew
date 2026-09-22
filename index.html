@@ -121,6 +121,9 @@ body{min-height:100dvh}
 .day-group{margin:18px 0}.day-heading{font-size:13px;font-weight:900;letter-spacing:.04em;color:var(--muted);text-transform:uppercase;margin:0 0 8px 2px}
 .activity-dot{width:10px;height:10px;border-radius:50%;background:#2563eb;flex:0 0 auto;margin-top:5px}.activity-row{display:flex;gap:10px}.activity-time{font-size:12px;color:var(--muted);margin-top:3px}
 .admin-only[hidden]{display:none!important}.trip-meta-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.security-status{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 0;border-bottom:1px solid var(--line)}
+.security-status:last-child{border-bottom:0}.security-dot{width:11px;height:11px;border-radius:50%;display:inline-block;margin-right:7px;background:#22c55e}.security-dot.locked{background:#dc2626}
+.admin-warning{background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;border-radius:16px;padding:13px;font-size:13px;margin:12px 0}.admin-danger{background:#fff1f2;border:1px solid #fecdd3;border-radius:18px;padding:16px;margin-top:14px}.admin-danger .primary-button{background:#b91c1c}.admin-session-note{font-size:12px;color:var(--muted);margin-top:8px}.owner-only-link[hidden]{display:none!important}
 .contrib-bar{height:8px;background:var(--soft);border-radius:999px;overflow:hidden;margin-top:8px}.contrib-bar>div{height:100%;background:#22c55e;border-radius:999px}
 @media(max-width:520px){.manage-grid,.trip-meta-grid{grid-template-columns:1fr}}
 
@@ -198,9 +201,19 @@ body{min-height:100dvh}
 <div class="card"><div class="theme-row"><div class="theme-copy"><strong>🌙 Dark mode</strong><span>Switch TripCrew to a darker theme.</span></div><label class="theme-switch" for="dark-toggle" aria-label="Toggle dark mode"></label></div></div>
 <div style="height:10px"></div>
 <div class="card"><div class="kv"><span>Destination</span><strong id="settings-destination">Seattle, WA</strong></div><div class="kv"><span>Dates</span><strong id="settings-dates">Jul 31–Aug 15, 2027</strong></div><div class="kv"><span>Travelers</span><strong id="settings-travelers">7</strong></div><div class="kv"><span>Access</span><strong>Private trip • code protected</strong></div><div class="kv"><span>Your role</span><strong id="settings-role">Member</strong></div></div>
-<div class="section manage-grid"><a class="manage-card" href="#create-trip"><strong>➕ Create another trip</strong><small>Give another group its own private code.</small></a><button id="switch-trip-button" class="manage-card" type="button" style="text-align:left"><strong>🔄 Switch / join trip</strong><small>Enter a different trip code.</small></button><a class="manage-card" href="#activity"><strong>📣 Activity feed</strong><small>See recent changes.</small></a><a class="manage-card" href="#manage-expenses"><strong>💰 Budget manager</strong><small>Update estimates and actual costs.</small></a></div>
-<div id="admin-settings" class="card admin-only" hidden><h3>Admin controls</h3><p class="muted">Only the trip creator can change core settings and the access code.</p><div class="field"><label>TRIP NAME</label><input id="admin-trip-name" maxlength="80"></div><div class="field"><label>DESTINATION</label><input id="admin-trip-destination" maxlength="100"></div><div class="field-row"><div class="field"><label>START DATE</label><input id="admin-trip-start" type="date"></div><div class="field"><label>END DATE</label><input id="admin-trip-end" type="date"></div></div><div class="field"><label>TRAVELER LIMIT</label><input id="admin-trip-limit" type="number" min="1" max="30"></div><button id="save-trip-settings" class="primary-button" type="button">Save trip settings</button><div class="field" style="margin-top:12px"><label>NEW ACCESS CODE</label><input id="admin-new-code" type="password" autocomplete="off" placeholder="Leave blank unless changing it"></div><button id="change-trip-code" class="secondary-button" type="button">Change access code</button><div id="admin-settings-msg" class="helper"></div></div>
+<div class="section manage-grid"><a class="manage-card" href="#create-trip"><strong>➕ Create another trip</strong><small>Give another group its own private code.</small></a><button id="switch-trip-button" class="manage-card" type="button" style="text-align:left"><strong>🔄 Switch / join trip</strong><small>Enter a different trip code.</small></button><a class="manage-card" href="#activity"><strong>📣 Activity feed</strong><small>See recent changes.</small></a><a class="manage-card" href="#manage-expenses"><strong>💰 Budget manager</strong><small>Update estimates and actual costs.</small></a><a id="owner-admin-link" class="manage-card owner-only-link" href="#admin-panel" hidden><strong>🔐 Owner admin panel</strong><small>Password-protected security and trip controls.</small></a></div>
 </section>
+<section id="admin-panel" class="screen"><a class="back" href="#settings">‹ Settings</a><h2 class="screen-title">Owner admin panel</h2><p class="screen-sub">A separate password protects sensitive TripCrew controls.</p>
+<div id="admin-not-owner" class="card" hidden><strong>Owner access only</strong><p class="muted">This panel is only available to the trip owner.</p></div>
+<div id="admin-password-setup" class="card" hidden><strong>Create your admin password</strong><p class="muted">Use a unique password of at least 12 characters. Do not use the same password as the normal trip access code.</p><div class="field"><label>NEW ADMIN PASSWORD</label><input id="admin-setup-password" type="password" minlength="12" autocomplete="new-password" placeholder="At least 12 characters"></div><div class="field"><label>CONFIRM ADMIN PASSWORD</label><input id="admin-setup-confirm" type="password" minlength="12" autocomplete="new-password" placeholder="Type it again"></div><button id="admin-setup-button" class="primary-button" type="button">Create admin password</button><div id="admin-setup-msg" class="helper"></div></div>
+<div id="admin-password-login" class="card" hidden><strong>Unlock admin panel</strong><p class="muted">This password is separate from the code your group uses to enter TripCrew.</p><div class="field"><label>ADMIN PASSWORD</label><input id="admin-login-password" type="password" autocomplete="current-password" placeholder="Admin password"></div><button id="admin-login-button" class="primary-button" type="button">Open admin panel</button><div id="admin-login-msg" class="helper"></div></div>
+<div id="admin-controls" hidden>
+<div class="card"><h3>Security status</h3><div class="security-status"><span><span id="admin-security-dot" class="security-dot"></span><strong id="admin-security-state">Trip open</strong></span><span id="admin-security-time" class="muted"></span></div><p class="admin-session-note">Your admin password is kept only in memory for this page and automatically locks again after 10 minutes.</p><button id="admin-lock-panel" class="secondary-button" type="button">Lock admin panel</button></div>
+<div class="card" style="margin-top:12px"><h3>Core trip settings</h3><div class="field"><label>TRIP NAME</label><input id="admin-trip-name" maxlength="80"></div><div class="field"><label>DESTINATION</label><input id="admin-trip-destination" maxlength="100"></div><div class="field-row"><div class="field"><label>START DATE</label><input id="admin-trip-start" type="date"></div><div class="field"><label>END DATE</label><input id="admin-trip-end" type="date"></div></div><div class="field"><label>TRAVELER LIMIT</label><input id="admin-trip-limit" type="number" min="1" max="30"></div><button id="save-trip-settings" class="primary-button" type="button">Save trip settings</button><div id="admin-settings-msg" class="helper"></div></div>
+<div class="card" style="margin-top:12px"><h3>Trip access code</h3><p class="muted">Changing this affects the code your group uses to enter this trip.</p><div class="field"><label>NEW TRIP ACCESS CODE</label><input id="admin-new-code" type="password" autocomplete="new-password" placeholder="At least 6 characters"></div><button id="change-trip-code" class="secondary-button" type="button">Change trip access code</button><div id="admin-code-msg" class="helper"></div></div>
+<div class="card" style="margin-top:12px"><h3>Admin password</h3><div class="field"><label>NEW ADMIN PASSWORD</label><input id="admin-change-password" type="password" minlength="12" autocomplete="new-password" placeholder="At least 12 characters"></div><div class="field"><label>CONFIRM NEW PASSWORD</label><input id="admin-change-confirm" type="password" minlength="12" autocomplete="new-password"></div><button id="admin-change-password-button" class="secondary-button" type="button">Change admin password</button><div id="admin-password-msg" class="helper"></div></div>
+<div class="admin-danger"><h3>🚨 Emergency lockdown</h3><p class="muted">Lockdown stops non-owner members from reading or changing live trip data at the Supabase level. It does not delete anything.</p><button id="admin-lockdown-button" class="primary-button" type="button">Lock TripCrew now</button><div id="admin-lockdown-msg" class="helper"></div></div>
+</div></section>
 <nav class="bottom"><a class="nav" href="#home"><span>🏠</span><small>Home</small></a><a class="nav" href="#travelers"><span>👥</span><small>Travelers</small></a><a class="nav" href="#expenses"><span>💳</span><small>Expenses</small></a><a class="nav" href="#itinerary"><span>🗓️</span><small>Plan</small></a><a class="nav" href="#more"><span>•••</span><small>More</small></a></nav>
 </div>
 
@@ -360,6 +373,11 @@ body{min-height:100dvh}
       '#tripcrew-code:focus{border-color:#2563eb;box-shadow:0 0 0 3px rgba(37,99,235,.12)}',
       '#tripcrew-unlock{width:100%;border:0;border-radius:15px;padding:14px 16px;margin-top:12px;background:#2563eb;color:#fff;font-weight:900;font-size:15px}',
       '#tripcrew-unlock:disabled{opacity:.65}',
+      '#tripcrew-owner-recovery-toggle{width:100%;border:0;background:transparent;color:#2563eb;font-weight:800;padding:12px 0 0}',
+      '#tripcrew-owner-recovery[hidden]{display:none!important}',
+      '#tripcrew-owner-recovery{margin-top:12px;padding-top:12px;border-top:1px solid #e2e8f0}',
+      '#tripcrew-recovery-admin-password{width:100%;border:1px solid #cbd5e1;border-radius:15px;padding:14px 15px;font-size:16px;outline:none;background:#fff;color:#0f172a}',
+      '#tripcrew-recover-owner{width:100%;border:0;border-radius:15px;padding:14px 16px;margin-top:12px;background:#0f172a;color:#fff;font-weight:900;font-size:15px}',
       '#tripcrew-gate-status{min-height:20px;margin-top:12px;font-size:13px;color:#64748b}',
       '#tripcrew-gate-status.error{color:#b91c1c}',
       '#tripcrew-gate-status.ok{color:#15803d}',
@@ -378,6 +396,8 @@ body{min-height:100dvh}
       '<label for="tripcrew-code">TRIP ACCESS CODE</label>' +
       '<input id="tripcrew-code" type="password" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="Enter access code">' +
       '<button id="tripcrew-unlock" type="button">Unlock TripCrew</button>' +
+      '<button id="tripcrew-owner-recovery-toggle" type="button">Owner recovery</button>' +
+      '<div id="tripcrew-owner-recovery" hidden><p style="margin:0 0 10px;font-size:13px">If you locked the trip or lost the browser that owned it, enter the normal trip code above plus your separate admin password.</p><label for="tripcrew-recovery-admin-password">ADMIN PASSWORD</label><input id="tripcrew-recovery-admin-password" type="password" autocomplete="current-password" placeholder="Admin password"><button id="tripcrew-recover-owner" type="button">Recover owner access & reopen</button></div>' +
       '<div id="tripcrew-gate-status">Checking secure session…</div>' +
       '</div>';
     document.body.appendChild(gate);
@@ -428,6 +448,10 @@ body{min-height:100dvh}
     var ownTravelerSlot = null;
     var expenseItems = [];
     var contributions = [];
+    var adminPasswordMemory = '';
+    var adminSessionExpiresAt = 0;
+    var adminPasswordSet = false;
+    var adminSecurityState = null;
     var sharedDeadlines = [];
 
     function deadlineMsg(text, kind) {
@@ -681,8 +705,9 @@ body{min-height:100dvh}
       var range=fmtDateRange(currentTrip.start_date,currentTrip.end_date);
       [['trip-header-name',name],['settings-trip-name',name],['trip-home-destination',dest],['trip-home-dates',range],['settings-destination',dest],['settings-dates',range],['settings-travelers',String(currentTrip.traveler_limit||7)]].forEach(function(pair){var el=document.getElementById(pair[0]);if(el)el.textContent=pair[1];});
       var count=document.getElementById('trip-home-traveler-count'); if(count) count.textContent=String(currentTrip.traveler_limit||7);
-      var role=document.getElementById('settings-role'); if(role) role.textContent=isTripAdmin?'Admin':'Member';
-      var admin=document.getElementById('admin-settings'); if(admin) admin.hidden=!isTripAdmin;
+      var role=document.getElementById('settings-role'); if(role) role.textContent=isTripAdmin?'Owner / Admin':'Member';
+      var ownerLink=document.getElementById('owner-admin-link'); if(ownerLink) ownerLink.hidden=!isTripAdmin;
+      var notOwner=document.getElementById('admin-not-owner'); if(notOwner) notOwner.hidden=isTripAdmin;
       if(isTripAdmin){
         var vals={'admin-trip-name':currentTrip.name||'','admin-trip-destination':currentTrip.destination||'','admin-trip-start':currentTrip.start_date||'','admin-trip-end':currentTrip.end_date||'','admin-trip-limit':currentTrip.traveler_limit||7};
         Object.keys(vals).forEach(function(id){var el=document.getElementById(id);if(el)el.value=vals[id];});
@@ -690,13 +715,14 @@ body{min-height:100dvh}
     }
     async function loadTripMeta() {
       if(!currentTripId)return;
-      var q=await client.from('trips').select('id,name,destination,start_date,end_date,traveler_limit,owner_id').eq('id',currentTripId).single();
+      var q=await client.from('trips').select('id,name,destination,start_date,end_date,traveler_limit,owner_id,locked_down,locked_at').eq('id',currentTripId).single();
       if(q.error) throw q.error; currentTrip=q.data; isTripAdmin=!!(currentTrip&&currentTrip.owner_id===currentUserId); tripUi();
+      if(isTripAdmin) await loadAdminSecurityStatus();
     }
     async function loadExpenses() {
       if(!currentTripId)return;
       var q=await client.from('expense_items').select('id,title,category,estimate_low,estimate_high,actual_total,note,created_by,created_at').eq('trip_id',currentTripId).order('created_at',{ascending:true});
-      if(q.error){console.error(q.error);return;} expenseItems=q.data||[]; if(!expenseItems.length && isTripAdmin){var seed=[{title:'Turo',category:'Transport',estimate_low:1440,estimate_high:1440,actual_total:1440,note:'Paid & booked'},{title:'Amtrak',category:'Transport',estimate_low:1505,estimate_high:1680,actual_total:1071,note:'$1,071 spent so far for San Diego → Los Angeles → Seattle. Return to San Diego not booked yet.'},{title:'Airbnb',category:'Lodging',estimate_low:3000,estimate_high:5000,actual_total:null,note:'Planning estimate'},{title:'Food',category:'Food',estimate_low:5500,estimate_high:7500,actual_total:null,note:'Two-week group estimate'}].map(function(x){return Object.assign({trip_id:currentTripId,created_by:currentUserId},x);});var s=await client.from('expense_items').insert(seed);if(!s.error)return loadExpenses();} renderExpenses();
+      if(q.error){console.error(q.error);return;} expenseItems=q.data||[]; if(!expenseItems.length && isTripAdmin){var seed=[{title:'Turo',category:'Transport',estimate_low:1440,estimate_high:1440,actual_total:1440,note:'Paid & booked'},{title:'Amtrak',category:'Transport',estimate_low:1505,estimate_high:1680,actual_total:1071,note:'$1,071 spent so far for San Diego → Los Angeles → Seattle. Return to San Diego not booked yet.'},{title:'Airbnb',category:'Lodging',estimate_low:3000,estimate_high:5000,actual_total:null,note:'Planning estimate'},{title:'Food',category:'Food',estimate_low:3000,estimate_high:4500,actual_total:null,note:'Two grocery runs plus selective dining out'}].map(function(x){return Object.assign({trip_id:currentTripId,created_by:currentUserId},x);});var s=await client.from('expense_items').insert(seed);if(!s.error)return loadExpenses();} renderExpenses();
     }
     function renderExpenses(){
       var list=document.getElementById('expense-manager-list'), summary=document.getElementById('expense-summary'); if(!list||!summary)return;
@@ -716,8 +742,29 @@ body{min-height:100dvh}
     function renderContributions(){var list=document.getElementById('contribution-list'),select=document.getElementById('contrib-traveler');if(select){var opts=Object.keys(travelerProfiles).map(function(k){var p=travelerProfiles[k];return '<option value="'+esc(p.user_id)+'">'+esc(p.display_name||('Traveler '+k))+'</option>';});select.innerHTML=opts.join('');}if(!list)return;var totals={};contributions.forEach(function(c){totals[c.user_id]=(totals[c.user_id]||0)+Number(c.amount||0);});var profiles=Object.keys(travelerProfiles).map(function(k){return travelerProfiles[k];});if(!profiles.length){list.innerHTML='<div class="card muted">Traveler slots have not been claimed yet.</div>';return;}list.innerHTML=profiles.map(function(p){return '<div class="card"><div class="row"><div><strong>'+esc(p.display_name)+'</strong><div class="muted">Shared contributions</div></div><div class="money">'+fmtMoney(totals[p.user_id]||0)+'</div></div></div>';}).join('');}
     async function saveContribution(){var user=document.getElementById('contrib-traveler').value,amt=document.getElementById('contrib-amount').value,note=document.getElementById('contrib-note').value.trim(),msg=document.getElementById('contrib-msg');if(!user||!amt||Number(amt)<=0){msg.textContent='Choose a traveler and enter an amount.';return;}var r=await client.from('trip_contributions').insert({trip_id:currentTripId,user_id:user,amount:Number(amt),note:note||null,recorded_by:currentUserId});if(r.error){msg.textContent=r.error.message;return;}document.getElementById('contrib-amount').value='';document.getElementById('contrib-note').value='';msg.textContent='Contribution saved.';await loadContributions();}
     async function loadActivity(){if(!currentTripId)return;var q=await client.from('activity_feed').select('id,actor_id,action,entity_type,summary,created_at').eq('trip_id',currentTripId).order('created_at',{ascending:false}).limit(50);if(q.error){console.error(q.error);return;}var list=document.getElementById('activity-list');if(!list)return;var rows=q.data||[];list.innerHTML=rows.length?rows.map(function(a){return '<div class="card activity-row"><span class="activity-dot"></span><div><strong>'+esc(a.summary||a.action)+'</strong><div class="muted">'+esc(memberDisplayName(a.actor_id))+'</div><div class="activity-time">'+new Date(a.created_at).toLocaleString()+'</div></div></div>';}).join(''):'<div class="card muted">No activity yet.</div>';}
-    async function saveTripSettings(){if(!isTripAdmin)return;var row={name:document.getElementById('admin-trip-name').value.trim(),destination:document.getElementById('admin-trip-destination').value.trim(),start_date:document.getElementById('admin-trip-start').value||null,end_date:document.getElementById('admin-trip-end').value||null,traveler_limit:Number(document.getElementById('admin-trip-limit').value||7)};var r=await client.from('trips').update(row).eq('id',currentTripId);var msg=document.getElementById('admin-settings-msg');if(r.error){msg.textContent=r.error.message;return;}await loadTripMeta();msg.textContent='Trip settings saved.';}
-    async function changeTripCode(){if(!isTripAdmin)return;var code=document.getElementById('admin-new-code').value.trim(),msg=document.getElementById('admin-settings-msg');if(!code){msg.textContent='Enter a new access code first.';return;}var r=await client.rpc('change_trip_access_code',{target_trip:currentTripId,new_code:code});if(r.error){msg.textContent=r.error.message;return;}document.getElementById('admin-new-code').value='';msg.textContent='Access code changed.';}
+    function adminSessionValid(){return !!adminPasswordMemory && Date.now()<adminSessionExpiresAt;}
+    function clearAdminSession(){adminPasswordMemory='';adminSessionExpiresAt=0;renderAdminSecurity();}
+    function setAdminMsg(id,text,error){var el=document.getElementById(id);if(!el)return;el.textContent=text||'';el.style.color=error?'#b91c1c':'';}
+    function renderAdminSecurity(){
+      var setup=document.getElementById('admin-password-setup'),login=document.getElementById('admin-password-login'),controls=document.getElementById('admin-controls'),notOwner=document.getElementById('admin-not-owner');
+      if(!isTripAdmin){if(setup)setup.hidden=true;if(login)login.hidden=true;if(controls)controls.hidden=true;if(notOwner)notOwner.hidden=false;return;}
+      if(notOwner)notOwner.hidden=true;
+      if(!adminPasswordSet){if(setup)setup.hidden=false;if(login)login.hidden=true;if(controls)controls.hidden=true;return;}
+      if(!adminSessionValid()){if(setup)setup.hidden=true;if(login)login.hidden=false;if(controls)controls.hidden=true;return;}
+      if(setup)setup.hidden=true;if(login)login.hidden=true;if(controls)controls.hidden=false;
+      var locked=!!(adminSecurityState&&adminSecurityState.locked_down);var dot=document.getElementById('admin-security-dot'),state=document.getElementById('admin-security-state'),time=document.getElementById('admin-security-time'),btn=document.getElementById('admin-lockdown-button');
+      if(dot)dot.className='security-dot'+(locked?' locked':'');if(state)state.textContent=locked?'Trip locked down':'Trip open';if(time)time.textContent=locked&&adminSecurityState.locked_at?new Date(adminSecurityState.locked_at).toLocaleString():'';if(btn)btn.textContent=locked?'Reopen TripCrew':'Lock TripCrew now';
+    }
+    async function loadAdminSecurityStatus(){if(!isTripAdmin)return;var r=await client.rpc('admin_security_status',{target_trip:currentTripId});if(r.error){console.error(r.error);return;}adminSecurityState=r.data||{};adminPasswordSet=!!adminSecurityState.password_set;renderAdminSecurity();}
+    async function setupAdminPassword(){var p=document.getElementById('admin-setup-password').value,c=document.getElementById('admin-setup-confirm').value;if(p.length<12){setAdminMsg('admin-setup-msg','Use at least 12 characters.',true);return;}if(p!==c){setAdminMsg('admin-setup-msg','The passwords do not match.',true);return;}var r=await client.rpc('set_trip_admin_password',{target_trip:currentTripId,new_password:p});if(r.error){setAdminMsg('admin-setup-msg',r.error.message,true);return;}adminPasswordMemory=p;adminSessionExpiresAt=Date.now()+10*60*1000;document.getElementById('admin-setup-password').value='';document.getElementById('admin-setup-confirm').value='';await loadAdminSecurityStatus();setAdminMsg('admin-settings-msg','Admin password created. Keep it somewhere safe.');}
+    async function unlockAdminPanel(){var input=document.getElementById('admin-login-password'),p=input.value;if(!p){setAdminMsg('admin-login-msg','Enter your admin password.',true);return;}var r=await client.rpc('verify_trip_admin_password',{target_trip:currentTripId,submitted_password:p});if(r.error||!r.data){setAdminMsg('admin-login-msg',r.error?r.error.message:'Incorrect admin password.',true);return;}adminPasswordMemory=p;adminSessionExpiresAt=Date.now()+10*60*1000;input.value='';setAdminMsg('admin-login-msg','');await loadAdminSecurityStatus();}
+    async function saveTripSettings(){if(!isTripAdmin||!adminSessionValid()){clearAdminSession();return;}var r=await client.rpc('admin_update_trip_settings',{target_trip:currentTripId,submitted_admin_password:adminPasswordMemory,new_name:document.getElementById('admin-trip-name').value.trim(),new_destination:document.getElementById('admin-trip-destination').value.trim(),new_start:document.getElementById('admin-trip-start').value||null,new_end:document.getElementById('admin-trip-end').value||null,new_traveler_limit:Number(document.getElementById('admin-trip-limit').value||7)});var msg=document.getElementById('admin-settings-msg');if(r.error){msg.textContent=r.error.message;return;}await loadTripMeta();msg.textContent='Trip settings saved.';}
+    async function changeTripCode(){if(!isTripAdmin||!adminSessionValid()){clearAdminSession();return;}var code=document.getElementById('admin-new-code').value.trim(),msg=document.getElementById('admin-code-msg');if(code.length<6){msg.textContent='Use at least 6 characters for the trip access code.';return;}var r=await client.rpc('admin_change_trip_access_code',{target_trip:currentTripId,submitted_admin_password:adminPasswordMemory,new_code:code});if(r.error){msg.textContent=r.error.message;return;}document.getElementById('admin-new-code').value='';msg.textContent='Trip access code changed.';}
+    async function changeAdminPassword(){if(!adminSessionValid()){clearAdminSession();return;}var p=document.getElementById('admin-change-password').value,c=document.getElementById('admin-change-confirm').value;if(p.length<12){setAdminMsg('admin-password-msg','Use at least 12 characters.',true);return;}if(p!==c){setAdminMsg('admin-password-msg','The passwords do not match.',true);return;}var r=await client.rpc('admin_change_password',{target_trip:currentTripId,current_password:adminPasswordMemory,new_password:p});if(r.error){setAdminMsg('admin-password-msg',r.error.message,true);return;}adminPasswordMemory=p;adminSessionExpiresAt=Date.now()+10*60*1000;document.getElementById('admin-change-password').value='';document.getElementById('admin-change-confirm').value='';setAdminMsg('admin-password-msg','Admin password changed.');}
+    async function toggleTripLockdown(){if(!adminSessionValid()){clearAdminSession();return;}var locked=!!(adminSecurityState&&adminSecurityState.locked_down);if(!locked&&!confirm('Lock TripCrew for every non-owner member? Nothing will be deleted.'))return;var r=await client.rpc('admin_set_lockdown',{target_trip:currentTripId,submitted_admin_password:adminPasswordMemory,should_lock:!locked});if(r.error){setAdminMsg('admin-lockdown-msg',r.error.message,true);return;}await loadTripMeta();setAdminMsg('admin-lockdown-msg',locked?'TripCrew is open again.':'TripCrew is locked. Non-owner members are blocked at Supabase.');}
+    async function recoverOwnerAccess(){var code=document.getElementById('tripcrew-code').value.trim(),p=document.getElementById('tripcrew-recovery-admin-password').value,btn=document.getElementById('tripcrew-recover-owner');if(!code||!p){status('Enter both the trip code and admin password.','error');return;}btn.disabled=true;status('Checking owner recovery…');try{var session=await ensureSession();currentUserId=session.user.id;var r=await client.rpc('recover_trip_owner',{submitted_code:code,submitted_admin_password:p});if(r.error)throw r.error;if(!r.data){status('Owner recovery details were not accepted.','error');btn.disabled=false;return;}currentTripId=r.data;localStorage.setItem('tripcrew_active_trip_id',currentTripId);adminPasswordMemory=p;adminSessionExpiresAt=Date.now()+10*60*1000;await loadAllTripData();status('Owner access recovered and trip reopened.','ok');setTimeout(hideGate,350);}catch(e){status(e&&e.message?e.message:'Owner recovery failed.','error');btn.disabled=false;}}
+    async function checkRemoteLock(){if(!currentTripId||isTripAdmin)return;try{var r=await client.rpc('trip_lock_state',{target_trip:currentTripId});if(!r.error&&r.data===true){var gate=document.getElementById('tripcrew-gate');if(gate)gate.style.display='flex';status('This trip is temporarily locked by the owner.','error');}}catch(e){console.error(e);}}
+
     async function createTrip(){var msg=document.getElementById('create-trip-msg');var args={trip_name:document.getElementById('new-trip-name').value.trim(),trip_destination:document.getElementById('new-trip-destination').value.trim(),trip_start:document.getElementById('new-trip-start').value||null,trip_end:document.getElementById('new-trip-end').value||null,traveler_count:Number(document.getElementById('new-trip-limit').value||7),submitted_code:document.getElementById('new-trip-code').value.trim()};if(!args.trip_name||!args.submitted_code){msg.textContent='Trip name and private code are required.';return;}var r=await client.rpc('create_trip_with_code',args);if(r.error){msg.textContent=r.error.message;return;}currentTripId=r.data;localStorage.setItem('tripcrew_active_trip_id',currentTripId);await loadAllTripData();location.hash='#home';}
     function switchTrip(){localStorage.removeItem('tripcrew_active_trip_id');currentTripId=null;currentTrip=null;var gate=document.getElementById('tripcrew-gate');if(gate)gate.style.display='flex';status('Enter another trip code to continue.');var input=document.getElementById('tripcrew-code');if(input)input.value='';location.hash='#home';}
 
@@ -974,6 +1021,11 @@ body{min-height:100dvh}
     var saveContribBtn=document.getElementById('save-contribution'); if(saveContribBtn)saveContribBtn.addEventListener('click',saveContribution);
     var saveTripSettingsBtn=document.getElementById('save-trip-settings'); if(saveTripSettingsBtn)saveTripSettingsBtn.addEventListener('click',saveTripSettings);
     var changeTripCodeBtn=document.getElementById('change-trip-code'); if(changeTripCodeBtn)changeTripCodeBtn.addEventListener('click',changeTripCode);
+    var adminSetupBtn=document.getElementById('admin-setup-button'); if(adminSetupBtn)adminSetupBtn.addEventListener('click',setupAdminPassword);
+    var adminLoginBtn=document.getElementById('admin-login-button'); if(adminLoginBtn)adminLoginBtn.addEventListener('click',unlockAdminPanel);
+    var adminLockPanelBtn=document.getElementById('admin-lock-panel'); if(adminLockPanelBtn)adminLockPanelBtn.addEventListener('click',clearAdminSession);
+    var adminChangePasswordBtn=document.getElementById('admin-change-password-button'); if(adminChangePasswordBtn)adminChangePasswordBtn.addEventListener('click',changeAdminPassword);
+    var adminLockdownBtn=document.getElementById('admin-lockdown-button'); if(adminLockdownBtn)adminLockdownBtn.addEventListener('click',toggleTripLockdown);
     var createTripBtn=document.getElementById('create-trip-button'); if(createTripBtn)createTripBtn.addEventListener('click',createTrip);
     var switchTripBtn=document.getElementById('switch-trip-button'); if(switchTripBtn)switchTripBtn.addEventListener('click',switchTrip);
 
@@ -1118,7 +1170,7 @@ body{min-height:100dvh}
         var rpc = await client.rpc('join_trip_by_code', { submitted_code: code });
         if (rpc.error) throw rpc.error;
         if (!rpc.data) {
-          status('That code is not correct.', 'error');
+          status('That code is unavailable or not correct. If you are the owner and locked the trip, use Owner recovery below.', 'error');
           button.disabled = false;
           return;
         }
@@ -1143,8 +1195,13 @@ body{min-height:100dvh}
     document.getElementById('tripcrew-code').addEventListener('keydown', function (e) {
       if (e.key === 'Enter') unlock();
     });
+    document.getElementById('tripcrew-owner-recovery-toggle').addEventListener('click',function(){var box=document.getElementById('tripcrew-owner-recovery');box.hidden=!box.hidden;});
+    document.getElementById('tripcrew-recover-owner').addEventListener('click',recoverOwnerAccess);
+    document.getElementById('tripcrew-recovery-admin-password').addEventListener('keydown',function(e){if(e.key==='Enter')recoverOwnerAccess();});
 
     start();
+    window.setInterval(checkRemoteLock,30000);
+    window.setInterval(function(){if(adminPasswordMemory&&Date.now()>=adminSessionExpiresAt)clearAdminSession();},15000);
   });
 })();
 </script>
