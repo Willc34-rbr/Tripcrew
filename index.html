@@ -111,22 +111,35 @@ body{min-height:100dvh}
 .deadline-mini-btn.danger{color:#b91c1c}
 .deadline-complete{text-decoration:line-through;opacity:.65}
 
+
+/* TripCrew self-managed platform additions */
+.manage-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.manage-card{padding:14px;border:1px solid var(--line);border-radius:16px;background:var(--card)}
+.manage-card strong{display:block;margin-bottom:4px}.manage-card small{color:var(--muted)}
+.expense-row,.activity-row{margin-bottom:10px}.expense-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.inline-actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.mini-btn{border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:10px;padding:8px 10px;font-weight:800}.mini-btn.danger{color:#b91c1c}.mini-btn.success{color:#15803d}
+.day-group{margin:18px 0}.day-heading{font-size:13px;font-weight:900;letter-spacing:.04em;color:var(--muted);text-transform:uppercase;margin:0 0 8px 2px}
+.activity-dot{width:10px;height:10px;border-radius:50%;background:#2563eb;flex:0 0 auto;margin-top:5px}.activity-row{display:flex;gap:10px}.activity-time{font-size:12px;color:var(--muted);margin-top:3px}
+.admin-only[hidden]{display:none!important}.trip-meta-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.contrib-bar{height:8px;background:var(--soft);border-radius:999px;overflow:hidden;margin-top:8px}.contrib-bar>div{height:100%;background:#22c55e;border-radius:999px}
+@media(max-width:520px){.manage-grid,.trip-meta-grid{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
 <input id="dark-toggle" type="checkbox" aria-label="Dark mode">
 <div class="app">
-<header class="topbar"><div><p class="eyebrow">TRIPCREW</p><h1>Seattle 2027</h1></div><a class="gear" href="#settings">⚙️</a></header>
+<header class="topbar"><div><p class="eyebrow">TRIPCREW</p><h1 id="trip-header-name">Seattle 2027</h1></div><a class="gear" href="#settings">⚙️</a></header>
 
 <section id="home" class="screen">
-  <div class="hero"><div class="hero-row"><div><h2>Seattle, WA</h2><p>Jul 31 – Aug 15, 2027</p></div><div class="countdown"><strong id="trip-days">323</strong><span>days to go</span></div></div><div class="stats"><div class="stat"><strong>7</strong><span>travelers</span></div><div class="stat"><strong>$11.4–15.6K</strong><span>trip estimate</span></div><div class="stat"><strong>2/3</strong><span>deadlines done</span></div></div></div>
+  <div class="hero"><div class="hero-row"><div><h2 id="trip-home-destination">Seattle, WA</h2><p id="trip-home-dates">Jul 31 – Aug 15, 2027</p></div><div class="countdown"><strong id="trip-days">323</strong><span>days to go</span></div></div><div class="stats"><div class="stat"><strong id="trip-home-traveler-count">7</strong><span>travelers</span></div><div class="stat"><strong>$11.4–15.6K</strong><span>trip estimate</span></div><div class="stat"><strong>2/3</strong><span>deadlines done</span></div></div></div>
   <div class="train-timer" aria-label="Countdown to train departure"><div class="train-timer-head"><strong>🚆 Train departure countdown</strong><span>Jul 31, 2027<br>4:00 AM Pacific</span></div><div class="timer-grid"><div class="timer-box"><strong id="train-days">322</strong><span>Days</span></div><div class="timer-box"><strong id="train-hours">16</strong><span>Hours</span></div><div class="timer-box"><strong id="train-minutes">06</strong><span>Minutes</span></div><div class="timer-box"><strong id="train-seconds">11</strong><span>Seconds</span></div></div><div class="timer-note" id="train-timer-note">Confirmed departure: July 31, 2027 at 4:00 AM Pacific. If this preview blocks live updates, these numbers are a snapshot; the hosted app will tick every second.</div></div>
-  <div class="section"><div class="section-head"><h3>Quick access</h3></div><div class="grid2"><a class="tap quick" href="#expenses"><div class="emoji">💳</div><div><strong>Expenses</strong><br><span>Budget & funding</span></div></a><a class="tap quick" href="#bookings"><div class="emoji">🎟️</div><div><strong>Bookings</strong><br><span>Car, train & stay</span></div></a><a class="tap quick" href="#planning"><div class="emoji">💡</div><div><strong>Planning</strong><br><span>Seattle ideas</span></div></a><a class="tap quick" href="#itinerary"><div class="emoji">🗓️</div><div><strong>Itinerary</strong><br><span>Confirmed plans</span></div></a><a class="tap quick" href="#voting"><div class="emoji">🗳️</div><div><strong>Voting</strong><br><span>Group decisions</span></div></a></div></div>
+  <div class="section"><div class="section-head"><h3>Quick access</h3></div><div class="grid2"><a class="tap quick" href="#expenses"><div class="emoji">💳</div><div><strong>Expenses</strong><br><span>Budget & funding</span></div></a><a class="tap quick" href="#bookings"><div class="emoji">🎟️</div><div><strong>Bookings</strong><br><span>Car, train & stay</span></div></a><a class="tap quick" href="#planning"><div class="emoji">💡</div><div><strong>Planning</strong><br><span>Seattle ideas</span></div></a><a class="tap quick" href="#itinerary"><div class="emoji">🗓️</div><div><strong>Itinerary</strong><br><span>Confirmed plans</span></div></a><a class="tap quick" href="#voting"><div class="emoji">🗳️</div><div><strong>Voting</strong><br><span>Group decisions</span></div></a><a class="tap quick" href="#activity"><div class="emoji">📣</div><div><strong>Activity</strong><br><span>What changed</span></div></a><a class="tap quick" href="#manage-expenses"><div class="emoji">💰</div><div><strong>Budget</strong><br><span>Edit estimates & actuals</span></div></a></div></div>
   <div class="section"><div class="section-head"><h3>Deadlines</h3><a class="seeall" href="#deadlines">See all</a></div><a class="tap" href="#deadlines"><div class="row"><div><strong>2 of 3 complete</strong><div class="muted" id="home-amtrak-deadline">Airbnb is next • Date TBD</div></div><span class="badge success">67%</span></div><div class="progress"><div style="width:67%"></div></div></a></div>
   <div class="section"><div class="section-head"><h3>Travelers</h3><a class="seeall" href="#travelers">See all</a></div><a class="tap" href="#travelers"><div class="row"><div class="row-start"><div class="avatar">7</div><div><strong>Traveler 1–7</strong><div class="muted">7 confirmed travelers</div></div></div><span class="badge success">Confirmed</span></div></a></div>
 <a class="primary-button" href="#manage-deadlines" style="display:block;text-align:center;margin-top:12px;text-decoration:none">Manage deadlines</a></section>
-<section id="travelers" class="screen"><a class="back" href="#home">‹ Home</a><h2 class="screen-title">Travelers</h2><p class="screen-sub">All 7 travelers are confirmed.</p><a class="tap" href="#traveler-1"><div class="row"><div class="row-start"><div class="avatar">T1</div><div><strong data-traveler-name="1">Traveler 1</strong><div class="muted">Confirmed traveler • Turo paid</div></div></div><span class="badge success">Confirmed</span></div></a><a class="tap" href="#traveler-2"><div class="row"><div class="row-start"><div class="avatar">T2</div><div><strong data-traveler-name="2">Traveler 2</strong><div class="muted">Confirmed traveler • Turo paid</div></div></div><span class="badge success">Confirmed</span></div></a><a class="tap" href="#traveler-3"><div class="row"><div class="row-start"><div class="avatar">T3</div><div><strong data-traveler-name="3">Traveler 3</strong><div class="muted">Confirmed traveler • Turo paid</div></div></div><span class="badge success">Confirmed</span></div></a><a class="tap" href="#traveler-4"><div class="row"><div class="row-start"><div class="avatar">T4</div><div><strong data-traveler-name="4">Traveler 4</strong><div class="muted">Confirmed traveler • Turo paid</div></div></div><span class="badge success">Confirmed</span></div></a><a class="tap" href="#traveler-5"><div class="row"><div class="row-start"><div class="avatar">T5</div><div><strong data-traveler-name="5">Traveler 5</strong><div class="muted">Confirmed traveler • Turo paid</div></div></div><span class="badge success">Confirmed</span></div></a><a class="tap" href="#traveler-6"><div class="row"><div class="row-start"><div class="avatar">T6</div><div><strong data-traveler-name="6">Traveler 6</strong><div class="muted">Confirmed traveler • Turo paid</div></div></div><span class="badge success">Confirmed</span></div></a><a class="tap" href="#traveler-7"><div class="row"><div class="row-start"><div class="avatar">T7</div><div><strong data-traveler-name="7">Traveler 7</strong><div class="muted">Confirmed traveler • Turo paid</div></div></div><span class="badge success">Confirmed</span></div></a></section>
-<section id="expenses" class="screen"><a class="back" href="#home">‹ Home</a><h2 class="screen-title">Expenses</h2><p class="screen-sub">Confirmed costs and planning estimates.</p><div class="cat-grid"><a class="tap cat" href="#transport"><div class="emoji">🚆</div><div><strong>Transport</strong><br><small>$2,945–$3,120 • Turo + Amtrak</small></div></a><a class="tap cat" href="#lodging"><div class="emoji">🏠</div><div><strong>Lodging</strong><br><small>$3,000–$5,000 estimate</small></div></a><a class="tap cat" href="#food"><div class="emoji">🍽️</div><div><strong>Food</strong><br><small>$5,500–$7,500 group estimate</small></div></a><a class="tap cat" href="#activities"><div class="emoji">🎡</div><div><strong>Activities</strong><br><small>No expenses yet</small></div></a></div></section>
+<section id="travelers" class="screen"><a class="back" href="#home">‹ Home</a><h2 class="screen-title">Travelers</h2><p class="screen-sub" id="travelers-summary">Traveler profiles, confirmation, and shared contributions.</p><a class="tap" href="#traveler-1"><div class="row"><div class="row-start"><div class="avatar">T1</div><div><strong data-traveler-name="1">Traveler 1</strong><div class="muted">Confirmed traveler • Turo paid</div></div></div><span class="badge success">Confirmed</span></div></a><a class="tap" href="#traveler-2"><div class="row"><div class="row-start"><div class="avatar">T2</div><div><strong data-traveler-name="2">Traveler 2</strong><div class="muted">Confirmed traveler • Turo paid</div></div></div><span class="badge success">Confirmed</span></div></a><a class="tap" href="#traveler-3"><div class="row"><div class="row-start"><div class="avatar">T3</div><div><strong data-traveler-name="3">Traveler 3</strong><div class="muted">Confirmed traveler • Turo paid</div></div></div><span class="badge success">Confirmed</span></div></a><a class="tap" href="#traveler-4"><div class="row"><div class="row-start"><div class="avatar">T4</div><div><strong data-traveler-name="4">Traveler 4</strong><div class="muted">Confirmed traveler • Turo paid</div></div></div><span class="badge success">Confirmed</span></div></a><a class="tap" href="#traveler-5"><div class="row"><div class="row-start"><div class="avatar">T5</div><div><strong data-traveler-name="5">Traveler 5</strong><div class="muted">Confirmed traveler • Turo paid</div></div></div><span class="badge success">Confirmed</span></div></a><a class="tap" href="#traveler-6"><div class="row"><div class="row-start"><div class="avatar">T6</div><div><strong data-traveler-name="6">Traveler 6</strong><div class="muted">Confirmed traveler • Turo paid</div></div></div><span class="badge success">Confirmed</span></div></a><a class="tap" href="#traveler-7"><div class="row"><div class="row-start"><div class="avatar">T7</div><div><strong data-traveler-name="7">Traveler 7</strong><div class="muted">Confirmed traveler • Turo paid</div></div></div><span class="badge success">Confirmed</span></div></a></section>
+<section id="expenses" class="screen"><a class="back" href="#home">‹ Home</a><h2 class="screen-title">Expenses</h2><p class="screen-sub">Confirmed costs and planning estimates.</p><div class="cat-grid"><a class="tap cat" href="#transport"><div class="emoji">🚆</div><div><strong>Transport</strong><br><small>$2,945–$3,120 • Turo + Amtrak</small></div></a><a class="tap cat" href="#lodging"><div class="emoji">🏠</div><div><strong>Lodging</strong><br><small>$3,000–$5,000 estimate</small></div></a><a class="tap cat" href="#food"><div class="emoji">🍽️</div><div><strong>Food</strong><br><small>$5,500–$7,500 group estimate</small></div></a><a class="tap cat" href="#activities"><div class="emoji">🎡</div><div><strong>Activities</strong><br><small>No expenses yet</small></div></a></div><div class="section"><a class="primary-button" href="#manage-expenses" style="display:block;text-align:center;text-decoration:none">Manage budget & actuals</a><a class="secondary-button" href="#contributions" style="display:block;text-align:center;text-decoration:none;margin-top:8px">Traveler contributions</a></div></section>
 <section id="transport" class="screen"><a class="back" href="#expenses">‹ Expenses</a><h2 class="screen-title">Transport</h2><p class="screen-sub">Turo paid + Amtrak tickets secured.</p><a class="tap" href="#turo"><div class="row"><div><strong>Turo • 2018 Dodge Grand Caravan</strong><div class="muted">Fully paid • 7/7 funded</div></div><div class="money">$1,440</div></div></a><a class="tap" href="#amtrak"><div class="row"><div><strong>Amtrak round trip</strong><div class="muted">$215–$240/person • round trip</div></div><div class="money">$1,505–$1,680</div></div></a></section>
 <section id="lodging" class="screen"><a class="back" href="#expenses">‹ Expenses</a><h2 class="screen-title">Lodging</h2><p class="screen-sub">Airbnb is still in planning.</p><a class="tap" href="#airbnb"><div class="row"><div><strong>Airbnb</strong><div class="muted">Group-funded • booking date TBD</div></div><div class="money">$3–5K</div></div></a></section>
 <section id="food" class="screen"><a class="back" href="#expenses">‹ Expenses</a><h2 class="screen-title">Food</h2><p class="screen-sub">Estimated food budget for 7 travelers over about two weeks.</p><div class="card"><div class="kv"><span>Group estimate</span><strong>$5,500–$7,500</strong></div><div class="kv"><span>Per person</span><strong>~$785–$1,070</strong></div><div class="kv"><span>Per person / day</span><strong>~$56–$77</strong></div><div class="kv"><span>Planning style</span><strong>Mixed groceries + dining out</strong></div></div><div class="card"><strong>How this estimate works</strong><p class="muted">This assumes a vacation mix: some groceries and simple breakfasts/snacks at the Airbnb, casual lunches, and restaurant dinners on many days. It is a planning estimate, not a spending requirement.</p></div></section>
@@ -147,7 +160,47 @@ body{min-height:100dvh}
 <section id="deadlines" class="screen"><a class="back" href="#home">‹ Home</a><h2 class="screen-title">Deadlines</h2><p class="screen-sub">2 complete • 1 upcoming</p><div class="card"><div class="row"><div class="row-start"><div class="check">✓</div><div><strong>Turo car rental</strong><div class="muted">Completed • fully paid</div></div></div><span class="badge success">Done</span></div></div><div class="card" id="amtrak-deadline-card"><div class="row"><div class="row-start"><div class="check">✓</div><div><strong>Buy Amtrak tickets</strong><div class="muted" id="amtrak-deadline-text">Completed • Sep 14, 2026</div></div></div><span id="amtrak-deadline-status" class="badge success">Done</span></div></div><div class="card"><div class="row"><div><strong>Book Airbnb</strong><div class="muted">Date TBD</div></div><span class="badge pending">Upcoming</span></div></div></section>
 <section id="traveler-1" class="screen"><a class="back" href="#travelers">‹ Travelers</a><div class="detail-hero"><div class="avatar">T1</div><h2 data-traveler-name="1">Traveler 1</h2><div class="muted">Confirmed traveler</div></div><div class="section card name-editor"><strong>Your name</strong><p class="muted">Add or change the name shown for Traveler 1.</p><div class="row-edit"><input id="traveler-name-input-1" type="text" maxlength="32" placeholder="Enter your name" autocomplete="name"><button class="save-name" type="button" data-save-traveler="1">Save</button></div><div id="traveler-name-msg-1" class="saved-msg" aria-live="polite"></div></div><div class="section card"><div class="kv"><span>Status</span><strong>Confirmed</strong></div><div class="kv"><span>Turo share</span><span class="badge success">Paid</span></div><div class="kv"><span>Amtrak</span><strong>Tickets secured • confirmed</strong></div><div class="kv"><span>Airbnb</span><strong>Estimate TBD</strong></div></div></section><section id="traveler-2" class="screen"><a class="back" href="#travelers">‹ Travelers</a><div class="detail-hero"><div class="avatar">T2</div><h2 data-traveler-name="2">Traveler 2</h2><div class="muted">Confirmed traveler</div></div><div class="section card name-editor"><strong>Your name</strong><p class="muted">Add or change the name shown for Traveler 2.</p><div class="row-edit"><input id="traveler-name-input-2" type="text" maxlength="32" placeholder="Enter your name" autocomplete="name"><button class="save-name" type="button" data-save-traveler="2">Save</button></div><div id="traveler-name-msg-2" class="saved-msg" aria-live="polite"></div></div><div class="section card"><div class="kv"><span>Status</span><strong>Confirmed</strong></div><div class="kv"><span>Turo share</span><span class="badge success">Paid</span></div><div class="kv"><span>Amtrak</span><strong>Tickets secured • confirmed</strong></div><div class="kv"><span>Airbnb</span><strong>Estimate TBD</strong></div></div></section><section id="traveler-3" class="screen"><a class="back" href="#travelers">‹ Travelers</a><div class="detail-hero"><div class="avatar">T3</div><h2 data-traveler-name="3">Traveler 3</h2><div class="muted">Confirmed traveler</div></div><div class="section card name-editor"><strong>Your name</strong><p class="muted">Add or change the name shown for Traveler 3.</p><div class="row-edit"><input id="traveler-name-input-3" type="text" maxlength="32" placeholder="Enter your name" autocomplete="name"><button class="save-name" type="button" data-save-traveler="3">Save</button></div><div id="traveler-name-msg-3" class="saved-msg" aria-live="polite"></div></div><div class="section card"><div class="kv"><span>Status</span><strong>Confirmed</strong></div><div class="kv"><span>Turo share</span><span class="badge success">Paid</span></div><div class="kv"><span>Amtrak</span><strong>Tickets secured • confirmed</strong></div><div class="kv"><span>Airbnb</span><strong>Estimate TBD</strong></div></div></section><section id="traveler-4" class="screen"><a class="back" href="#travelers">‹ Travelers</a><div class="detail-hero"><div class="avatar">T4</div><h2 data-traveler-name="4">Traveler 4</h2><div class="muted">Confirmed traveler</div></div><div class="section card name-editor"><strong>Your name</strong><p class="muted">Add or change the name shown for Traveler 4.</p><div class="row-edit"><input id="traveler-name-input-4" type="text" maxlength="32" placeholder="Enter your name" autocomplete="name"><button class="save-name" type="button" data-save-traveler="4">Save</button></div><div id="traveler-name-msg-4" class="saved-msg" aria-live="polite"></div></div><div class="section card"><div class="kv"><span>Status</span><strong>Confirmed</strong></div><div class="kv"><span>Turo share</span><span class="badge success">Paid</span></div><div class="kv"><span>Amtrak</span><strong>Tickets secured • confirmed</strong></div><div class="kv"><span>Airbnb</span><strong>Estimate TBD</strong></div></div></section><section id="traveler-5" class="screen"><a class="back" href="#travelers">‹ Travelers</a><div class="detail-hero"><div class="avatar">T5</div><h2 data-traveler-name="5">Traveler 5</h2><div class="muted">Confirmed traveler</div></div><div class="section card name-editor"><strong>Your name</strong><p class="muted">Add or change the name shown for Traveler 5.</p><div class="row-edit"><input id="traveler-name-input-5" type="text" maxlength="32" placeholder="Enter your name" autocomplete="name"><button class="save-name" type="button" data-save-traveler="5">Save</button></div><div id="traveler-name-msg-5" class="saved-msg" aria-live="polite"></div></div><div class="section card"><div class="kv"><span>Status</span><strong>Confirmed</strong></div><div class="kv"><span>Turo share</span><span class="badge success">Paid</span></div><div class="kv"><span>Amtrak</span><strong>Tickets secured • confirmed</strong></div><div class="kv"><span>Airbnb</span><strong>Estimate TBD</strong></div></div></section><section id="traveler-6" class="screen"><a class="back" href="#travelers">‹ Travelers</a><div class="detail-hero"><div class="avatar">T6</div><h2 data-traveler-name="6">Traveler 6</h2><div class="muted">Confirmed traveler</div></div><div class="section card name-editor"><strong>Your name</strong><p class="muted">Add or change the name shown for Traveler 6.</p><div class="row-edit"><input id="traveler-name-input-6" type="text" maxlength="32" placeholder="Enter your name" autocomplete="name"><button class="save-name" type="button" data-save-traveler="6">Save</button></div><div id="traveler-name-msg-6" class="saved-msg" aria-live="polite"></div></div><div class="section card"><div class="kv"><span>Status</span><strong>Confirmed</strong></div><div class="kv"><span>Turo share</span><span class="badge success">Paid</span></div><div class="kv"><span>Amtrak</span><strong>Tickets secured • confirmed</strong></div><div class="kv"><span>Airbnb</span><strong>Estimate TBD</strong></div></div></section><section id="traveler-7" class="screen"><a class="back" href="#travelers">‹ Travelers</a><div class="detail-hero"><div class="avatar">T7</div><h2 data-traveler-name="7">Traveler 7</h2><div class="muted">Confirmed traveler</div></div><div class="section card name-editor"><strong>Your name</strong><p class="muted">Add or change the name shown for Traveler 7.</p><div class="row-edit"><input id="traveler-name-input-7" type="text" maxlength="32" placeholder="Enter your name" autocomplete="name"><button class="save-name" type="button" data-save-traveler="7">Save</button></div><div id="traveler-name-msg-7" class="saved-msg" aria-live="polite"></div></div><div class="section card"><div class="kv"><span>Status</span><strong>Confirmed</strong></div><div class="kv"><span>Turo share</span><span class="badge success">Paid</span></div><div class="kv"><span>Amtrak</span><strong>Tickets secured • confirmed</strong></div><div class="kv"><span>Airbnb</span><strong>Estimate TBD</strong></div></div></section>
 <section id="more" class="screen"><a class="back" href="#home">‹ Home</a><h2 class="screen-title">More</h2><p class="screen-sub">Everything else for the trip.</p><div class="grid2"><a class="tap quick" href="#planning"><div class="emoji">💡</div><div><strong>Planning</strong><br><span>Seattle ideas</span></div></a><a class="tap quick" href="#bookings"><div class="emoji">🎟️</div><div><strong>Bookings</strong><br><span>Reservations</span></div></a><a class="tap quick" href="#voting"><div class="emoji">🗳️</div><div><strong>Voting</strong><br><span>Group polls</span></div></a><a class="tap quick" href="#deadlines"><div class="emoji">⏰</div><div><strong>Deadlines</strong><br><span>Important dates</span></div></a><a class="tap quick" href="#settings"><div class="emoji">⚙️</div><div><strong>Settings</strong><br><span>Trip details</span></div></a></div></section>
-<section id="settings" class="screen"><a class="back" href="#home">‹ Home</a><h2 class="screen-title">Trip settings</h2><p class="screen-sub">Seattle 2027</p><div class="card"><div class="theme-row"><div class="theme-copy"><strong>🌙 Dark mode</strong><span>Switch TripCrew to a darker theme.</span></div><label class="theme-switch" for="dark-toggle" aria-label="Toggle dark mode"></label></div></div><div style="height:10px"></div><div class="card"><div class="kv"><span>Destination</span><strong>Seattle, WA</strong></div><div class="kv"><span>Dates</span><strong>Jul 31–Aug 15, 2027</strong></div><div class="kv"><span>Train departure</span><strong>Jul 31, 2027 · 4:00 AM Pacific</strong></div><div class="kv"><span>Length</span><strong>16 calendar days • 15 nights</strong></div><div class="kv"><span>Travelers</span><strong>7</strong></div><div class="kv"><span>Access</span><strong>Private trip • code protected</strong></div></div></section>
+
+<section id="manage-expenses" class="screen">
+  <a class="back" href="#expenses">‹ Expenses</a>
+  <div class="titlebar"><div><h2 class="screen-title">Manage budget</h2><p class="screen-sub">Estimates, actual costs, and contributions — editable inside TripCrew.</p></div><a class="addplus" href="#add-expense" aria-label="Add expense">+</a></div>
+  <div id="expense-summary" class="card"><strong>Loading budget…</strong></div>
+  <div id="expense-manager-list" class="section"></div>
+</section>
+<section id="add-expense" class="screen">
+  <a class="back" href="#manage-expenses">‹ Budget</a>
+  <h2 class="screen-title" id="expense-form-title">Add expense</h2>
+  <input id="expense-edit-id" type="hidden">
+  <div class="card">
+    <div class="field"><label>NAME</label><input id="expense-title-input" maxlength="100" placeholder="Example: Museum tickets"></div>
+    <div class="field"><label>CATEGORY</label><select id="expense-category-input"><option>Transport</option><option>Lodging</option><option>Food</option><option>Activities</option><option>Other</option></select></div>
+    <div class="field-row"><div class="field"><label>ESTIMATE LOW</label><input id="expense-est-low" type="number" min="0" step="0.01"></div><div class="field"><label>ESTIMATE HIGH</label><input id="expense-est-high" type="number" min="0" step="0.01"></div></div>
+    <div class="field"><label>ACTUAL TOTAL</label><input id="expense-actual" type="number" min="0" step="0.01" placeholder="Leave blank until known"></div>
+    <div class="field"><label>NOTE</label><textarea id="expense-note-input" maxlength="500"></textarea></div>
+    <button id="save-expense-button" class="primary-button" type="button">Save expense</button>
+    <button id="cancel-expense-edit" class="secondary-button" type="button" style="display:none;margin-top:8px">Cancel edit</button>
+    <div id="expense-form-msg" class="helper"></div>
+  </div>
+</section>
+<section id="contributions" class="screen">
+  <a class="back" href="#manage-expenses">‹ Budget</a><h2 class="screen-title">Contributions</h2><p class="screen-sub">Track how much each traveler has contributed to shared costs.</p>
+  <div id="contribution-list" class="section"></div>
+  <div class="card"><div class="field"><label>TRAVELER</label><select id="contrib-traveler"></select></div><div class="field"><label>AMOUNT</label><input id="contrib-amount" type="number" min="0" step="0.01" placeholder="0.00"></div><div class="field"><label>NOTE</label><input id="contrib-note" maxlength="120" placeholder="Example: Airbnb deposit"></div><button id="save-contribution" class="primary-button" type="button">Add contribution</button><div id="contrib-msg" class="helper"></div></div>
+</section>
+<section id="activity" class="screen">
+  <a class="back" href="#home">‹ Home</a><h2 class="screen-title">Activity</h2><p class="screen-sub">Recent changes made by the crew.</p><div id="activity-list" class="section"><div class="card muted">Loading activity…</div></div>
+</section>
+<section id="create-trip" class="screen">
+  <a class="back" href="#settings">‹ Settings</a><h2 class="screen-title">Create another trip</h2><p class="screen-sub">Start a separate private TripCrew space with its own access code.</p>
+  <div class="card"><div class="field"><label>TRIP NAME</label><input id="new-trip-name" maxlength="80" placeholder="Example: Japan 2028"></div><div class="field"><label>DESTINATION</label><input id="new-trip-destination" maxlength="100" placeholder="Tokyo, Japan"></div><div class="field-row"><div class="field"><label>START DATE</label><input id="new-trip-start" type="date"></div><div class="field"><label>END DATE</label><input id="new-trip-end" type="date"></div></div><div class="field-row"><div class="field"><label>TRAVELERS</label><input id="new-trip-limit" type="number" min="1" max="30" value="7"></div><div class="field"><label>PRIVATE CODE</label><input id="new-trip-code" type="password" autocomplete="off"></div></div><button id="create-trip-button" class="primary-button" type="button">Create trip</button><div id="create-trip-msg" class="helper"></div></div>
+</section>
+<section id="settings" class="screen"><a class="back" href="#home">‹ Home</a><h2 class="screen-title">Trip settings</h2><p class="screen-sub" id="settings-trip-name">Seattle 2027</p>
+<div class="card"><div class="theme-row"><div class="theme-copy"><strong>🌙 Dark mode</strong><span>Switch TripCrew to a darker theme.</span></div><label class="theme-switch" for="dark-toggle" aria-label="Toggle dark mode"></label></div></div>
+<div style="height:10px"></div>
+<div class="card"><div class="kv"><span>Destination</span><strong id="settings-destination">Seattle, WA</strong></div><div class="kv"><span>Dates</span><strong id="settings-dates">Jul 31–Aug 15, 2027</strong></div><div class="kv"><span>Travelers</span><strong id="settings-travelers">7</strong></div><div class="kv"><span>Access</span><strong>Private trip • code protected</strong></div><div class="kv"><span>Your role</span><strong id="settings-role">Member</strong></div></div>
+<div class="section manage-grid"><a class="manage-card" href="#create-trip"><strong>➕ Create another trip</strong><small>Give another group its own private code.</small></a><button id="switch-trip-button" class="manage-card" type="button" style="text-align:left"><strong>🔄 Switch / join trip</strong><small>Enter a different trip code.</small></button><a class="manage-card" href="#activity"><strong>📣 Activity feed</strong><small>See recent changes.</small></a><a class="manage-card" href="#manage-expenses"><strong>💰 Budget manager</strong><small>Update estimates and actual costs.</small></a></div>
+<div id="admin-settings" class="card admin-only" hidden><h3>Admin controls</h3><p class="muted">Only the trip creator can change core settings and the access code.</p><div class="field"><label>TRIP NAME</label><input id="admin-trip-name" maxlength="80"></div><div class="field"><label>DESTINATION</label><input id="admin-trip-destination" maxlength="100"></div><div class="field-row"><div class="field"><label>START DATE</label><input id="admin-trip-start" type="date"></div><div class="field"><label>END DATE</label><input id="admin-trip-end" type="date"></div></div><div class="field"><label>TRAVELER LIMIT</label><input id="admin-trip-limit" type="number" min="1" max="30"></div><button id="save-trip-settings" class="primary-button" type="button">Save trip settings</button><div class="field" style="margin-top:12px"><label>NEW ACCESS CODE</label><input id="admin-new-code" type="password" autocomplete="off" placeholder="Leave blank unless changing it"></div><button id="change-trip-code" class="secondary-button" type="button">Change access code</button><div id="admin-settings-msg" class="helper"></div></div>
+</section>
 <nav class="bottom"><a class="nav" href="#home"><span>🏠</span><small>Home</small></a><a class="nav" href="#travelers"><span>👥</span><small>Travelers</small></a><a class="nav" href="#expenses"><span>💳</span><small>Expenses</small></a><a class="nav" href="#itinerary"><span>🗓️</span><small>Plan</small></a><a class="nav" href="#more"><span>•••</span><small>More</small></a></nav>
 </div>
 
@@ -292,7 +345,7 @@ body{min-height:100dvh}
 (function () {
   var SUPABASE_URL = 'https://dbumoidcqkijpwnerxee.supabase.co';
   var SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_x7cHFhvsixNHlIGv3e37xQ_GIALjKB6';
-  var TRIP_NAME = 'Seattle 2027';
+  var TRIP_NAME = 'Seattle 2027'; // legacy fallback
 
   function makeGate() {
     var style = document.createElement('style');
@@ -321,7 +374,7 @@ body{min-height:100dvh}
     gate.innerHTML = '<div id="tripcrew-gate-card">' +
       '<div class="logo">✈️</div>' +
       '<h1>Welcome to TripCrew</h1>' +
-      '<p>This Seattle 2027 trip is private. Enter the shared trip code to continue.</p>' +
+      '<p>Enter a private TripCrew access code to open a trip.</p>' +
       '<label for="tripcrew-code">TRIP ACCESS CODE</label>' +
       '<input id="tripcrew-code" type="password" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="Enter access code">' +
       '<button id="tripcrew-unlock" type="button">Unlock TripCrew</button>' +
@@ -369,8 +422,12 @@ body{min-height:100dvh}
 
     var currentUserId = null;
     var currentTripId = null;
+    var currentTrip = null;
+    var isTripAdmin = false;
     var travelerProfiles = {};
     var ownTravelerSlot = null;
+    var expenseItems = [];
+    var contributions = [];
     var sharedDeadlines = [];
 
     function deadlineMsg(text, kind) {
@@ -607,6 +664,63 @@ body{min-height:100dvh}
       else if (t.dataset.deadlineDelete) deleteDeadline(t.dataset.deadlineDelete);
     });
 
+
+    function fmtMoney(v) {
+      if (v === null || v === undefined || v === '') return '—';
+      var n = Number(v); if (!isFinite(n)) return '—';
+      return '$' + n.toLocaleString(undefined,{minimumFractionDigits:n%1?2:0,maximumFractionDigits:2});
+    }
+    function fmtDateRange(start,end) {
+      if (!start && !end) return 'Dates TBD';
+      function f(x){if(!x)return 'TBD'; return new Date(x+'T12:00:00').toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});}
+      return f(start) + (end ? ' – ' + f(end) : '');
+    }
+    function tripUi() {
+      if (!currentTrip) return;
+      var name=currentTrip.name||'TripCrew'; var dest=currentTrip.destination||name;
+      var range=fmtDateRange(currentTrip.start_date,currentTrip.end_date);
+      [['trip-header-name',name],['settings-trip-name',name],['trip-home-destination',dest],['trip-home-dates',range],['settings-destination',dest],['settings-dates',range],['settings-travelers',String(currentTrip.traveler_limit||7)]].forEach(function(pair){var el=document.getElementById(pair[0]);if(el)el.textContent=pair[1];});
+      var count=document.getElementById('trip-home-traveler-count'); if(count) count.textContent=String(currentTrip.traveler_limit||7);
+      var role=document.getElementById('settings-role'); if(role) role.textContent=isTripAdmin?'Admin':'Member';
+      var admin=document.getElementById('admin-settings'); if(admin) admin.hidden=!isTripAdmin;
+      if(isTripAdmin){
+        var vals={'admin-trip-name':currentTrip.name||'','admin-trip-destination':currentTrip.destination||'','admin-trip-start':currentTrip.start_date||'','admin-trip-end':currentTrip.end_date||'','admin-trip-limit':currentTrip.traveler_limit||7};
+        Object.keys(vals).forEach(function(id){var el=document.getElementById(id);if(el)el.value=vals[id];});
+      }
+    }
+    async function loadTripMeta() {
+      if(!currentTripId)return;
+      var q=await client.from('trips').select('id,name,destination,start_date,end_date,traveler_limit,owner_id').eq('id',currentTripId).single();
+      if(q.error) throw q.error; currentTrip=q.data; isTripAdmin=!!(currentTrip&&currentTrip.owner_id===currentUserId); tripUi();
+    }
+    async function loadExpenses() {
+      if(!currentTripId)return;
+      var q=await client.from('expense_items').select('id,title,category,estimate_low,estimate_high,actual_total,note,created_by,created_at').eq('trip_id',currentTripId).order('created_at',{ascending:true});
+      if(q.error){console.error(q.error);return;} expenseItems=q.data||[]; if(!expenseItems.length && isTripAdmin){var seed=[{title:'Turo',category:'Transport',estimate_low:1440,estimate_high:1440,actual_total:1440,note:'Paid & booked'},{title:'Amtrak',category:'Transport',estimate_low:1505,estimate_high:1680,actual_total:null,note:'Tickets secured; enter final actual total when ready'},{title:'Airbnb',category:'Lodging',estimate_low:3000,estimate_high:5000,actual_total:null,note:'Planning estimate'},{title:'Food',category:'Food',estimate_low:5500,estimate_high:7500,actual_total:null,note:'Two-week group estimate'}].map(function(x){return Object.assign({trip_id:currentTripId,created_by:currentUserId},x);});var s=await client.from('expense_items').insert(seed);if(!s.error)return loadExpenses();} renderExpenses();
+    }
+    function renderExpenses(){
+      var list=document.getElementById('expense-manager-list'), summary=document.getElementById('expense-summary'); if(!list||!summary)return;
+      var low=0,high=0,actual=0,actualCount=0;
+      expenseItems.forEach(function(e){low+=Number(e.estimate_low||0);high+=Number(e.estimate_high||e.estimate_low||0);if(e.actual_total!==null&&e.actual_total!==undefined){actual+=Number(e.actual_total||0);actualCount++;}});
+      summary.innerHTML='<div class="kv"><span>Estimated range</span><strong>'+fmtMoney(low)+' – '+fmtMoney(high)+'</strong></div><div class="kv"><span>Known actuals</span><strong>'+fmtMoney(actual)+'</strong></div><div class="kv"><span>Actual costs entered</span><strong>'+actualCount+' / '+expenseItems.length+'</strong></div>';
+      if(!expenseItems.length){list.innerHTML='<div class="card muted">No editable expense items yet. Tap + to add one.</div>';return;}
+      list.innerHTML=expenseItems.map(function(e){var est=fmtMoney(e.estimate_low)+(e.estimate_high!=null&&e.estimate_high!==e.estimate_low?' – '+fmtMoney(e.estimate_high):'');return '<div class="card expense-row"><div class="row"><div><strong>'+esc(e.title)+'</strong><div class="muted">'+esc(e.category||'Other')+' • estimate '+est+'</div></div><div class="money">'+(e.actual_total==null?'Estimate':fmtMoney(e.actual_total))+'</div></div>'+(e.note?'<p class="muted">'+esc(e.note)+'</p>':'')+'<div class="expense-actions"><button class="mini-btn" data-expense-edit="'+esc(e.id)+'">Edit</button><button class="mini-btn danger" data-expense-delete="'+esc(e.id)+'">Delete</button></div></div>';}).join('');
+      list.querySelectorAll('[data-expense-edit]').forEach(function(b){b.addEventListener('click',function(){editExpense(b.dataset.expenseEdit);});});
+      list.querySelectorAll('[data-expense-delete]').forEach(function(b){b.addEventListener('click',function(){deleteExpense(b.dataset.expenseDelete);});});
+    }
+    function resetExpenseForm(){['expense-edit-id','expense-title-input','expense-est-low','expense-est-high','expense-actual','expense-note-input'].forEach(function(id){var e=document.getElementById(id);if(e)e.value='';});var c=document.getElementById('expense-category-input');if(c)c.value='Transport';var t=document.getElementById('expense-form-title');if(t)t.textContent='Add expense';var x=document.getElementById('cancel-expense-edit');if(x)x.style.display='none';}
+    function editExpense(id){var e=expenseItems.find(function(x){return x.id===id;});if(!e)return;document.getElementById('expense-edit-id').value=e.id;document.getElementById('expense-title-input').value=e.title||'';document.getElementById('expense-category-input').value=e.category||'Other';document.getElementById('expense-est-low').value=e.estimate_low==null?'':e.estimate_low;document.getElementById('expense-est-high').value=e.estimate_high==null?'':e.estimate_high;document.getElementById('expense-actual').value=e.actual_total==null?'':e.actual_total;document.getElementById('expense-note-input').value=e.note||'';document.getElementById('expense-form-title').textContent='Edit expense';document.getElementById('cancel-expense-edit').style.display='';location.hash='#add-expense';}
+    async function saveExpense(){var id=document.getElementById('expense-edit-id').value,title=document.getElementById('expense-title-input').value.trim(),cat=document.getElementById('expense-category-input').value,lo=document.getElementById('expense-est-low').value,hi=document.getElementById('expense-est-high').value,act=document.getElementById('expense-actual').value,note=document.getElementById('expense-note-input').value.trim(),msg=document.getElementById('expense-form-msg');if(!title){msg.textContent='Add an expense name.';return;}var row={title:title,category:cat,estimate_low:lo===''?null:Number(lo),estimate_high:hi===''?null:Number(hi),actual_total:act===''?null:Number(act),note:note||null};var r=id?await client.from('expense_items').update(row).eq('id',id):await client.from('expense_items').insert(Object.assign({trip_id:currentTripId,created_by:currentUserId},row));if(r.error){msg.textContent=r.error.message;return;}resetExpenseForm();await loadExpenses();location.hash='#manage-expenses';}
+    async function deleteExpense(id){if(!confirm('Delete this expense item?'))return;var r=await client.from('expense_items').delete().eq('id',id);if(r.error){alert(r.error.message);return;}await loadExpenses();}
+    async function loadContributions(){if(!currentTripId)return;var q=await client.from('trip_contributions').select('id,user_id,amount,note,created_at').eq('trip_id',currentTripId).order('created_at',{ascending:false});if(q.error){console.error(q.error);return;}contributions=q.data||[];renderContributions();}
+    function renderContributions(){var list=document.getElementById('contribution-list'),select=document.getElementById('contrib-traveler');if(select){var opts=Object.keys(travelerProfiles).map(function(k){var p=travelerProfiles[k];return '<option value="'+esc(p.user_id)+'">'+esc(p.display_name||('Traveler '+k))+'</option>';});select.innerHTML=opts.join('');}if(!list)return;var totals={};contributions.forEach(function(c){totals[c.user_id]=(totals[c.user_id]||0)+Number(c.amount||0);});var profiles=Object.keys(travelerProfiles).map(function(k){return travelerProfiles[k];});if(!profiles.length){list.innerHTML='<div class="card muted">Traveler slots have not been claimed yet.</div>';return;}list.innerHTML=profiles.map(function(p){return '<div class="card"><div class="row"><div><strong>'+esc(p.display_name)+'</strong><div class="muted">Shared contributions</div></div><div class="money">'+fmtMoney(totals[p.user_id]||0)+'</div></div></div>';}).join('');}
+    async function saveContribution(){var user=document.getElementById('contrib-traveler').value,amt=document.getElementById('contrib-amount').value,note=document.getElementById('contrib-note').value.trim(),msg=document.getElementById('contrib-msg');if(!user||!amt||Number(amt)<=0){msg.textContent='Choose a traveler and enter an amount.';return;}var r=await client.from('trip_contributions').insert({trip_id:currentTripId,user_id:user,amount:Number(amt),note:note||null,recorded_by:currentUserId});if(r.error){msg.textContent=r.error.message;return;}document.getElementById('contrib-amount').value='';document.getElementById('contrib-note').value='';msg.textContent='Contribution saved.';await loadContributions();}
+    async function loadActivity(){if(!currentTripId)return;var q=await client.from('activity_feed').select('id,actor_id,action,entity_type,summary,created_at').eq('trip_id',currentTripId).order('created_at',{ascending:false}).limit(50);if(q.error){console.error(q.error);return;}var list=document.getElementById('activity-list');if(!list)return;var rows=q.data||[];list.innerHTML=rows.length?rows.map(function(a){return '<div class="card activity-row"><span class="activity-dot"></span><div><strong>'+esc(a.summary||a.action)+'</strong><div class="muted">'+esc(memberDisplayName(a.actor_id))+'</div><div class="activity-time">'+new Date(a.created_at).toLocaleString()+'</div></div></div>';}).join(''):'<div class="card muted">No activity yet.</div>';}
+    async function saveTripSettings(){if(!isTripAdmin)return;var row={name:document.getElementById('admin-trip-name').value.trim(),destination:document.getElementById('admin-trip-destination').value.trim(),start_date:document.getElementById('admin-trip-start').value||null,end_date:document.getElementById('admin-trip-end').value||null,traveler_limit:Number(document.getElementById('admin-trip-limit').value||7)};var r=await client.from('trips').update(row).eq('id',currentTripId);var msg=document.getElementById('admin-settings-msg');if(r.error){msg.textContent=r.error.message;return;}await loadTripMeta();msg.textContent='Trip settings saved.';}
+    async function changeTripCode(){if(!isTripAdmin)return;var code=document.getElementById('admin-new-code').value.trim(),msg=document.getElementById('admin-settings-msg');if(!code){msg.textContent='Enter a new access code first.';return;}var r=await client.rpc('change_trip_access_code',{target_trip:currentTripId,new_code:code});if(r.error){msg.textContent=r.error.message;return;}document.getElementById('admin-new-code').value='';msg.textContent='Access code changed.';}
+    async function createTrip(){var msg=document.getElementById('create-trip-msg');var args={trip_name:document.getElementById('new-trip-name').value.trim(),trip_destination:document.getElementById('new-trip-destination').value.trim(),trip_start:document.getElementById('new-trip-start').value||null,trip_end:document.getElementById('new-trip-end').value||null,traveler_count:Number(document.getElementById('new-trip-limit').value||7),submitted_code:document.getElementById('new-trip-code').value.trim()};if(!args.trip_name||!args.submitted_code){msg.textContent='Trip name and private code are required.';return;}var r=await client.rpc('create_trip_with_code',args);if(r.error){msg.textContent=r.error.message;return;}currentTripId=r.data;localStorage.setItem('tripcrew_active_trip_id',currentTripId);await loadAllTripData();location.hash='#home';}
+    function switchTrip(){localStorage.removeItem('tripcrew_active_trip_id');currentTripId=null;currentTrip=null;var gate=document.getElementById('tripcrew-gate');if(gate)gate.style.display='flex';status('Enter another trip code to continue.');var input=document.getElementById('tripcrew-code');if(input)input.value='';location.hash='#home';}
+
     function travelerMessage(slot, text, kind) {
       var el = document.getElementById('traveler-name-msg-' + slot);
       if (!el) return;
@@ -805,12 +919,18 @@ body{min-height:100dvh}
         list.innerHTML = '<div class="card" id="itinerary-empty"><strong>No confirmed plans yet</strong><p class="muted">Once the crew agrees on an idea, add it here as part of the official trip itinerary.</p><a class="emptybtn" href="#add-plan">+ Add confirmed plan</a></div>';
         return;
       }
-      list.innerHTML = q.data.map(function (plan) {
-        var dateText = plan.plan_date ? new Date(plan.plan_date + 'T12:00:00').toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'}) : 'Date TBD';
-        var when = dateText + (plan.plan_time ? ' • ' + plan.plan_time.slice(0,5) : '');
-        var loc = plan.location ? ' • ' + esc(plan.location) : '';
-        var notes = plan.notes ? '<p class="muted" style="margin-top:8px">' + esc(plan.notes) + '</p>' : '';
-        var actions = '<div class="item-actions"><button class="danger-btn" type="button" data-delete-plan="' + esc(plan.id) + '">Delete</button></div>'; return '<div class="card"><div class="row"><div><strong>' + esc(plan.title) + '</strong><div class="muted">' + esc(when) + loc + ' • added by ' + esc(memberDisplayName(plan.created_by)) + '</div></div><span class="badge success">Confirmed</span></div>' + notes + actions + '</div>';
+      var groups = {};
+      q.data.forEach(function(plan){ var key=plan.plan_date||'TBD'; (groups[key]||(groups[key]=[])).push(plan); });
+      list.innerHTML = Object.keys(groups).map(function(key){
+        var heading = key==='TBD' ? 'Date TBD' : new Date(key+'T12:00:00').toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'});
+        var cards = groups[key].map(function(plan){
+          var when = plan.plan_time ? plan.plan_time.slice(0,5) : 'Time TBD';
+          var loc = plan.location ? ' • ' + esc(plan.location) : '';
+          var notes = plan.notes ? '<p class="muted" style="margin-top:8px">' + esc(plan.notes) + '</p>' : '';
+          var actions = '<div class="item-actions"><button class="danger-btn" type="button" data-delete-plan="' + esc(plan.id) + '">Delete</button></div>';
+          return '<div class="card"><div class="row"><div><strong>'+esc(plan.title)+'</strong><div class="muted">'+esc(when)+loc+' • added by '+esc(memberDisplayName(plan.created_by))+'</div></div><span class="badge success">Confirmed</span></div>'+notes+actions+'</div>';
+        }).join('');
+        return '<div class="day-group"><div class="day-heading">'+esc(heading)+'</div>'+cards+'</div>';
       }).join('');
       list.querySelectorAll('[data-delete-plan]').forEach(function(btn){ btn.addEventListener('click', function(){ deletePlan(btn.getAttribute('data-delete-plan')); }); });
     }
@@ -849,6 +969,14 @@ body{min-height:100dvh}
       } finally { if (btn) btn.disabled = false; }
     }
 
+    var saveExpenseBtn=document.getElementById('save-expense-button'); if(saveExpenseBtn)saveExpenseBtn.addEventListener('click',saveExpense);
+    var cancelExpenseBtn=document.getElementById('cancel-expense-edit'); if(cancelExpenseBtn)cancelExpenseBtn.addEventListener('click',resetExpenseForm);
+    var saveContribBtn=document.getElementById('save-contribution'); if(saveContribBtn)saveContribBtn.addEventListener('click',saveContribution);
+    var saveTripSettingsBtn=document.getElementById('save-trip-settings'); if(saveTripSettingsBtn)saveTripSettingsBtn.addEventListener('click',saveTripSettings);
+    var changeTripCodeBtn=document.getElementById('change-trip-code'); if(changeTripCodeBtn)changeTripCodeBtn.addEventListener('click',changeTripCode);
+    var createTripBtn=document.getElementById('create-trip-button'); if(createTripBtn)createTripBtn.addEventListener('click',createTrip);
+    var switchTripBtn=document.getElementById('switch-trip-button'); if(switchTripBtn)switchTripBtn.addEventListener('click',switchTrip);
+
     var saveIdeaBtn = document.getElementById('save-idea');
     if (saveIdeaBtn) saveIdeaBtn.addEventListener('click', saveIdea);
     var savePlanBtn = document.getElementById('save-plan');
@@ -878,11 +1006,22 @@ body{min-height:100dvh}
           return '<div class="poll-option"><button class="'+selected+'" type="button" data-vote-poll="'+esc(poll.id)+'" data-vote-option="'+esc(o.id)+'">'+esc(o.option_text)+'</button><span class="poll-count">'+(votesBy[o.id]||0)+'</span></div>';
         }).join('');
         var note=poll.notes?'<p class="muted" style="margin-top:8px">'+esc(poll.notes)+'</p>':'';
-        var del='<div class="item-actions"><button class="danger-btn" type="button" data-delete-poll="'+esc(poll.id)+'">Delete poll</button></div>';
+        var del='<div class="item-actions"><button class="mini-btn success" type="button" data-promote-poll="'+esc(poll.id)+'">Move winner to Planning</button><button class="danger-btn" type="button" data-delete-poll="'+esc(poll.id)+'">Delete poll</button></div>';
         return '<div class="card"><strong>'+esc(poll.question)+'</strong><div class="muted">Created by '+esc(memberDisplayName(poll.created_by))+'</div>'+note+options+del+'</div>';
       }).join('');
       list.querySelectorAll('[data-vote-option]').forEach(function(btn){btn.addEventListener('click',function(){votePoll(btn.getAttribute('data-vote-poll'),btn.getAttribute('data-vote-option'));});});
       list.querySelectorAll('[data-delete-poll]').forEach(function(btn){btn.addEventListener('click',function(){deletePoll(btn.getAttribute('data-delete-poll'));});});
+      list.querySelectorAll('[data-promote-poll]').forEach(function(btn){btn.addEventListener('click',function(){promotePoll(btn.getAttribute('data-promote-poll'));});});
+    }
+
+    async function promotePoll(pollId) {
+      var pq=await client.from('polls').select('question').eq('id',pollId).single(); if(pq.error){alert(pq.error.message);return;}
+      var oq=await client.from('poll_options').select('id,option_text').eq('poll_id',pollId); if(oq.error){alert(oq.error.message);return;}
+      var vq=await client.from('poll_votes').select('option_id').eq('poll_id',pollId); if(vq.error){alert(vq.error.message);return;}
+      var counts={};(vq.data||[]).forEach(function(v){counts[v.option_id]=(counts[v.option_id]||0)+1;});
+      var opts=oq.data||[]; if(!opts.length)return; opts.sort(function(a,b){return (counts[b.id]||0)-(counts[a.id]||0);}); var winner=opts[0];
+      if(!confirm('Move “'+winner.option_text+'” to Planning?'))return;
+      var r=await client.from('planning_ideas').insert({trip_id:currentTripId,title:winner.option_text,category:'Other',notes:'Moved from poll: '+pq.data.question,created_by:currentUserId}); if(r.error){alert(r.error.message);return;} await loadIdeas(); location.hash='#planning';
     }
 
     async function savePoll() {
@@ -929,9 +1068,24 @@ body{min-height:100dvh}
     }
 
     async function membershipTripId() {
-      var q = await client.from('trip_members').select('trip_id').limit(1);
+      var preferred = localStorage.getItem('tripcrew_active_trip_id');
+      var q = await client.from('trip_members').select('trip_id,joined_at').order('joined_at',{ascending:false});
       if (q.error) throw q.error;
-      return q.data && q.data.length ? q.data[0].trip_id : null;
+      var rows=q.data||[]; if(!rows.length)return null;
+      if(preferred && rows.some(function(r){return r.trip_id===preferred;})) return preferred;
+      return rows[0].trip_id;
+    }
+    async function loadAllTripData(){
+      await loadTripMeta();
+      await loadTravelerProfiles();
+      await loadIdeas();
+      await loadItinerary();
+      await loadPolls();
+      await loadBookingUpdates();
+      await loadSharedDeadlines();
+      await loadExpenses();
+      await loadContributions();
+      await loadActivity();
     }
 
     async function start() {
@@ -940,16 +1094,11 @@ body{min-height:100dvh}
         currentUserId = session.user.id;
         currentTripId = await membershipTripId();
         if (currentTripId) {
-          await loadTravelerProfiles();
-          await loadIdeas();
-          await loadItinerary();
-          await loadPolls();
-          await loadBookingUpdates();
-          await loadSharedDeadlines();
+          await loadAllTripData();
           hideGate();
           return;
         }
-        status('Enter your trip code to unlock Seattle 2027.');
+        status('Enter a trip code to continue.');
       } catch (e) {
         console.error(e);
         status('Secure sign-in could not start. Please refresh and try again.', 'error');
@@ -966,7 +1115,7 @@ body{min-height:100dvh}
       try {
         var session = await ensureSession();
         currentUserId = session.user.id;
-        var rpc = await client.rpc('join_trip_with_code', { trip_name: TRIP_NAME, submitted_code: code });
+        var rpc = await client.rpc('join_trip_by_code', { submitted_code: code });
         if (rpc.error) throw rpc.error;
         if (!rpc.data) {
           status('That code is not correct.', 'error');
@@ -974,10 +1123,8 @@ body{min-height:100dvh}
           return;
         }
         currentTripId = rpc.data;
-        await loadTravelerProfiles();
-        await loadIdeas();
-        await loadItinerary();
-        await loadPolls();
+        localStorage.setItem('tripcrew_active_trip_id',currentTripId);
+        await loadAllTripData();
         status('Access granted.', 'ok');
         window.setTimeout(hideGate, 350);
       } catch (e) {
