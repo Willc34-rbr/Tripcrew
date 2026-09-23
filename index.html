@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0f172a">
 <title>TripCrew</title>
+<meta name="tripcrew-build" content="2026-09-23-desktop-v1">
 <style>
 :root{--bg:#f7f8fc;--surface:#fff;--ink:#0f172a;--muted:#64748b;--line:#e2e8f0;--brand:#2563eb;--brand2:#60a5fa;--success:#16a34a;--warn:#f59e0b;--radius:22px;--shadow:0 18px 50px rgba(15,23,42,.08);--topbar:rgba(247,248,252,.9);--appgrad1:#eef4ff;--appgrad2:#f7f8fc;--card:#fff;--soft:#eff6ff;--input:#fff}
 #dark-toggle{position:absolute;opacity:0;pointer-events:none}
@@ -127,12 +128,207 @@ body{min-height:100dvh}
 .contrib-bar{height:8px;background:var(--soft);border-radius:999px;overflow:hidden;margin-top:8px}.contrib-bar>div{height:100%;background:#22c55e;border-radius:999px}
 @media(max-width:520px){.manage-grid,.trip-meta-grid{grid-template-columns:1fr}}
 
+
+
+/* ============================================================
+   TripCrew desktop/laptop shell — mobile is intentionally untouched.
+   Everything below is opt-in at 1100px and wider.
+   ============================================================ */
+.desktop-sidebar{display:none}
+
+@media (min-width:1100px){
+  body{padding:24px 28px;align-items:flex-start}
+  .app{
+    width:100%;
+    max-width:1480px;
+    min-height:calc(100vh - 48px);
+    margin:0 auto;
+    padding:0 0 34px 252px;
+    border-radius:30px;
+    overflow:clip;
+    box-shadow:0 22px 70px rgba(15,23,42,.12);
+    background:linear-gradient(180deg,var(--appgrad1) 0,var(--appgrad2) 260px);
+  }
+  .topbar{
+    position:sticky;
+    top:0;
+    z-index:40;
+    min-height:82px;
+    padding:19px 34px 17px;
+    background:color-mix(in srgb,var(--topbar) 96%,transparent);
+    border-bottom:1px solid var(--line);
+  }
+  .topbar h1{font-size:23px}
+  .gear{width:42px;height:42px}
+
+  .desktop-sidebar{
+    display:flex;
+    position:absolute;
+    z-index:35;
+    left:20px;
+    top:102px;
+    bottom:22px;
+    width:212px;
+    flex-direction:column;
+    padding:17px 12px 14px;
+    border:1px solid var(--line);
+    border-radius:22px;
+    background:color-mix(in srgb,var(--card) 97%,transparent);
+    box-shadow:0 14px 34px rgba(15,23,42,.07);
+  }
+  .desktop-nav-label{
+    padding:3px 10px 10px;
+    font-size:10px;
+    font-weight:900;
+    letter-spacing:.14em;
+    color:var(--muted);
+  }
+  .desktop-nav{display:flex;flex-direction:column;gap:4px}
+  .desktop-nav a,.desktop-sidebar-footer a{
+    display:flex;
+    align-items:center;
+    gap:11px;
+    min-height:43px;
+    padding:9px 11px;
+    border-radius:13px;
+    color:var(--muted);
+    transition:background .15s ease,color .15s ease,transform .08s ease;
+  }
+  .desktop-nav a:hover,.desktop-sidebar-footer a:hover{
+    color:var(--ink);
+    background:var(--soft);
+  }
+  .desktop-nav a:active,.desktop-sidebar-footer a:active{transform:scale(.985)}
+  .desktop-nav a span,.desktop-sidebar-footer a>span{width:25px;text-align:center;font-size:18px}
+  .desktop-nav a strong,.desktop-sidebar-footer strong{font-size:13px}
+  .desktop-sidebar-footer{
+    margin-top:auto;
+    padding-top:12px;
+    border-top:1px solid var(--line);
+  }
+  .desktop-sidebar-footer a div{display:flex;flex-direction:column;gap:2px}
+  .desktop-sidebar-footer small{font-size:10px;color:var(--muted)}
+
+  /* The phone bottom nav is replaced by the desktop side rail only on wide screens. */
+  .bottom{display:none!important}
+
+  .screen{
+    width:100%;
+    max-width:none;
+    padding:30px 34px 46px;
+  }
+  .screen-title{font-size:34px;letter-spacing:-.02em}
+  .screen-sub{font-size:14px;max-width:760px}
+  .back{margin-bottom:16px}
+
+  /* Desktop home dashboard: same content, reorganized for wide screens. */
+  body:not(:has(.screen:target)) #home,
+  body:has(#home:target) #home{
+    display:grid;
+    grid-template-columns:repeat(12,minmax(0,1fr));
+    gap:18px;
+    align-items:start;
+  }
+  #home>.hero{grid-column:1 / -1;margin:0}
+  #home>.train-timer{grid-column:1 / -1;margin-top:0}
+  #home>.section:nth-of-type(1){grid-column:1 / -1;margin-top:2px}
+  #home>.section:nth-of-type(2){grid-column:1 / span 7;margin-top:0}
+  #home>.section:nth-of-type(3){grid-column:8 / -1;margin-top:0}
+  #home>.primary-button{grid-column:1 / span 7;margin-top:-6px!important}
+
+  #home .hero{padding:30px 32px;border-radius:26px}
+  #home .hero h2{font-size:38px}
+  #home .hero p{font-size:15px}
+  #home .countdown strong{font-size:38px}
+  #home .stats{gap:12px;margin-top:20px}
+  #home .stat{padding:15px 16px}
+  #home .stat strong{font-size:21px}
+  #home .stat span{font-size:11px}
+
+  #home .train-timer{
+    display:grid;
+    grid-template-columns:250px minmax(0,1fr);
+    column-gap:18px;
+    row-gap:8px;
+    align-items:center;
+    padding:17px 20px;
+    border-radius:20px;
+  }
+  #home .train-timer-head{margin:0;display:block}
+  #home .train-timer-head strong{display:block;font-size:15px}
+  #home .train-timer-head span{display:block;text-align:left;margin-top:5px;font-size:11px}
+  #home .timer-grid{grid-column:2;grid-row:1 / span 2;gap:9px}
+  #home .timer-box{padding:10px 8px}
+  #home .timer-box strong{font-size:24px}
+  #home .timer-note{grid-column:1;margin:0;font-size:10px;line-height:1.35}
+
+  #home .grid2{grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+  #home .quick{min-height:108px;padding:15px}
+  #home .quick .emoji{font-size:24px}
+  #home .quick strong{font-size:14px}
+  #home .quick span{font-size:11px}
+
+  #home>.section:nth-of-type(2) .tap,
+  #home>.section:nth-of-type(3) .tap{min-height:126px;display:flex;flex-direction:column;justify-content:center}
+  #home>.section:nth-of-type(2) .row,
+  #home>.section:nth-of-type(3) .row{width:100%}
+
+  /* Wider content makes list/detail pages feel like desktop, without changing mobile markup. */
+  #expenses .cat-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+  #more .grid2{grid-template-columns:repeat(5,minmax(0,1fr))}
+  #settings .manage-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+  #settings>.card,#admin-panel>.card,#admin-controls>.card,#admin-controls>.admin-danger{max-width:1040px}
+  #manage-expenses,#add-expense,#contributions,#create-trip,#admin-panel,#settings{max-width:1120px}
+
+  .cat{min-height:132px}
+  .card,.tap{border-radius:18px}
+  .tap:hover{transform:translateY(-1px);box-shadow:0 12px 30px rgba(15,23,42,.07)}
+  .tap:active{transform:scale(.992)}
+  .section{margin-top:26px}
+  .section-head{margin-bottom:12px}
+  .section h3{font-size:19px}
+
+  .field-row{gap:14px}
+  .field input,.field select{height:48px}
+  .field textarea{min-height:100px}
+  .primary-button,.secondary-button{max-width:520px}
+
+  body:has(#dark-toggle:checked) .desktop-sidebar{
+    background:color-mix(in srgb,var(--card) 97%,transparent);
+    box-shadow:0 16px 38px rgba(0,0,0,.2);
+  }
+}
+
+@media (min-width:1400px){
+  .app{max-width:1560px;padding-left:272px}
+  .desktop-sidebar{left:24px;width:226px}
+  .screen{padding-left:42px;padding-right:42px}
+  #home .quick{min-height:112px}
+}
+
 </style>
 </head>
 <body>
 <input id="dark-toggle" type="checkbox" aria-label="Dark mode">
 <div class="app">
-<header class="topbar"><div><p class="eyebrow">TRIPCREW</p><h1 id="trip-header-name">Seattle 2027</h1></div><a class="gear" href="#settings">⚙️</a></header>
+<header class="topbar"><div><p class="eyebrow">TRIPCREW</p><h1 id="trip-header-name">Seattle 2027</h1></div><a class="gear" href="#settings" aria-label="Settings">⚙️</a></header>
+<aside class="desktop-sidebar" aria-label="Desktop navigation">
+  <div class="desktop-nav-label">TRIP MENU</div>
+  <nav class="desktop-nav">
+    <a href="#home"><span>🏠</span><strong>Home</strong></a>
+    <a href="#travelers"><span>👥</span><strong>Travelers</strong></a>
+    <a href="#expenses"><span>💳</span><strong>Expenses</strong></a>
+    <a href="#itinerary"><span>🗓️</span><strong>Itinerary</strong></a>
+    <a href="#bookings"><span>🎟️</span><strong>Bookings</strong></a>
+    <a href="#planning"><span>💡</span><strong>Planning</strong></a>
+    <a href="#voting"><span>🗳️</span><strong>Voting</strong></a>
+    <a href="#deadlines"><span>⏰</span><strong>Deadlines</strong></a>
+    <a href="#activity"><span>📣</span><strong>Activity</strong></a>
+  </nav>
+  <div class="desktop-sidebar-footer">
+    <a href="#settings"><span>⚙️</span><div><strong>Settings</strong><small>Trip & security</small></div></a>
+  </div>
+</aside>
 
 <section id="home" class="screen">
   <div class="hero"><div class="hero-row"><div><h2 id="trip-home-destination">Seattle, WA</h2><p id="trip-home-dates">Jul 31 – Aug 15, 2027</p></div><div class="countdown"><strong id="trip-days">323</strong><span>days to go</span></div></div><div class="stats"><div class="stat"><strong id="trip-home-traveler-count">7</strong><span>travelers</span></div><div class="stat"><strong>$11.4–15.6K</strong><span>trip estimate</span></div><div class="stat"><strong>2/3</strong><span>deadlines done</span></div></div></div>
