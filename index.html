@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0f172a">
 <title>TripCrew</title>
-<meta name="tripcrew-build" content="2026-10-09-halloween-v1">
+<meta name="tripcrew-build" content="2026-10-12-halloween-v2">
 <style>
 :root{--bg:#f7f8fc;--surface:#fff;--ink:#0f172a;--muted:#64748b;--line:#e2e8f0;--brand:#2563eb;--brand2:#60a5fa;--success:#16a34a;--warn:#f59e0b;--radius:22px;--shadow:0 18px 50px rgba(15,23,42,.08);--topbar:rgba(247,248,252,.9);--appgrad1:#eef4ff;--appgrad2:#f7f8fc;--card:#fff;--soft:#eff6ff;--input:#fff}
 #dark-toggle{position:absolute;opacity:0;pointer-events:none}
@@ -229,6 +229,10 @@ body{min-height:100dvh}
     gap:18px;
     align-items:start;
   }
+  #home>.halloween-banner{grid-column:1 / -1;width:100%;margin:0;padding:12px 16px;min-height:54px;flex-direction:row;align-items:center;justify-content:space-between}
+  #home>.halloween-banner>div:first-child{display:flex;align-items:center;gap:8px;min-width:0;flex-wrap:wrap}
+  #home>.halloween-banner>div:first-child br{display:none}
+  #home>.halloween-banner .spooky{margin-left:auto;flex:0 0 auto}
   #home>.hero{grid-column:1 / -1;margin:0}
   #home>.train-timer{grid-column:1 / -1;margin-top:0}
   #home>.home-quick{grid-column:1 / -1;margin-top:2px}
