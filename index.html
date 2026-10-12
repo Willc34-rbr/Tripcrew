@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0f172a">
 <title>TripCrew</title>
-<meta name="tripcrew-build" content="2026-09-23-desktop-v2">
+<meta name="tripcrew-build" content="2026-10-09-halloween-v1">
 <style>
 :root{--bg:#f7f8fc;--surface:#fff;--ink:#0f172a;--muted:#64748b;--line:#e2e8f0;--brand:#2563eb;--brand2:#60a5fa;--success:#16a34a;--warn:#f59e0b;--radius:22px;--shadow:0 18px 50px rgba(15,23,42,.08);--topbar:rgba(247,248,252,.9);--appgrad1:#eef4ff;--appgrad2:#f7f8fc;--card:#fff;--soft:#eff6ff;--input:#fff}
 #dark-toggle{position:absolute;opacity:0;pointer-events:none}
@@ -306,9 +306,136 @@ body{min-height:100dvh}
   #home .quick{min-height:112px}
 }
 
+
+
+/* =========================================================
+   TripCrew Halloween Edition — seasonal visual layer only.
+   Mobile layout is intentionally preserved.
+   ========================================================= */
+#halloween-toggle{position:absolute;opacity:0;pointer-events:none}
+
+body.halloween-mode{
+  --brand:#f97316;
+  --brand2:#a855f7;
+  --appgrad1:#fff7ed;
+  --soft:#fff7ed;
+}
+body.halloween-mode .app{
+  background:
+    radial-gradient(circle at 12% 3%,rgba(249,115,22,.11),transparent 23%),
+    radial-gradient(circle at 88% 10%,rgba(168,85,247,.09),transparent 25%),
+    linear-gradient(180deg,var(--appgrad1) 0,var(--appgrad2) 230px);
+}
+body.halloween-mode .eyebrow{color:#f97316}
+body.halloween-mode .hero{
+  background:linear-gradient(135deg,#17101f 0%,#3b164f 48%,#9a3412 100%);
+  box-shadow:0 20px 50px rgba(88,28,135,.18),0 10px 30px rgba(249,115,22,.12);
+}
+body.halloween-mode .hero:after{
+  width:190px;height:190px;right:-60px;top:-70px;
+  background:radial-gradient(circle,rgba(251,146,60,.22),rgba(255,255,255,.04) 60%,transparent 61%);
+}
+body.halloween-mode .hero:before{
+  content:"🦇   ✦   🦇";
+  position:absolute;
+  right:18px;
+  top:12px;
+  font-size:14px;
+  letter-spacing:7px;
+  opacity:.65;
+  z-index:1;
+  transform:rotate(-4deg);
+}
+body.halloween-mode .hero p,body.halloween-mode .countdown span,body.halloween-mode .stat span{color:#fed7aa}
+body.halloween-mode .stat{background:rgba(255,255,255,.10);border:1px solid rgba(251,146,60,.13)}
+body.halloween-mode .card,body.halloween-mode .tap,body.halloween-mode .gear{
+  box-shadow:0 8px 28px rgba(88,28,135,.055);
+}
+body.halloween-mode .tap:hover{border-color:rgba(249,115,22,.35)}
+body.halloween-mode .progress>div{background:linear-gradient(90deg,#f97316,#a855f7)}
+body.halloween-mode .timeline-item:before{background:#f97316}
+body.halloween-mode .avatar{background:#ffedd5;color:#9a3412}
+body.halloween-mode .info{background:#f3e8ff;color:#7e22ce}
+body.halloween-mode .notice{background:#fff7ed;border-color:#fdba74;color:#9a3412}
+body.halloween-mode .emptybtn,body.halloween-mode .primary-button{background:linear-gradient(135deg,#ea580c,#9333ea)}
+body.halloween-mode .bottom{border-top-color:rgba(249,115,22,.22)}
+body.halloween-mode .nav:active{background:#fff7ed;color:#ea580c}
+body.halloween-mode .desktop-sidebar{border-color:rgba(249,115,22,.22)}
+body.halloween-mode .desktop-nav a:hover,body.halloween-mode .desktop-sidebar-footer a:hover{background:#fff7ed}
+body.halloween-mode .desktop-nav-label{color:#c2410c}
+
+body.halloween-mode:has(#dark-toggle:checked){
+  --bg:#09070d;
+  --surface:#15101b;
+  --ink:#fff7ed;
+  --muted:#c4b5c9;
+  --line:#35263d;
+  --brand:#fb923c;
+  --brand2:#c084fc;
+  --topbar:rgba(9,7,13,.91);
+  --appgrad1:#160d1d;
+  --appgrad2:#09070d;
+  --card:#15101b;
+  --soft:#211327;
+  --input:#100b15;
+}
+body.halloween-mode:has(#dark-toggle:checked) .hero{background:linear-gradient(135deg,#09070d,#321445 54%,#7c2d12)}
+body.halloween-mode:has(#dark-toggle:checked) .avatar{background:#43230f;color:#fdba74}
+body.halloween-mode:has(#dark-toggle:checked) .info{background:#2e1741;color:#d8b4fe}
+body.halloween-mode:has(#dark-toggle:checked) .notice{background:#2a1408;border-color:#7c2d12;color:#fdba74}
+body.halloween-mode:has(#dark-toggle:checked) .desktop-nav a:hover,body.halloween-mode:has(#dark-toggle:checked) .desktop-sidebar-footer a:hover{background:#24152c}
+body.halloween-mode:has(#dark-toggle:checked) .nav:active{background:#24152c;color:#fb923c}
+
+.halloween-banner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:12px;
+  padding:10px 12px;
+  border-radius:16px;
+  background:linear-gradient(90deg,#fff7ed,#faf5ff);
+  border:1px solid #fed7aa;
+  color:#7c2d12;
+  font-size:12px;
+  font-weight:800;
+}
+.halloween-banner strong{font-size:13px;color:#7c2d12}
+.halloween-banner .spooky{white-space:nowrap;font-size:17px;letter-spacing:3px}
+body:not(.halloween-mode) .halloween-banner{display:none}
+body.halloween-mode:has(#dark-toggle:checked) .halloween-banner{background:linear-gradient(90deg,#281509,#24132e);border-color:#7c2d12;color:#fdba74}
+body.halloween-mode:has(#dark-toggle:checked) .halloween-banner strong{color:#fed7aa}
+
+.halloween-switch{width:54px;height:32px;border-radius:999px;background:#cbd5e1;position:relative;display:block;cursor:pointer;flex:0 0 auto;transition:.2s}
+.halloween-switch:after{content:"";position:absolute;width:26px;height:26px;left:3px;top:3px;border-radius:50%;background:#fff;box-shadow:0 2px 7px rgba(15,23,42,.2);transition:.2s}
+#halloween-toggle:checked~.app .halloween-switch{background:linear-gradient(90deg,#f97316,#a855f7)}
+#halloween-toggle:checked~.app .halloween-switch:after{transform:translateX(22px)}
+
+@media (prefers-reduced-motion:no-preference){
+  body.halloween-mode .hero:before{animation:tripcrew-bat-float 4.8s ease-in-out infinite}
+  @keyframes tripcrew-bat-float{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(4px) rotate(2deg)}}
+}
+
+@media (min-width:1100px){
+  body.halloween-mode .desktop-sidebar:before{
+    content:"🎃 Halloween Edition";
+    display:block;
+    margin:0 0 12px;
+    padding:8px 10px;
+    border-radius:12px;
+    background:linear-gradient(90deg,#fff7ed,#faf5ff);
+    color:#9a3412;
+    font-size:11px;
+    font-weight:900;
+    letter-spacing:.04em;
+  }
+  body.halloween-mode:has(#dark-toggle:checked) .desktop-sidebar:before{background:linear-gradient(90deg,#281509,#24132e);color:#fdba74}
+}
+
 </style>
 </head>
 <body>
+<input id="halloween-toggle" type="checkbox">
 <input id="dark-toggle" type="checkbox" aria-label="Dark mode">
 <div class="app">
 <header class="topbar"><div><p class="eyebrow">TRIPCREW</p><h1 id="trip-header-name">Seattle 2027</h1></div><a class="gear" href="#settings" aria-label="Settings">⚙️</a></header>
@@ -331,7 +458,8 @@ body{min-height:100dvh}
 </aside>
 
 <section id="home" class="screen">
-  <div class="hero"><div class="hero-row"><div><h2 id="trip-home-destination">Seattle, WA</h2><p id="trip-home-dates">Jul 31 – Aug 15, 2027</p></div><div class="countdown"><strong id="trip-days">323</strong><span>days to go</span></div></div><div class="stats"><div class="stat"><strong id="trip-home-traveler-count">7</strong><span>travelers</span></div><div class="stat"><strong>$11.4–15.6K</strong><span>trip estimate</span></div><div class="stat"><strong>2/3</strong><span>deadlines done</span></div></div></div>
+  <div class="halloween-banner" aria-label="Halloween theme active"><div><strong>🎃 TripCrew Halloween Edition</strong><br><span>Seasonal look, same Seattle trip.</span></div><div class="spooky" aria-hidden="true">🦇 ✦ 👻</div></div>
+<div class="hero"><div class="hero-row"><div><h2 id="trip-home-destination">Seattle, WA</h2><p id="trip-home-dates">Jul 31 – Aug 15, 2027</p></div><div class="countdown"><strong id="trip-days">323</strong><span>days to go</span></div></div><div class="stats"><div class="stat"><strong id="trip-home-traveler-count">7</strong><span>travelers</span></div><div class="stat"><strong>$11.4–15.6K</strong><span>trip estimate</span></div><div class="stat"><strong>2/3</strong><span>deadlines done</span></div></div></div>
   <div class="train-timer" aria-label="Countdown to train departure"><div class="train-timer-head"><strong>🚆 Train departure countdown</strong><span>Jul 31, 2027<br>4:00 AM Pacific</span></div><div class="timer-grid"><div class="timer-box"><strong id="train-days">322</strong><span>Days</span></div><div class="timer-box"><strong id="train-hours">16</strong><span>Hours</span></div><div class="timer-box"><strong id="train-minutes">06</strong><span>Minutes</span></div><div class="timer-box"><strong id="train-seconds">11</strong><span>Seconds</span></div></div><div class="timer-note" id="train-timer-note">Confirmed departure: July 31, 2027 at 4:00 AM Pacific. If this preview blocks live updates, these numbers are a snapshot; the hosted app will tick every second.</div></div>
   <div class="section home-quick"><div class="section-head"><h3>Quick access</h3></div><div class="grid2"><a class="tap quick" href="#expenses"><div class="emoji">💳</div><div><strong>Expenses</strong><br><span>Budget & funding</span></div></a><a class="tap quick" href="#bookings"><div class="emoji">🎟️</div><div><strong>Bookings</strong><br><span>Car, train & stay</span></div></a><a class="tap quick" href="#planning"><div class="emoji">💡</div><div><strong>Planning</strong><br><span>Seattle ideas</span></div></a><a class="tap quick" href="#itinerary"><div class="emoji">🗓️</div><div><strong>Itinerary</strong><br><span>Confirmed plans</span></div></a><a class="tap quick" href="#voting"><div class="emoji">🗳️</div><div><strong>Voting</strong><br><span>Group decisions</span></div></a><a class="tap quick" href="#activity"><div class="emoji">📣</div><div><strong>Activity</strong><br><span>What changed</span></div></a><a class="tap quick" href="#manage-expenses"><div class="emoji">💰</div><div><strong>Budget</strong><br><span>Edit estimates & actuals</span></div></a></div></div>
   <div class="section home-deadlines"><div class="section-head"><h3>Deadlines</h3><a class="seeall" href="#deadlines">See all</a></div><a class="tap" href="#deadlines"><div class="row"><div><strong>2 of 3 complete</strong><div class="muted" id="home-amtrak-deadline">Airbnb is next • Date TBD</div></div><span class="badge success">67%</span></div><div class="progress"><div style="width:67%"></div></div></a></div>
@@ -396,6 +524,8 @@ body{min-height:100dvh}
 <section id="settings" class="screen"><a class="back" href="#home">‹ Home</a><h2 class="screen-title">Trip settings</h2><p class="screen-sub" id="settings-trip-name">Seattle 2027</p>
 <div class="card"><div class="theme-row"><div class="theme-copy"><strong>🌙 Dark mode</strong><span>Switch TripCrew to a darker theme.</span></div><label class="theme-switch" for="dark-toggle" aria-label="Toggle dark mode"></label></div></div>
 <div style="height:10px"></div>
+<div class="card"><div class="theme-row"><div class="theme-copy"><strong>🎃 Halloween mode</strong><span>Seasonal orange-and-purple TripCrew theme. Auto-enabled during October.</span></div><label class="halloween-switch" for="halloween-toggle" aria-label="Toggle Halloween mode"></label></div></div>
+<div style="height:10px"></div>
 <div class="card"><div class="kv"><span>Destination</span><strong id="settings-destination">Seattle, WA</strong></div><div class="kv"><span>Dates</span><strong id="settings-dates">Jul 31–Aug 15, 2027</strong></div><div class="kv"><span>Travelers</span><strong id="settings-travelers">7</strong></div><div class="kv"><span>Access</span><strong>Private trip • code protected</strong></div><div class="kv"><span>Your role</span><strong id="settings-role">Member</strong></div></div>
 <div class="section manage-grid"><a class="manage-card" href="#create-trip"><strong>➕ Create another trip</strong><small>Give another group its own private code.</small></a><button id="switch-trip-button" class="manage-card" type="button" style="text-align:left"><strong>🔄 Switch / join trip</strong><small>Enter a different trip code.</small></button><a class="manage-card" href="#activity"><strong>📣 Activity feed</strong><small>See recent changes.</small></a><a class="manage-card" href="#manage-expenses"><strong>💰 Budget manager</strong><small>Update estimates and actual costs.</small></a><a id="owner-admin-link" class="manage-card owner-only-link" href="#admin-panel" hidden><strong>🔐 Owner admin panel</strong><small>Password-protected security and trip controls.</small></a></div>
 </section>
@@ -437,6 +567,27 @@ body{min-height:100dvh}
 </section>
 <script>
 (function () {
+  // Halloween mode: auto-on during October unless the user has chosen a preference.
+  (function setupHalloweenMode(){
+    var toggle=document.getElementById('halloween-toggle');
+    if(!toggle) return;
+    var saved=null;
+    try{ saved=localStorage.getItem('tripcrew_halloween_mode'); }catch(e){}
+    var now=new Date();
+    var october=(now.getMonth()===9);
+    var enabled=saved===null ? october : saved==='1';
+    toggle.checked=enabled;
+    document.body.classList.toggle('halloween-mode',enabled);
+    var meta=document.querySelector('meta[name="theme-color"]');
+    if(meta && enabled) meta.setAttribute('content','#17101f');
+    toggle.addEventListener('change',function(){
+      var on=toggle.checked;
+      document.body.classList.toggle('halloween-mode',on);
+      try{ localStorage.setItem('tripcrew_halloween_mode',on?'1':'0'); }catch(e){}
+      if(meta) meta.setAttribute('content',on?'#17101f':'#0f172a');
+    });
+  })();
+
   function byId(id) { return document.getElementById(id); }
   function trimSpaces(value) {
     return String(value || '').replace(/^\s+|\s+$/g, '').replace(/\s+/g, ' ').substring(0, 32);
